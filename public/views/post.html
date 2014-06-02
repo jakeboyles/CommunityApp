@@ -1,9 +1,5 @@
 	<div class="container">
 
-		<!-- HEADER AND TODO COUNT -->
-		<div class="jumbotron text-center">
-			<h1>I'm a Todo-aholic <span class="label label-info">{{posts.length}}</span></h1>
-		</div>
 
 		<!-- TODO LIST -->
 		<div id="todo-list" class="row">
@@ -28,23 +24,4 @@
 			</div>
 		</div>
 
-		<H2>{{user.local.email}}</H2>
-
-		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
-				<form>
-					<div class="form-group">
-
-						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
-						<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content">
-						<input type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
-
-					</div>
-
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createpost()">Add</button>
-				</form>
-			</div>
-		</div>
+		<H1>{{user.local.email}}</H1>

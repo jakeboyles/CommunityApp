@@ -34,6 +34,17 @@ module.exports = function(app,passport) {
     res.send(req.user);
   });
 
+    app.get('/login',function(req, res) {
+    // If this function gets called, authentication was successful.
+    // `req.user` contains the authenticated user.
+    if(isLoggedIn(req,res)) {
+    	res.send(req.user);
+    }
+    else {
+    	res.send("Nope");
+    }
+  });
+
 
 	// create todo and send back all todos after creation
 	app.post('/api/posts', function(req, res) {
@@ -73,13 +84,13 @@ module.exports = function(app,passport) {
 
 			Post.remove({
 				_id : req.params.post_id,
-				user:req.user
+				//user:req.user
 			}, function(err, post) {
 				if (err)
-					res.send("Not Authorized");
+					res.send(err);
 
 				// get and return all the todos after you create another
-				Todo.find(function(err, posts) {
+				Post.find(function(err, posts) {
 					if (err)
 						res.send(err)
 					res.json(posts);
