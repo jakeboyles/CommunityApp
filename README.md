@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Node Todo App
 
 A Node app built with MongoDB and Angular. For demonstration purposes and a tutorial.
@@ -30,3 +31,9 @@ Each branch represents a certain tutorial.
 Happy Todo-ing!
 
 ![Todo-aholic](http://i.imgur.com/ikyqgrn.png)
+=======
+CommunityApp
+============
+
+CommunityApp
+>>>>>>> 7702f89d537f7dad496a2482f1822c10f2841653
