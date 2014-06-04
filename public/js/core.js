@@ -1,9 +1,13 @@
-angular.module('scotchTodo', ['communityController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
+angular.module('scotchTodo', ['communityController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
 
 .config(function($routeProvider) {
 $routeProvider
     .when('/', {
     controller:'mainController',
+    templateUrl:'views/list.html'
+    })
+    .when('/post/:postid', {
+    controller:'getPostController',
     templateUrl:'views/post.html'
     })
     .when('/signin', {
@@ -17,10 +21,6 @@ $routeProvider
     .when('/post', {
     controller:'postController',
     templateUrl:'views/createPost.html'
-    })
-    .when('/projects/:projectid', {
-    controller:'projectCtrl',
-    templateUrl:'project.html'
     })
     .otherwise({
     redirectTo:'/'

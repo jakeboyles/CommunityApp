@@ -4,11 +4,7 @@ angular.module('SignupController', [])
 .controller('signupController', function($scope, $http, Communities,$location) {
 
 	$scope.signup = function() {
-		var email = $scope.signupData.email;
-		email = email.toLowerCase();
-		var check = email.indexOf('miamioh.edu');
-		alert(check);
-		if(check >= 0) {
+
 			Communities.postSignUp($scope.signupData)
 			.success(function(data){
 				if(data!="") {
@@ -17,9 +13,6 @@ angular.module('SignupController', [])
 					$location.url("/");
 				}
 			})
-		}
-		else {
-			alert("Must contain miami email")
-		}
+		
 	}
 });

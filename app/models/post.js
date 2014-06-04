@@ -21,8 +21,8 @@ var PostSchema = new Schema({
         default: '',
     },
     comments: {
-        type: String,
-        default: '',
+        type:  [],
+        ref: 'Comment',
     },
     user: {
         type: Schema.ObjectId,

@@ -6,6 +6,9 @@ return {
 	get : function() {
 	return $http.get('/api/posts');
 	},
+	getPost : function(id) {
+	return $http.get('/api/posts/'+ id);
+	},
 	create : function(todoData) {
 	return $http.post('/api/posts', todoData);
 	},
@@ -21,5 +24,8 @@ return {
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},
+	postComment: function(data) {
+		return $http.post('/api/comment',data);
+	}
 }
 });

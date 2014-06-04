@@ -2,26 +2,30 @@
 
 
 		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
-			<div class="col-sm-4 col-sm-offset-4">
-
-				
-
-				<!-- LOOP OVER THE TODOS IN $scope.todos -->
-				<div class="checkbox" ng-repeat="post in posts">
-					<label>
-						<input type="checkbox" ng-click="deletepost(post._id)"> {{ post.title }}
-						<p>{{post.content}}
-						<p>{{post.user.local.email}}
-						<p>{{post.price}}
-					</label>
-				</div>
-
-				<p class="text-center" ng-show="loading">
-					<span class="fa fa-spinner fa-spin fa-3x"></span>
-				</p>
+		<div class="row">
+			<div >
+			<H2>{{post.title}}</H2>
+			<p>{{post.content}}</p>
+			<p>{{post.price}}</p>
 
 			</div>
 		</div>
 
-		<H1>{{user.local.email}}</H1>
+
+		<div>
+				<h2>Add a comment</h2>
+				<form>
+				<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="comment.title">
+				<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content">
+				<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add</button>
+
+				</form>
+		</div>
+
+
+			<h3>Comments</h3>
+				<div>
+				    <li ng-repeat="comment in post.comments"> {{comment.title}} </li>
+				</div>
+	</div>
+

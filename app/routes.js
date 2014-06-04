@@ -1,5 +1,7 @@
 var Post = require('./models/post');
 var User = require('./models/user');
+var Comment = require('./models/comment');
+
 
 
 module.exports = function(app,passport) {
@@ -77,6 +79,32 @@ module.exports = function(app,passport) {
 
 	});
 
+
+	app.post('/api/comment', function(req, res) {
+
+	//if(isLoggedIn(req,res)) {
+
+
+		var postid = req.body.id;
+
+		Comment.create({ 
+			title : req.body.title,
+			content : req.body.content,
+			user: req.user,
+		},function(err, comment) {
+
+			Post.findByIdAndUpdate( postid, 
+				{$push: {comments: comment}}, 
+				{safe: true, upsert: true}, 
+				function(err, post) { 
+					res.send(post); 
+				} 
+			);
+
+		});
+	});
+
+
 	// delete a post
 	app.delete('/api/posts/:post_id', function(req, res) {
 
@@ -98,6 +126,19 @@ module.exports = function(app,passport) {
 			});
 		}
 
+	});
+
+
+	app.get('/api/posts/:post_id', function(req, res) {
+			Post.find({
+				_id : req.params.post_id,
+				//user:req.user
+			}, function(err, post) {
+				if (err)
+					res.send(err);
+
+				res.json(post);
+			});
 	});
 
 
