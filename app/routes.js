@@ -47,12 +47,8 @@ app.all('/*', function(req, res, next) {
     app.get('/login',function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-    if(req.user!==null)) {
     	res.send(req.user);
-    }
-    else {
-    	res.send("Nope");
-    }
+
   });
 
 
