@@ -12,13 +12,7 @@ mongoose.connect("localhost/testMongo"); 	// connect to mongoDB database on modu
 
 require('./config/passport')(passport); // pass passport for configuration
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', config.allowedDomains);
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
 
-    next();
-}
 
 
 app.configure(function() {
@@ -26,7 +20,6 @@ app.configure(function() {
 	app.use(express.logger('dev')); 						// log every request to the console
 	app.use(express.bodyParser()); 							// pull information from html in POST
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
-    app.use(allowCrossDomain);
 	// required for passport
 	app.use( express.cookieParser() );
 	app.use(express.session({ secret: 'communitybasedapp' })); // session secret
