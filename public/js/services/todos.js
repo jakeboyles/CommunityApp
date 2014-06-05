@@ -4,31 +4,31 @@ angular.module('communityService', [])
 .factory('Communities', function($http) {
 return {
 	get : function() {
-	return $http.get('/api/posts');
+	return $http.get('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/posts');
 	},
 	getPost : function(id) {
-	return $http.get('/api/posts/'+ id);
+	return $http.get('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/posts/'+ id);
 	},
 	create : function(todoData) {
-	return $http.post('/api/posts', todoData);
+	return $http.post('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/posts', todoData);
 	},
 	delete : function(id) {
-	return $http.delete('/api/posts/' + id);
+	return $http.delete('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/posts/' + id);
 	},
 	postSignUp: function(data) {
-		return $http.post('/signup',data);
+		return $http.post('http://ec2-107-23-32-67.compute-1.amazonaws.com/signup',data);
 	},
 	postSignIn: function(data) {
-		return $http.post('/login',data);
+		return $http.post('http://ec2-107-23-32-67.compute-1.amazonaws.com/login',data);
 	},
 	loggedIn: function(data) {
-		return $http.get('/login');
+		return $http.get('http://ec2-107-23-32-67.compute-1.amazonaws.com/login');
 	},
 	postComment: function(data) {
-		return $http.post('/api/comment',data);
+		return $http.post('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/comment',data);
 	},
 	getComments: function(data) {
-		return $http.post('/api/allComments',data);
+		return $http.post('http://ec2-107-23-32-67.compute-1.amazonaws.com/api/allComments',data);
 	}
 }
 });

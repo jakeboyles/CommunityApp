@@ -18,6 +18,11 @@ app.configure(function() {
 	app.use(express.bodyParser()); 							// pull information from html in POST
 	app.use(express.methodOverride()); 						// simulate DELETE and PUT
 
+app.all('/', function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+ });
 	// required for passport
 	app.use( express.cookieParser() );
 	app.use(express.session({ secret: 'communitybasedapp' })); // session secret
