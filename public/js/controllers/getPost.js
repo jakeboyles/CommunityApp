@@ -2,6 +2,7 @@ angular.module('SinglePostController', [])
 
 	// inject the Todo service factory into our controller
 	.controller('getPostController', function($scope, $routeParams,$location, $http, Communities) {
+		
 		$scope.post;
 		var id =  $routeParams.postid;
 		var post = {
@@ -32,9 +33,6 @@ angular.module('SinglePostController', [])
 			error(function(data, status, headers, config) {
 		    	$scope.error(data);
 		    })
-
-		    		
-
 
 
 
