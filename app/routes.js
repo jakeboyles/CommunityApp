@@ -82,26 +82,32 @@ module.exports = function(app,passport) {
 
 	app.post('/api/comment', function(req, res) {
 
-	//if(isLoggedIn(req,res)) {
-
-
-		var postid = req.body.id;
-
+	 if(req.user != null) {
 		Comment.create({ 
 			title : req.body.title,
 			content : req.body.content,
+			postid : req.body.postid,
 			user: req.user,
 		},function(err, comment) {
-
-			Post.findByIdAndUpdate( postid, 
-				{$push: {comments: comment}}, 
-				{safe: true, upsert: true}, 
-				function(err, post) { 
-					res.send(post); 
-				} 
-			);
-
+			res.send(comment);
 		});
+	} else {
+		res.json({ redirect: "/signin" });
+	}
+	});
+
+
+	app.post('/api/allComments', function(req, res) {
+
+		Comment.find({
+				postid : req.body.postid,
+			}).populate('user').exec(function(err,comment){
+				if (err)
+					res.send(err);
+
+				res.json(comment);
+			});
+
 	});
 
 
@@ -133,7 +139,7 @@ module.exports = function(app,passport) {
 			Post.find({
 				_id : req.params.post_id,
 				//user:req.user
-			}, function(err, post) {
+			}).populate('user').exec(function(err,post){
 				if (err)
 					res.send(err);
 

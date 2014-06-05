@@ -5,6 +5,8 @@
 		<div class="row">
 			<div >
 			<H2>{{post.title}}</H2>
+			 <p>{{post.user.local.email}}</p>
+
 			<p>{{post.content}}</p>
 			<p>{{post.price}}</p>
 
@@ -25,7 +27,13 @@
 
 			<h3>Comments</h3>
 				<div>
-				    <li ng-repeat="comment in post.comments"> {{comment.title}} </li>
+				    <li ng-repeat="comment in comments"> 
+
+				    <p>{{comment.user.local.email}}</p>
+
+				    <p>{{comment.content}}</p>
+
+				    </li>
 				</div>
 	</div>
 

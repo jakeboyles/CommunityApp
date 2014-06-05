@@ -12,6 +12,10 @@ var CommentSchema = new Schema({
         type: String,
         default: '',
     },
+    postid: {
+        type: String,
+        default: '',
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'

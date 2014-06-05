@@ -26,6 +26,9 @@ return {
 	},
 	postComment: function(data) {
 		return $http.post('/api/comment',data);
+	},
+	getComments: function(data) {
+		return $http.post('/api/allComments',data);
 	}
 }
 });
