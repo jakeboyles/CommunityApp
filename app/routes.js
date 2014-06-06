@@ -49,19 +49,14 @@ app.all('/*', function(req, res, next) {
     res.send(req.user);
   });
 
-  app.get('/login', function(req, res){
-    if (req.isAuthenticated()) {
+  app.get('/login', isLoggedIn, function(req, res){
 		res.json(req.user);
-    } else {
-    	res.json("Not Logged In")
-    }
   });
 
 
 	// create todo and send back all todos after creation
-	app.post('/api/posts', function(req, res) {
+	app.post('/api/posts',isLoggedIn, function(req, res) {
 
-	if(isLoggedIn(req,res)) {
 
 		Post.create({
 			title : req.body.title,
@@ -82,17 +77,14 @@ app.all('/*', function(req, res, next) {
 			});
 		});
 
-	} else {
-		res.json("0");
-	}
+
 
 
 	});
 
 
-	app.post('/api/comment', function(req, res) {
+	app.post('/api/comment', isLoggedIn, function(req, res) {
 
-	 if(req.user != null) {
 		Comment.create({ 
 			title : req.body.title,
 			content : req.body.content,
@@ -101,9 +93,6 @@ app.all('/*', function(req, res, next) {
 		},function(err, comment) {
 			res.send(comment);
 		});
-	} else {
-		res.json({ redirect: "/signin" });
-	}
 	});
 
 
@@ -122,9 +111,8 @@ app.all('/*', function(req, res, next) {
 
 
 	// delete a post
-	app.delete('/api/posts/:post_id', function(req, res) {
+	app.delete('/api/posts/:post_id',isLoggedIn, function(req, res) {
 
-		if(isLoggedIn(req,res)) {
 
 			Post.remove({
 				_id : req.params.post_id,
@@ -140,7 +128,6 @@ app.all('/*', function(req, res, next) {
 					res.json(posts);
 				});
 			});
-		}
 
 	});
 
@@ -190,16 +177,17 @@ var sendMessage = function(user) {
 };
 
 
-	// route middleware to make sure a user is logged in
+// route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
 
 	// if user is authenticated in the session, carry on 
 	if (req.isAuthenticated())
-		return true;
+		return next();
 
 	// if they aren't redirect them to the home page
-	res.json("0")
+	res.json({error:"Please Log In"})
 }
+
 
 
 	// application -------------------------------------------------------------
