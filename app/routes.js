@@ -49,11 +49,10 @@ app.all('/*', function(req, res, next) {
     res.send(req.user);
   });
 
-    app.get('/login',passport.authenticate('local-login', { session: false }),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    	res.send(req.user);
-
+  app.get('/login', function(req, res){
+   if(req.user) {
+   	res.send(req.user);
+   }
   });
 
 
