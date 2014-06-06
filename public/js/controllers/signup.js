@@ -7,9 +7,14 @@ angular.module('SignupController', [])
 
 			Communities.postSignUp($scope.signupData)
 			.success(function(data){
-					$scope.user = data;
-					console.log(data);
+					$rootScope.user = data;
 					$location.url("/");
+			}).
+			error(function(data){
+				var n = notyfy({
+				text: data,
+				type: 'error',
+			});
 			})
 		
 	}

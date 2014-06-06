@@ -41,7 +41,11 @@ angular.module('SinglePostController', [])
 			Communities.postComment($scope.comment)
 			.success(function(data){
 				if(typeof data.redirect == 'string') {
-					$location.url("/signin");
+				var n = notyfy({
+								text: "Please Login",
+								type: 'error',
+							});
+
 				} else {
 					Communities.getComments(str)
 					 .success(function(data){
