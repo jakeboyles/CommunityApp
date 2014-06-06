@@ -50,9 +50,11 @@ app.all('/*', function(req, res, next) {
   });
 
   app.get('/login', function(req, res){
-   if(req.user) {
-   	res.send(req.user);
-   }
+    if (req.isAuthenticated()) {
+		res.json(req.user);
+    } else {
+    	res.json("Not Logged In")
+    }
   });
 
 
