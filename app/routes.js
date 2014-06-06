@@ -116,10 +116,10 @@ app.all('/*', function(req, res, next) {
 
 			Post.remove({
 				_id : req.params.post_id,
-				//user:req.user
+				user:req.user
 			}, function(err, post) {
-				if (err)
-					res.send(err);
+				if (!post)
+					res.json({error:"You cant delete this"});
 
 				// get and return all the todos after you create another
 				Post.find(function(err, posts) {

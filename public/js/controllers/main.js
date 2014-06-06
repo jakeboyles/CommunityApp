@@ -1,7 +1,7 @@
 angular.module('communityController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', function($scope, $http, Communities) {
+	.controller('mainController', function($scope,$location, $http, Communities) {
 		$scope.formData = {};
 		$scope.loading = true;
 
@@ -17,10 +17,13 @@ angular.module('communityController', [])
 
 		Communities.loggedIn()
 			.success(function(data){
-				if(data!="0") {
-					$scope.user = data;
+				if(data.error) {
+					$location.url("/signin")
 				}
-			});
+			}).
+			error(function(data){
+				$location.url("/signin")
+			})
 
 
 
@@ -34,11 +37,13 @@ angular.module('communityController', [])
 			Communities.delete(id)
 				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
-					$scope.loading = false;
-					$scope.posts = data; // assign our new list of todos
-				}).
-		    error(function(data, status, headers, config) {
-		      alert(data)
-		    });
+					if(data.error){
+						alert(data.error);
+						$scope.loading = false;
+					}else {
+						$scope.loading = false;
+						$scope.posts = data; // assign our new list of todos
+					}
+				})
 		};
 	});
