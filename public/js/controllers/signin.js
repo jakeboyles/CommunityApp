@@ -4,14 +4,17 @@ angular.module('SigninController', [])
 .controller('signinController', function($scope, $http, Communities,$location) {
 
 	$scope.signin = function() {
-		alert("HE");
 		Communities.postSignIn($scope.signupData)
 		.success(function(data){
-			if(data!="") {
 				$scope.user = data;
 				console.log(data);
 				$location.url("/");
-			}
+		}).
+		error(function(data){
+			var n = notyfy({
+				text: data,
+				type: 'error',
+			});
 		})
 	}
 });
