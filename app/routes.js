@@ -2,6 +2,9 @@ var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
 
+var mandrill = require('mandrill-api/mandrill');
+var mandrill_client = new mandrill.Mandrill('OGc0mZWdpPE41igHW215UQ');
+
 
 
 
@@ -34,6 +37,8 @@ app.all('/*', function(req, res, next) {
  app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
+   	sendMessage(req.user);
+
     res.send(req.user);
   });
 
@@ -44,7 +49,7 @@ app.all('/*', function(req, res, next) {
     res.send(req.user);
   });
 
-    app.get('/login',function(req, res) {
+    app.get('/login',passport.authenticate('local-login', { session: false }),function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
     	res.send(req.user);
@@ -77,7 +82,7 @@ app.all('/*', function(req, res, next) {
 		});
 
 	} else {
-		res.jsonp("0");
+		res.json("0");
 	}
 
 
@@ -150,6 +155,38 @@ app.all('/*', function(req, res, next) {
 				res.json(post);
 			});
 	});
+
+
+
+var sendMessage = function(user) {
+	var message = {
+	    "html": "<h2>Thanks for registering!</h2><p>Your username is "+user.local.email+"</p>",
+	    "text": "Thanks for registering Your username is "+user.local.email,
+	    "subject": "Thanks for Registering!",
+	    "from_email": "jake@jibdesigns.com",
+	    "from_name": "Jake Boyles",
+	    "to": [{
+	            "email": user.local.email,
+	            "name": "Jake Boyles",
+	            "type": "to"
+	        }],
+	    "headers": {
+	        "Reply-To": "jake@jibdesigns.com"
+	    },
+	    "important": false,
+	    "track_opens": null,
+	    "track_clicks": null,
+	};
+	var async = false;
+	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
+		    console.log(result);
+
+	}, function(e) {
+	    // Mandrill returns the error as an object with name and message keys
+	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+	});
+};
 
 
 	// route middleware to make sure a user is logged in

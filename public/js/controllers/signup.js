@@ -7,11 +7,9 @@ angular.module('SignupController', [])
 
 			Communities.postSignUp($scope.signupData)
 			.success(function(data){
-				if(data!="") {
-					$rootScope.user = data;
+					$scope.user = data;
 					console.log(data);
 					$location.url("/");
-				}
 			})
 		
 	}
