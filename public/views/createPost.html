@@ -8,12 +8,19 @@
 						<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
 						<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content">
 						<input type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
-
+  						<input type="file" ng-file-select="onFileSelect($files)" multiple>
+						 
+						 
 					</div>
 
 					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createpost()">Add</button>
+
 				</form>
+				<div class="images">
+				<img ng-repeat="image in formData.images" src="{{image}}">
+				</div>
+
 
 			</div>
 		</div>

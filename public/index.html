@@ -17,10 +17,12 @@
 
 
 	<!-- SPELLS -->
+	<script src="js/bower_components/ng-file-upload/angular-file-upload-shim.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+	<script src="js/bower_components/ng-file-upload/angular-file-upload.js"></script> 
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.0-beta.2/angular-route.min.js"></script>
 	<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-	<!--<script type="text/javascript" src="js/bower_components/notyfy/jquery.notyfy.js"></script>-->
+	<script type="text/javascript" src="js/bower_components/notyfy/jquery.notyfy.js"></script>
 
 
 
@@ -32,9 +34,22 @@
 	<script src="js/services/todos.js"></script> <!-- load our todo service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
+
 </head>
 <!-- SET THE CONTROLLER -->
 <body>
+
+        <header ng-controller="mainController" id="header" class="container">
+            <div class="row">
+            <a href="#/">Home</a>
+            {{user.local.email}}
+            </div>
+
+            <div class="options col-md-3 col-xs-7 col-md-offset-5">
+
+            </div>
+            
+        </header>
 
          <div ng-view></div>
 

@@ -13,6 +13,7 @@
     "passport-local" : "~0.1.6",
     "bcrypt-nodejs" : "latest",
     "connect-flash" : "~0.1.1",
-    "mandrill-api" : "latest"
+    "mandrill-api" : "latest",
+    "imagemagick":"latest"
   }
 }

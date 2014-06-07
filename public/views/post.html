@@ -1,39 +1,35 @@
-	<div class="container">
-
-
-		<!-- TODO LIST -->
-		<div class="row">
-			<div >
+<div class="container">
+	<div class="row">
+		<div >
 			<H2>{{post.title}}</H2>
-			 <p>{{post.user.local.email}}</p>
-
+		 	<p>{{post.user.local.email}}</p>
 			<p>{{post.content}}</p>
 			<p>{{post.price}}</p>
-
-			</div>
 		</div>
-
-
-		<div>
-				<h2>Add a comment</h2>
-				<form>
-				<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="comment.title">
-				<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content">
-				<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add</button>
-
-				</form>
-		</div>
-
-
-			<h3>Comments</h3>
-				<div>
-				    <li ng-repeat="comment in comments"> 
-
-				    <p>{{comment.user.local.email}}</p>
-
-				    <p>{{comment.content}}</p>
-
-				    </li>
-				</div>
 	</div>
+
+	<div class="images">
+		<img ng-repeat="image in post.images" src="{{image}}">
+	</div>
+
+
+	<div>
+		<h2>Add a comment</h2>
+		<form>
+			<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="comment.title">
+			<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content">
+			<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add</button>
+		</form>
+	</div>
+
+	<h3>Comments</h3>
+			
+	<div>
+	    <li ng-repeat="comment in comments"> 
+	    <p>{{comment.user.local.email}}</p>
+	    <p>{{comment.content}}</p>
+	    </li>
+	</div>
+
+</div>
 

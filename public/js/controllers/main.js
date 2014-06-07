@@ -1,29 +1,27 @@
 angular.module('communityController', [])
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', function($scope,$location, $http, Communities) {
+	.controller('mainController', function($scope,$rootScope,$location, $http, Communities) {
 		$scope.formData = {};
 		$scope.loading = true;
 
-		// GET =====================================================================
-		// when landing on the page, get all todos and show them
-		// use the service to get all the todos
-		Communities.get()
-			.success(function(data) {
-				$scope.posts = data;
-				$scope.loading = false;
-			});
 
+		Communities.get()
+		.success(function(data) {
+			$scope.posts = data;
+			$scope.loading = false;
+		});
 
 		Communities.loggedIn()
-			.success(function(data){
-				if(data.error) {
-					$location.url("/signin")
-				}
-			}).
-			error(function(data){
+		.success(function(data){
+			if(data.error) {
 				$location.url("/signin")
-			})
+			}
+			$rootScope.user = data;
+		}).
+		error(function(data){
+			$location.url("/signin")
+		})
 
 
 

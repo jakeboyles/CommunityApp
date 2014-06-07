@@ -17,8 +17,7 @@ angular.module('SinglePostController', [])
 		Communities.getPost($routeParams.postid)
 				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
-					$scope.post = data[0]; // assign our new list of todos
-					
+					$scope.post = data[0]; // assign our new list of todos					
 				}).
 		    error(function(data, status, headers, config) {
 		    	$scope.error(data);

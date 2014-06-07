@@ -1,7 +1,8 @@
 var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
-
+var fs = require("fs");
+var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('OGc0mZWdpPE41igHW215UQ');
 
@@ -34,6 +35,28 @@ app.all('/*', function(req, res, next) {
 	});
 
 
+
+app.post('/post/image',function(req,res) {
+	console.log(req.files.file.path);
+    var tmp_path = req.files.file.path;
+    // set where the file should actually exists - in this case it is in the "images" directory
+    var time = new Date().getTime();
+    var target_path = './public/uploads/' +time+ req.files.file.name;
+
+    // move the file from the temporary location to the intended location
+    fs.rename(tmp_path, target_path, function(err) {
+        if (err) {
+        	res.send(err);
+        }
+        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+        fs.unlink(tmp_path, function() {
+            if (err) throw err;
+            res.json("uploads/"+time+req.files.file.name);
+        });
+    });
+});
+
+
  app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
@@ -63,6 +86,7 @@ app.all('/*', function(req, res, next) {
 			content : req.body.content,
 			price : req.body.price,
 			user: req.user,
+			images:req.body.images,
 		}, function(err, post) {
 			if (err)
 				res.send(err);
