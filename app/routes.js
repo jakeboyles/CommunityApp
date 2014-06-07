@@ -60,9 +60,18 @@ app.post('/post/image',function(req,res) {
  app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
     // If this function gets called, authentication was successful.
     // `req.user` contains the authenticated user.
-   	sendMessage(req.user);
 
-    res.send(req.user);
+    User.update({"_id":req.user._id}, {$set: { "firstName": req.body.firstname }}, {upsert: true}, function(err){
+    		if(err){
+    			res.send(err);
+    		} else {
+    		res.send(req.user);
+
+    		}
+    	   	//sendMessage(req.user);
+
+
+    })
   });
 
 
