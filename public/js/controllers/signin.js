@@ -6,7 +6,7 @@ angular.module('SigninController', [])
 	$scope.signin = function() {
 		Communities.postSignIn($scope.signupData)
 		.success(function(data){
-			$scope.user = data;
+				$scope.user = data;
 				console.log(data);
 				$location.url("/");
 		}).

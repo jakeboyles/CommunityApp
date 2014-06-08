@@ -58,22 +58,15 @@ app.post('/post/image',function(req,res) {
 
 
  app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-
-    User.update({"_id":req.user._id}, {$set: { "firstName": req.body.firstname }}, {upsert: true}, function(err){
-    		if(err){
-    			res.send(err);
-    		} else {
-    		res.send(req.user);
-
-    		}
-    	   	//sendMessage(req.user);
-
-
-    })
+        res.send(req.user);
+    	sendMessage(req.user);
   });
 
+
+  app.get('/logout',function(req, res) {
+   		req.logout();
+  		res.redirect('/');
+  });
 
   app.post('/login', passport.authenticate('local-login'),function(req, res) {
     // If this function gets called, authentication was successful.

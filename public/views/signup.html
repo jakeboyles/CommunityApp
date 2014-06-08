@@ -1,11 +1,13 @@
 <div class="signup container">
 	<form>
 		<h2>Signup</h2>
-		<input ng-model="signupData.email" type="text">
-		<input ng-model="signupData.password" type="password">
-		<input ng-model="signupData.firstname" type="text">
-		<input ng-model="signupData.lastname" type="text">
-		<input ng-model="signupData.location" type="text">
+		<input ng-model="signupData.email" required placeholder="Email" type="text">
+		<input ng-model="signupData.password" required  placeholder="Password" type="password">
+		<input ng-model="signupData.firstname" required  placeholder="First Name" type="text">
+		<input ng-model="signupData.lastname" required  placeholder="Last Name" type="text">
+		<input ng-model="signupData.location" required  placeholder="Location" type="text">
+		<input required type="file" ng-file-select="onFileSelect($files)">
 		<button ng-click="signup()">Sign Up</button>
+		<img src="{{signupData.image}}">
 	</form>
 </div>

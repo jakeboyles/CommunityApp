@@ -1,26 +1,18 @@
 <!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
-			<div class="col-sm-8 col-sm-offset-2 text-center">
+		<div id="post-form">
 				<form>
 					<div class="form-group">
-
 						<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-						<input type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
-						<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content">
-						<input type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
-  						<input type="file" ng-file-select="onFileSelect($files)" multiple>
-						 
-						 
+						<input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
+						<input required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content">
+						<input required type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
+  						<input required type="file" ng-file-select="onFileSelect($files)" multiple> 
 					</div>
 
-					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="createpost()">Add</button>
 
 				</form>
 				<div class="images">
 				<img ng-repeat="image in formData.images" src="{{image}}">
 				</div>
-
-
-			</div>
 		</div>

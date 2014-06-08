@@ -14,6 +14,8 @@
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 	<link rel="stylesheet" href="js/bower_components/notyfy/jquery.notyfy.css"></script>
 	<link rel="stylesheet" href="js/bower_components/notyfy/themes/default.css"></script>
+	<link rel="stylesheet" href="less/main.css"></script>
+
 
 
 	<!-- SPELLS -->
@@ -33,25 +35,34 @@
 	<script src="js/controllers/getPost.js"></script> <!-- load up our controller -->
 	<script src="js/services/todos.js"></script> <!-- load our todo service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
+	<script src="js/masonary.js"></script> <!-- load our main application -->
 
 
 </head>
 <!-- SET THE CONTROLLER -->
 <body>
 
-        <header ng-controller="mainController" id="header" class="container">
-            <div class="row">
-            <a href="#/">Home</a>
-            {{user.local.email}}
+        <header ng-controller="mainController" id="header" class="container-fluid">
+
+            <div ng-if="user.error != 'Please Log In'" class="row">
+            	<a class="col-xs-2 logo" href="#/"><img src="images/logo.png" /></a>
+            	<div class="userInfo pull-right col-xs-8">
+            		<img style="max-width:60px" src="{{user.profilepicture}}">
+            		 <a href="/logout">Logout</a>
+            	</div>
             </div>
 
-            <div class="options col-md-3 col-xs-7 col-md-offset-5">
-
+            <div ng-if="user.error == 'Please Log In'" class="row">
+            	<a class="col-xs-2 logo" href="#/"><img src="images/logo.png" /></a>
+            	<div class="pull-right col-xs-2">
+            		<a href="#/signin">Login</a>
+            	</div>
             </div>
-            
+
+
         </header>
 
-         <div ng-view></div>
+         <div class="container-fluid" ng-view></div>
 
 </body>
 </html>

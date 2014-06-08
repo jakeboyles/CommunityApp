@@ -70,16 +70,29 @@ module.exports = function(passport) {
                 return done(null, false, 'That email is already taken.');
             } else {
 
+
+                function capitalize(str) {
+                    strVal = '';
+                    str = str.split(' ');
+                    for (var chr = 0; chr < str.length; chr++) {
+                        strVal += str[chr].substring(0, 1).toUpperCase() + str[chr].substring(1, str[chr].length) + ' '
+                    }
+                    return strVal
+                }
+
 				// if there is no user with that email
                 // create the user
                 var newUser = new User();
 
+                var firstName = capitalize(req.body.firstname);
+                var lastName = capitalize(req.body.lastname);
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
-                newUser.firstName = req.body.firstname;
-                newUser.lastName = req.body.lastname;
+                newUser.firstName = firstName;
+                newUser.lastName = lastName;
                 newUser.location = req.body.location;
+                newUser.profilepicture = req.body.profilepic;
 
 				// save the user
                 newUser.save(function(err) {
@@ -129,6 +142,8 @@ module.exports = function(passport) {
         });
 
     }));
+
+
 
 };
 

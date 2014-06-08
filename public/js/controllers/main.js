@@ -14,14 +14,20 @@ angular.module('communityController', [])
 
 		Communities.loggedIn()
 		.success(function(data){
-			if(data.error) {
-				$location.url("/signin")
-			}
 			$rootScope.user = data;
 		}).
 		error(function(data){
 			$location.url("/signin")
 		})
+
+
+    setTimeout(function () {
+		var container = document.querySelector('.listContain');
+			var msnry = new Masonry( container, {
+			  // options
+			  itemSelector: '.item'
+			});
+		},300);
 
 
 

@@ -1,0 +1,114 @@
+.clearfix {
+  *zoom: 1;
+}
+.clearfix:before,
+.clearfix:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.clearfix:after {
+  clear: both;
+}
+img {
+  width: 100%;
+}
+.item {
+  margin-bottom: 20px;
+}
+.item .contain {
+  padding: 20px;
+  background-color: #f7f7f7;
+  *zoom: 1;
+}
+.item .contain:before,
+.item .contain:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.item .contain:after {
+  clear: both;
+}
+.row {
+  margin: 0;
+  padding: 0;
+}
+header {
+  padding: 10px 10px;
+  background-color: #DBF7D9;
+  color: #000;
+  margin-bottom: 20px;
+}
+header .row {
+  padding: 0;
+  margin: 0;
+}
+header a {
+  color: #fff;
+  background-color: #000;
+  padding: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+header a:hover {
+  text-decoration: none;
+  background-color: #1a1a1a;
+}
+h3 {
+  padding: 0;
+  margin: 0;
+}
+.logo {
+  background-color: transparent;
+  padding: 0;
+  padding-left: 25px;
+}
+.logo img {
+  max-width: 50px;
+}
+.logo:hover {
+  background-color: transparent;
+}
+#post-form {
+  max-width: 700px;
+  margin: 0px auto;
+}
+#post-form input {
+  margin-bottom: 20px;
+}
+.post {
+  padding: 0px 20px;
+}
+.post button {
+  margin-top: 10px;
+}
+.post form {
+  margin-bottom: 20px;
+}
+.post img {
+  max-width: 200px;
+}
+.post ul {
+  margin: 0;
+  padding: 0;
+}
+.post li {
+  list-style: none;
+}
+.comment {
+  width: 100%;
+  float: left;
+  margin-bottom: 30px;
+}
+.userInfo img,
+.userInfo a {
+  float: right;
+}
+.userInfo img {
+  margin-left: 20px;
+}
+input {
+  max-width: 400px;
+}
