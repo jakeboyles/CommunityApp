@@ -87,6 +87,7 @@ app.post('/post/image',function(req,res) {
 			title : req.body.title,
 			content : req.body.content,
 			price : req.body.price,
+			location:req.body.location,
 			user: req.user,
 			images:req.body.images,
 		}, function(err, post) {

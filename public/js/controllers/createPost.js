@@ -2,6 +2,7 @@ angular.module('PostController', ['angularFileUpload'])
 
 // inject the Todo service factory into our controller
 .controller('postController', function($scope, $upload, $http, Communities,$location) {
+	$scope.formData = "";
 
 Communities.loggedIn()
 	.success(function(data){
@@ -43,6 +44,7 @@ var images = [];
 
 $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
+    $scope.formData.images = "";
     if(images.length<5) {
     for (var i = 0; i < $files.length; i++) {
       var $file = $files[i];
@@ -56,12 +58,13 @@ $scope.onFileSelect = function($files) {
       	images.push(str);
         $scope.image = images[0];
         $scope.formData.images = images;
-        $scope.$apply()
+        $scope.$digest();
       }); 
     }
     } else {
     	var n = notyfy({
 					text: 'You can only upload 5 images',
+					timeout: 3000,
 					type: 'error',
 		});
     }

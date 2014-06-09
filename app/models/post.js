@@ -6,10 +6,12 @@ var mongoose = require('mongoose')
 var PostSchema = new Schema({
     title: {
         type: String,
+        required: true,
         default: '',
     },
     content: {
         type: String,
+        required: true,
         default: '',
     },
     community: {
@@ -18,13 +20,21 @@ var PostSchema = new Schema({
     },
     price: {
         type: String,
+        required: true,
+        default: '',
+    },
+    location: {
+        type: String,
+        required: true,
         default: '',
     },
     images: {
         type:[],
+        required: true,
     },
     user: {
         type: Schema.ObjectId,
+        required: true,
         ref: 'User'
     }
 });

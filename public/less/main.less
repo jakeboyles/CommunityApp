@@ -1,16 +1,51 @@
 @import "mixins.less";
 
+body {
+	font-family: 'Roboto', sans-serif;
+}
 
 img {
 	width:100%;
 }
 
+h1,h2,h3,h4,h5,button {
+	font-family: 'Oswald', sans-serif;
+	font-weight:300;
+}
+
 .item {
 	margin-bottom:20px;
 	.contain {
-	padding:20px;
-	background-color:darken(#fff,3);
-	.clearfix();
+		padding:20px;
+		background-color:darken(#fff,2);
+		.clearfix();
+		.box-shadow(0px 0px 5px rgba(0,0,0,.1));
+		.border-radius(10px);
+	}
+
+	p {
+		float:left;
+		clear:left;
+	}
+
+	.pull-right {
+		clear:both;
+	}
+
+	.price {
+		color:#000;
+		font-weight:400;
+		background-color:#DEF9DA;
+		font-family: 'Oswald', sans-serif;
+		.border-radius(5px);
+		padding:5px 8px;
+		display:inline-block;
+		margin-top:10px;
+		font-size:13px;
+		margin-bottom:10px;
+		.clearfix();
+		float:left;
+		clear:both;
 	}
 }
 
@@ -21,24 +56,64 @@ img {
 
 
 header {
+	height:65px;
+	.box-shadow(0 0px 10px rgba(0,0,0,.6));
 	.row {
 		padding:0;
 		margin:0;
+		height:65px;
 	}
-	padding:10px 10px;
-	background-color:#DBF7D9;
-	color:#000;
+
+	.postIcon {
+			border-right:0px;
+	}
+
+	width:100%;
+	padding:0px 10px;
+	background-color:#3A4A59;
+	color:#fff;
 	margin-bottom:20px;
 	a {
+		border-left:2px solid lighten(#3A4A59,5);
+		border-right:2px solid lighten(#3A4A59,5);
+		padding:20px 10px;
 		color:#fff;
-		background-color:#000;
-		padding:10px;
-		.border-radius(10px);
+		height:65px;
+		float:right;
+		font-size:16px;
+		font-family: 'Oswald', sans-serif;
+		font-weight: 300;
+
+		i {
+			margin-right:5px;
+			font-size:100%;
+		}
 	}
+
+	a:last-child {
+		border-right:0;
+	}
+
+
 
 	a:hover {
 		text-decoration:none;
-		background-color:lighten(#000,10);
+		background-color:lighten(#3A4A59,5);
+		color:#fff;
+	}
+
+	.userInfo {
+		.clearfix();
+		height:65px;
+
+		img,a {
+			float:right;
+		}
+
+		img {
+			margin-left:20px;
+			margin-top:10px;
+		}
 	}
 }
 
@@ -51,32 +126,76 @@ h3 {
 	background-color:transparent;
 	padding:0;
 	padding-left:25px;
+	border:0px;
+	margin-top:10px;
+	margin-bottom:10px;
 }
 
 .logo img {
-	max-width:50px;
+	max-width:40px;
 }
 
 .logo:hover {
 	background-color:transparent;
+	border:0px;
 }
 
 #post-form {
-	max-width:700px;
 	margin:0px auto;
 
-	input {
+	input,textarea {
 		margin-bottom:20px;
+	}
+}
+
+
+.signup {
+	padding:0px 20px;
+	input,textarea {
+		margin-bottom:20px;
+		float:left;
+		clear:left;
+	}
+
+	img {
+		max-width:150px;
+	}
+
+	button {
+		float:left;
+		clear:left;
 	}
 }
 
 .post {
 	padding:0px 20px;
+	margin-top:45px;
 
 	button {
 		margin-top:10px;
 	}
 
+	h2 {
+		margin:0;
+		padding:0;
+		margin-bottom:15px;
+	}
+
+	.price {
+		color:#000;
+		font-weight:400;
+		background-color:#DEF9DA;
+		font-family: 'Oswald', sans-serif;
+		.border-radius(10px);
+		padding:10px 20px;
+		display:inline-block;
+		font-size:17px;
+		margin-bottom:20px;
+	}
+
+	h3 {
+		margin-bottom:20px;
+	}
 	form {
 		margin-bottom:20px;
 	}
@@ -99,18 +218,31 @@ h3 {
 	width:100%;
 	float:left;
 	margin-bottom:30px;
+	background-color:darken(#fff,2);
+	padding:15px 20px;
+	.border-radius(20px);
 }
 
-.userInfo {
-	img,a {
-		float:right;
+.commentSection {
+	margin-top:70px;
+
+	.allComments {
+		margin-top:60px;
+		.clearfix();
 	}
-
-	img {
-		margin-left:20px;
-	}
 }
 
-input {
-	max-width:400px;
+
+input, textarea {
+	max-width:600px;
 }
+
+.fileUpload {
+	float:left;
+	clear:left;
+}
+
+.imageTitle {
+	margin-bottom:20px;
+}
+

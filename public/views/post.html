@@ -4,33 +4,40 @@
 		<div class="col-md-2 col-xs-12 images">
 			<img ng-repeat="image in post.images" src="{{image}}">
 		</div>
-		<div class="col-md-8 col-xs-12 col-md-offset-2">
-			<H2>{{post.title}}</H2>
+		<div class="col-md-9 col-xs-12 col-md-offset-1">
+			<H2 class="col-xs-12">{{post.title}}</H2>
+			<p class="price">{{post.price | currency:"$ "}}</p>
 			<p>{{post.content}}</p>
-			<p>{{post.price}}</p>
 		</div>
 	</div>
-	<div>
-		<h2>Add a comment</h2>
-		<form>
-			<input type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content">
-			<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add</button>
-		</form>
-	</div>
 
-	<h3>Comments</h3>
-			
-	<div>
-		<ul>
-		    <li class="comment" ng-repeat="comment in comments"> 
-			    <div class="col-xs-3">
-			    	<img src="{{comment.user.profilepicture}}" />
-			    </div>
-			    <div class="col-xs-8 col-xs-offset-1">
-			    	<p>{{comment.user.firstName}} says...</p>
-			    	<p>{{comment.content}}</p>
-			    </div>
-		    </li>
-	    </ul>
+
+	<div class="commentSection">
+		<div>
+			<h2>Want to Add A Comment {{user.firstName}}?</h2>
+			<form>
+				<textarea type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content"></textarea>
+				<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add Comment</button>
+			</form>
+		</div>
+
+
+		<div class="allComments">
+			<h3>Comments</h3>
+					
+			<div>
+				<ul>
+				    <li class="comment" ng-repeat="comment in comments"> 
+					    <div class="col-xs-2 col-md-1">
+					    	<img src="{{comment.user.profilepicture}}" />
+					    </div>
+					    <div class="col-xs-9 col-md-11 col-xs-offset-1">
+					    	<p>{{comment.user.firstName}} says...</p>
+					    	<p>{{comment.content}}</p>
+					    </div>
+				    </li>
+			    </ul>
+			</div>
+		</div>
 	</div>
 </div>

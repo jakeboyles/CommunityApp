@@ -43,6 +43,7 @@ angular.module('SinglePostController', [])
 				var n = notyfy({
 								text: "Please Login",
 								type: 'error',
+								timeout: 3000,
 							});
 
 				} else {

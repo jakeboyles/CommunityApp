@@ -17,6 +17,7 @@ angular.module('SignupController', ['angularFileUpload'])
 		error(function(data){
 			var n = notyfy({
 			text: data,
+			timeout: 3000,
 			type: 'error',
 		});
 		})
@@ -35,9 +36,8 @@ $scope.onFileSelect = function($files) {
       	var str = data.data;
       	str = str.replace(/"/g, "");
       	profilePicture = str;
-      	alert(profilePicture);
-        $scope.signupData.image = str;
-        $scope.$apply()
+        $scope.image = str;
+        scope.$digest();
       }); 
     
  }

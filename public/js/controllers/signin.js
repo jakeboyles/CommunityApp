@@ -13,6 +13,7 @@ angular.module('SigninController', [])
 		error(function(data){
 			var n = notyfy({
 				text: data,
+				timeout: 3000,
 				type: 'error',
 			});
 		})

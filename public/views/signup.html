@@ -1,13 +1,15 @@
-<div class="signup container">
+<div class="signup container-fluid">
 	<form>
 		<h2>Signup</h2>
-		<input ng-model="signupData.email" required placeholder="Email" type="text">
-		<input ng-model="signupData.password" required  placeholder="Password" type="password">
-		<input ng-model="signupData.firstname" required  placeholder="First Name" type="text">
-		<input ng-model="signupData.lastname" required  placeholder="Last Name" type="text">
-		<input ng-model="signupData.location" required  placeholder="Location" type="text">
-		<input required type="file" ng-file-select="onFileSelect($files)">
-		<button ng-click="signup()">Sign Up</button>
-		<img src="{{signupData.image}}">
+		<input class="form-control input-lg text-center" ng-model="signupData.email" required placeholder="Email" type="text">
+		<input class="form-control input-lg text-center" ng-model="signupData.password" required  placeholder="Password" type="password">
+		<input class="form-control input-lg text-center" ng-model="signupData.firstname" required  placeholder="First Name" type="text">
+		<input class="form-control input-lg text-center" ng-model="signupData.lastname" required  placeholder="Last Name" type="text">
+		<input class="form-control input-lg text-center" ng-model="signupData.location" placeholder="Location" type="text">
+		<div class="profilePicture">
+		<input class="col-md-3 fileUpload" required type="file" ng-file-select="onFileSelect($files)">
+		<img class="col-md-3" ng-if="image != null" src="{{image}}">
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg" ng-click="signup()">Sign Up</button>
 	</form>
 </div>
