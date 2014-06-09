@@ -146,7 +146,9 @@ header .userInfo a {
 }
 header .userInfo img {
   margin-left: 20px;
-  margin-top: 10px;
+  margin-top: 5px;
+  max-height: 50px;
+  width: auto;
 }
 h3 {
   padding: 0;
@@ -244,6 +246,14 @@ h3 {
 .commentSection {
   margin-top: 70px;
 }
+.commentSection textarea {
+  margin-bottom: 20px;
+}
+.commentSection .offer {
+  max-width: 10em;
+  width: 10em;
+  margin-bottom: 20px;
+}
 .commentSection .allComments {
   margin-top: 60px;
   *zoom: 1;
@@ -256,6 +266,62 @@ h3 {
 }
 .commentSection .allComments:after {
   clear: both;
+}
+.commentSection .allComments .offerPrice {
+  color: #000;
+  font-weight: 400;
+  background-color: #ECC2D6;
+  font-family: 'Oswald', sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 8px;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  *zoom: 1;
+  float: left;
+  clear: both;
+}
+.commentSection .allComments .offerPrice:before,
+.commentSection .allComments .offerPrice:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.commentSection .allComments .offerPrice:after {
+  clear: both;
+}
+.commentSection .allComments .acceptOffer {
+  color: #000;
+  font-weight: 400;
+  background-color: #DEF9DA;
+  font-family: 'Oswald', sans-serif;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  padding: 5px 8px;
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 13px;
+  margin-bottom: 10px;
+  *zoom: 1;
+  float: left;
+  margin-left: 20px;
+}
+.commentSection .allComments .acceptOffer:before,
+.commentSection .allComments .acceptOffer:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.commentSection .allComments .acceptOffer:after {
+  clear: both;
+}
+.commentSection .allComments .acceptOffer:hover {
+  background-color: #90eb82;
+  text-decoration: none;
 }
 input,
 textarea {

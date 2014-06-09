@@ -34,6 +34,24 @@ angular.module('SinglePostController', [])
 		    })
 
 
+		$scope.acceptOffer = function(number,comment) {
+
+			var data = {
+				user: number,
+				comment: comment,
+			}
+
+			data = JSON.stringify(data);
+
+			Communities.acceptOffer(data)
+			.success(function(data){
+				alert("DONE");
+			})
+			
+			return false;
+		};
+
+
 
 		$scope.createComment = function(){
 			$scope.comment.postid = $routeParams.postid;

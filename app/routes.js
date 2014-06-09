@@ -93,9 +93,6 @@ app.post('/post/image',function(req,res) {
 		}, function(err, post) {
 			if (err)
 				res.send(err);
-
-			Post.find()
-
 			// get and return all the todos after you create another
 			Post.find(function(err, posts) {
 				if (err)
@@ -116,6 +113,7 @@ app.post('/post/image',function(req,res) {
 			title : req.body.title,
 			content : req.body.content,
 			postid : req.body.postid,
+			offer: req.body.offer,
 			user: req.user,
 		},function(err, comment) {
 			res.send(comment);
@@ -133,6 +131,34 @@ app.post('/post/image',function(req,res) {
 
 				res.json(comment);
 			});
+
+	});
+
+
+	app.post('/api/acceptOffer',function(req,res){
+
+
+		Comment.find({
+				_id : req.body.comment,
+			}).populate('user').exec(function(err,comment){
+				if (err)
+					res.send(err);
+
+
+				Post.findById(req.body.user, function (err, post) {
+				  if (err) {
+				  	res.json(err);
+				  }
+				  post.accepted = comment;
+				  post.save(function(){
+				  offerAccepted(comment);
+				  res.json(comment);
+				  });
+				})
+
+			});
+
+
 
 	});
 
@@ -170,6 +196,35 @@ app.post('/post/image',function(req,res) {
 				res.json(post);
 			});
 	});
+
+var offerAccepted = function(comment) {
+	var message = {
+	    "html": "<h2>Offer Accpeted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of "+comment[0].offer+" was accepted!",
+	    "subject": "Offer Accepted!",
+	    "from_email": "jake@jibdesigns.com",
+	    "from_name": "Jake Boyles",
+	    "to": [{
+	            "email": comment[0].user.local.email,
+	            "name": comment[0].user.firstName,
+	            "type": "to"
+	        }],
+	    "headers": {
+	        "Reply-To": "jake@jibdesigns.com"
+	    },
+	    "important": false,
+	    "track_opens": null,
+	    "track_clicks": null,
+	};
+	var async = false;
+	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
+		    console.log(result);
+
+	}, function(e) {
+	    // Mandrill returns the error as an object with name and message keys
+	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+	});
+};	
 
 
 

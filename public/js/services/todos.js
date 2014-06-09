@@ -29,6 +29,9 @@ return {
 	},
 	getComments: function(data) {
 		return $http.post('/api/allComments',data);
+	},
+	acceptOffer:function(data) {
+		return $http.post('/api/acceptOffer',data);
 	}
 }
 });

@@ -19,6 +19,10 @@ var CommentSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    offer: {
+        type: String,
+        default: '',
     }
 });
 

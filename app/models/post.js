@@ -35,7 +35,10 @@ var PostSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'User',
+    },
+    accepted : {
+        type: [],
     }
 });
 

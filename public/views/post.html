@@ -8,6 +8,7 @@
 			<H2 class="col-xs-12">{{post.title}}</H2>
 			<p class="price">{{post.price | currency:"$ "}}</p>
 			<p>{{post.content}}</p>
+			<p><b>Location:</b> {{post.location}}</p>
 		</div>
 	</div>
 
@@ -17,6 +18,8 @@
 			<h2>Want to Add A Comment {{user.firstName}}?</h2>
 			<form>
 				<textarea type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content"></textarea>
+				<h4>Have An Offer?</h4>
+				<input type="text" class="offer form-control input-lg text-center" ng-model="comment.offer" placeholder="Offer">
 				<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add Comment</button>
 			</form>
 		</div>
@@ -27,13 +30,16 @@
 					
 			<div>
 				<ul>
-				    <li class="comment" ng-repeat="comment in comments"> 
+				    <li class="comment" data-author="{{comment.user._id}}" ng-repeat="comment in comments"> 
 					    <div class="col-xs-2 col-md-1">
 					    	<img src="{{comment.user.profilepicture}}" />
 					    </div>
 					    <div class="col-xs-9 col-md-11 col-xs-offset-1">
+					    <h5 ng-if="comment.user._id==post.user._id">Post Author</h5>
 					    	<p>{{comment.user.firstName}} says...</p>
 					    	<p>{{comment.content}}</p>
+					    	<p ng-if="comment.offer!=''" class="offerPrice">{{comment.offer | currency:"$ "}}</p>
+					    	<a class="acceptOffer" ng-click="acceptOffer(post._id,comment._id)" ng-if="post.user._id==user._id && comment.offer!=''">Accept Offer</a>
 					    </div>
 				    </li>
 			    </ul>

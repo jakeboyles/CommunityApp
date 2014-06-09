@@ -112,7 +112,9 @@ header {
 
 		img {
 			margin-left:20px;
-			margin-top:10px;
+			margin-top:5px;
+			max-height:50px;
+			width:auto;
 		}
 	}
 }
@@ -226,9 +228,56 @@ h3 {
 .commentSection {
 	margin-top:70px;
 
+	textarea {
+		margin-bottom:20px;
+	}
+
+	.offer {
+		max-width:10em;
+		width:10em;
+		margin-bottom:20px;
+	}
+
 	.allComments {
 		margin-top:60px;
 		.clearfix();
+
+		.offerPrice {
+			color:#000;
+			font-weight:400;
+			background-color:#ECC2D6;
+			font-family: 'Oswald', sans-serif;
+			.border-radius(5px);
+			padding:5px 8px;
+			display:inline-block;
+			margin-top:10px;
+			font-size:13px;
+			margin-bottom:10px;
+			.clearfix();
+			float:left;
+			clear:both;
+		}
+
+		.acceptOffer {
+			color:#000;
+			font-weight:400;
+			background-color:#DEF9DA;
+			font-family: 'Oswald', sans-serif;
+			.border-radius(5px);
+			padding:5px 8px;
+			display:inline-block;
+			margin-top:10px;
+			font-size:13px;
+			margin-bottom:10px;
+			.clearfix();
+			float:left;
+			margin-left:20px;
+		}
+
+		.acceptOffer:hover {
+			background-color:darken(#DEF9DA,20);
+			text-decoration:none;
+		}
 	}
 }
 
