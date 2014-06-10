@@ -31,10 +31,10 @@
 			<div>
 				<ul>
 				    <li class="comment" data-author="{{comment.user._id}}" ng-repeat="comment in comments"> 
-					    <div class="col-xs-2 col-md-1">
+					    <div class="col-xs-4 col-md-1">
 					    	<img src="{{comment.user.profilepicture}}" />
 					    </div>
-					    <div class="col-xs-9 col-md-11 col-xs-offset-1">
+					    <div class="col-xs-7 col-md-11 col-xs-offset-1">
 					    <h5 ng-if="comment.user._id==post.user._id">Post Author</h5>
 					    	<p>{{comment.user.firstName}} says...</p>
 					    	<p>{{comment.content}}</p>
