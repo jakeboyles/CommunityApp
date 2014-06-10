@@ -46,17 +46,27 @@
         <header ng-controller="mainController" id="header" class="container-fluid">
 
             <div ng-if="user.error != 'Please Log In'" class="row">
-            	<a class="col-xs-2 logo" href="#/"><img src="images/logo.png" /></a>
-            	<div class="userInfo pull-right col-md-3 col-xs-8">
+            	<a class="col-xs-4 col-md-3 logo" href="#/"><img src="images/logo.png" /></a>
+            	<h4 class="col-md-6 mobileHide community">Miami University Community</h4>
+            	<div class="userInfo mobileHide pull-right col-md-3 col-xs-8">
             		<img src="{{user.profilepicture}}">
             		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
             		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
             	</div>
+            	<div class="userInfo desktopHide pull-right col-md-3 col-xs-8">
+            	    <a href="#" ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
+            		<img src="{{user.profilepicture}}">
+
+            		<ul class="mobileNav">
+            			<li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
+            		 	<li><a href="#/post"><i class="fa fa-plus-square-o"></i> Post</a></li>
+            		</ul>
+            	</div>
             </div>
 
             <div ng-if="user.error == 'Please Log In'" class="row">
-            	<a class="col-xs-2 logo" href="#/"><img class="userPic" src="images/logo.png" /></a>
-            	<div class="pull-right col-xs-2">
+            	<a class="col-xs-4 logo" href="#/"><img class="userPic" src="images/logo.png" /></a>
+            	<div class="pull-right col-xs-8">
             		<a href="#/signin"><i class="fa fa-users"></i> Login</a>
             		<a class="postIcon" href="#/signup"><i class="fa fa-child"></i> Signup</a>
             	</div>

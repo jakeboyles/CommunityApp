@@ -145,21 +145,18 @@ app.post('/post/image',function(req,res) {
 					res.send(err);
 
 
-				Post.findById(req.body.user, function (err, post) {
+				Post.findById(req.body.user).populate('user').exec(function(err,post){
 				  if (err) {
 				  	res.json(err);
 				  }
 				  post.accepted = comment;
 				  post.save(function(){
-				  offerAccepted(comment);
-				  res.json(comment);
+				  offerAccepted(comment,post);
+				  res.json(post);
 				  });
 				})
 
 			});
-
-
-
 	});
 
 
@@ -197,9 +194,9 @@ app.post('/post/image',function(req,res) {
 			});
 	});
 
-var offerAccepted = function(comment) {
+var offerAccepted = function(comment,post) {
 	var message = {
-	    "html": "<h2>Offer Accpeted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of "+comment[0].offer+" was accepted!",
+	    "html": "<h2>Offer Accepted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of "+comment[0].offer+" was accepted!<p>Please contact "+post.user.firstName+" "+post.user.lastName+" to set up a time to meet. You can email them at: "+post.user.local.email,
 	    "subject": "Offer Accepted!",
 	    "from_email": "jake@jibdesigns.com",
 	    "from_name": "Jake Boyles",

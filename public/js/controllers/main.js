@@ -21,15 +21,18 @@ angular.module('communityController', [])
 		})
 
 
-    setTimeout(function () {
+    	setTimeout(function () {
 		var container = document.querySelector('.listContain');
 			var msnry = new Masonry( container, {
 			  // options
 			  itemSelector: '.item'
 			});
-		},300);
+		},200);
 
 
+    	$scope.menuClick = function() {
+				$(".mobileNav").toggle();
+    	}
 
 
 
