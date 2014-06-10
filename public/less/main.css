@@ -58,6 +58,9 @@ button {
 .item .pull-right {
   clear: both;
 }
+.item h3 a {
+  color: #3A4A59;
+}
 .item .price {
   color: #000;
   font-weight: 400;
@@ -149,8 +152,9 @@ header .userInfo a {
 }
 header .userInfo img {
   margin-left: 20px;
-  margin-top: 5px;
+  margin-top: 9px;
   max-height: 50px;
+  max-width: 70px;
   width: auto;
 }
 h3 {
@@ -349,11 +353,11 @@ textarea {
 }
 .mobileNav {
   display: none;
-  background-color: #3A4A59;
+  background-color: #445768;
   color: #000;
   position: absolute;
   right: -10px;
-  top: 60px;
+  top: 64px;
   z-index: 200;
   padding: 0;
   margin: 0;
