@@ -206,6 +206,9 @@ h3 {
 .post button {
   margin-top: 10px;
 }
+.post img {
+  margin-bottom: 15px;
+}
 .post h2 {
   margin: 0;
   padding: 0;
