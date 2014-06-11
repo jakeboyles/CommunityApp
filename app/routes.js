@@ -196,7 +196,7 @@ app.post('/post/image',function(req,res) {
 
 var offerAccepted = function(comment,post) {
 	var message = {
-	    "html": "<h2>Offer Accepted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of "+comment[0].offer+" was accepted!<p>Please contact "+post.user.firstName+" "+post.user.lastName+" to set up a time to meet. You can email them at: "+post.user.local.email,
+	    "html": "<h2>Offer Accepted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of $"+comment[0].offer+" was accepted!<p>Please contact "+post.user.firstName+" "+post.user.lastName+" to set up a time to meet. You can email them at: "+post.user.local.email,
 	    "subject": "Offer Accepted!",
 	    "from_email": "jake@jibdesigns.com",
 	    "from_name": "Jake Boyles",

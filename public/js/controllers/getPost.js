@@ -17,7 +17,7 @@ angular.module('SinglePostController', [])
 		Communities.getPost($routeParams.postid)
 				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
-					$scope.post = data[0]; // assign our new list of todos					
+					$scope.post = data[0]; // assign our new list of todos				
 				}).
 		    error(function(data, status, headers, config) {
 		    	$scope.error(data);
@@ -45,21 +45,35 @@ angular.module('SinglePostController', [])
 
 			Communities.acceptOffer(data)
 			.success(function(data){
-				alert("DONE");
+				var n = notyfy({
+						text: "Offer Accepted, Email Has Been Sent To Buyer",
+						type: 'success',
+						timeout: 3000,
+				});
 			})
 			
 			return false;
 		};
 
+		$scope.init = function() {
+			$(document).ready(function(){
+  				$('.bxslider').bxSlider({
+  					pager:true,
+  					controls:false,
+  				});
+			});	
+		}
+
 
 
 		$scope.createComment = function(){
+			if(!isNaN($scope.comment.offer)) {
 			$scope.comment.postid = $routeParams.postid;
 			Communities.postComment($scope.comment)
 			.success(function(data){
-				if(typeof data.redirect == 'string') {
+				if(data.error) {
 				var n = notyfy({
-								text: "Please Login",
+								text: data.error,
 								type: 'error',
 								timeout: 3000,
 							});
@@ -68,10 +82,25 @@ angular.module('SinglePostController', [])
 					Communities.getComments(str)
 					 .success(function(data){
 					 	$scope.comments = data;
+
+					 	var n = notyfy({
+								text: "Comment Posted!",
+								type: 'success',
+								timeout: 3000,
+						});
 					 })
 				}
 			})
+		} else {
+			var n = notyfy({
+				text: "Quote must be a valid number",
+				timeout: 3000,
+				type: 'error',
+			});
+		}
 		};
-
+		    setTimeout(function(){
+		$scope.init();
+	},400);
 	});
 

@@ -23,6 +23,15 @@ h1,h2,h3,h4,h5,button {
 		.border-radius(10px);
 	}
 
+	.info {
+		padding:0;
+	}
+
+	.commentsTotal {
+		padding:0;
+		text-align:right
+	}
+
 	img {
 		margin-bottom:10px;
 	}
@@ -136,12 +145,19 @@ h3 {
 }
 
 .logo {
-	background-color:transparent;
-	padding:0;
-	padding-left:25px;
-	border:0px;
-	margin-top:10px;
-	margin-bottom:10px;
+	a {
+		background-color:transparent;
+		padding:0;
+		padding-left:10px;
+		border:0px;
+		margin-top:10px;
+		margin-bottom:10px;
+		float:left;
+	}
+
+	a:hover {
+		background-color:transparent;
+	}
 }
 
 .logo img {
@@ -188,8 +204,41 @@ h3 {
 		margin-top:10px;
 	}
 
+	.poster {
+		padding:0;
+		img {
+			max-width:50px;
+			float:right;
+		}
+	}
+
+	.content {
+		margin-bottom:30px;
+	}
+
+	.col-md-6 {
+		.clearfix();
+	}
+
 	img {
 		margin-bottom:15px;
+	}
+
+	.row {
+		padding:0;
+	}
+
+	.info {
+		padding:0;
+	}
+
+	.commentsTotal {
+		padding:0;
+		text-align:right;
+	}
+
+	.priceContainer {
+		padding:0
 	}
 
 	h2 {
@@ -204,10 +253,10 @@ h3 {
 		background-color:#DEF9DA;
 		font-family: 'Oswald', sans-serif;
 		.border-radius(10px);
-		padding:10px 20px;
+		padding:5px 12px;
 		display:inline-block;
-		font-size:17px;
-		margin-bottom:20px;
+		font-size:15px;
+		margin-bottom:15px;
 	}
 
 	h3 {
@@ -218,7 +267,7 @@ h3 {
 	}
 
 	img {
-		max-width:200px;
+		max-width:250px;
 	}
 
 	ul {
@@ -241,7 +290,6 @@ h3 {
 }
 
 .commentSection {
-	margin-top:70px;
 
 	textarea {
 		margin-bottom:20px;
@@ -253,9 +301,17 @@ h3 {
 		margin-bottom:20px;
 	}
 
+}
+
+
+input, textarea {
+	max-width:600px;
+}
+
 	.allComments {
 		margin-top:60px;
 		.clearfix();
+		float:left;
 
 		.offerPrice {
 			color:#000;
@@ -294,12 +350,6 @@ h3 {
 			text-decoration:none;
 		}
 	}
-}
-
-
-input, textarea {
-	max-width:600px;
-}
 
 .fileUpload {
 	float:left;
@@ -352,14 +402,44 @@ input, textarea {
     }
 }
 
-@media (min-width: 600px) {
+.bx-wrapper .bx-viewport {
+	.box-shadow(0px);
+	.box-shadow(0px 0px 0px 0px);
+}
+
+.content {
+	margin-bottom:15px;
+}
+
+#bx-pager a {
+	.box-shadow();
+	padding:10px;
+}
+
+@media (min-width: 990px) {
   .desktopHide {
   	display:none;
   }
 }
 
+@media(max-width:900px) {
+	.commentSection {
+		margin-top:60px;
+	}
 
-@media (max-width: 600px) {
+	.post {
+  	padding:0;
+  	}
+
+  	.contain {
+  		.col-md-7,.col-md-5  {
+			padding:0
+		}
+  	}
+}
+
+
+@media (max-width: 990px) {
   .mobileHide {
   	display:none;
   }

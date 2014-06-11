@@ -10,6 +10,12 @@ angular.module('communityController', [])
 		.success(function(data) {
 			$scope.posts = data;
 			$scope.loading = false;
+			setTimeout(function () {
+				var container = document.querySelector('.listContain');
+				var msnry = new Masonry( container, {
+			 	 	itemSelector: '.item'
+				});
+			},100);
 		});
 
 		Communities.loggedIn()
@@ -21,13 +27,7 @@ angular.module('communityController', [])
 		})
 
 
-    	setTimeout(function () {
-		var container = document.querySelector('.listContain');
-			var msnry = new Masonry( container, {
-			  // options
-			  itemSelector: '.item'
-			});
-		},200);
+
 
 
     	$scope.menuClick = function() {

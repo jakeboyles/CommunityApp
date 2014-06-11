@@ -1,21 +1,33 @@
 <div class="post">
-	<div class="row">
+	<div class="col-md-6">
 
-		<div class="col-md-2 col-xs-12 images">
-			<img ng-repeat="image in post.images" src="{{image}}">
+		<div class="col-md-5 col-xs-12 images">
+			<ul class="bxslider">
+			  <li ng-repeat="image in post.images"><img src="{{image}}" /></li>
+			</ul>
 		</div>
-		<div class="col-md-9 col-xs-12 col-md-offset-1">
+
+
+		<div class="col-md-7 col-xs-12">
 			<H2 class="col-xs-12">{{post.title}}</H2>
-			<p class="price">{{post.price | currency:"$ "}}</p>
-			<p>{{post.content}}</p>
-			<p><b>Location:</b> {{post.location}}</p>
+			<div class="row">
+				<div class="col-xs-6 priceContainer">
+					<p class="price">{{post.price | currency:"$ "}}</p>
+				</div>
+				<div class="poster col-xs-6">
+					<img src='{{post.user.profilepicture}}' />
+				</div>
+			</div>
+			<p class="content">{{post.content}}</p>
+			<p class="info col-xs-6">{{post.location}}</p>
+			<p class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{comments.length}}</p>
 		</div>
 	</div>
 
 
-	<div class="commentSection">
+	<div class="commentSection col-md-5 col-md-offset-1">
 		<div>
-			<h2>Want to Add A Comment {{user.firstName}}?</h2>
+			<h2>Add Comment</h2>
 			<form>
 				<textarea type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="comment.content"></textarea>
 				<h4>Have An Offer?</h4>
@@ -23,10 +35,11 @@
 				<button type="submit" class="btn btn-primary btn-lg" ng-click="createComment()">Add Comment</button>
 			</form>
 		</div>
+	</div>
 
 
-		<div class="allComments">
-			<h3>Comments</h3>
+	<div class="allComments col-xs-12">
+			<h3>{{comments.length}} Comments</h3>
 					
 			<div>
 				<ul>
@@ -45,5 +58,4 @@
 			    </ul>
 			</div>
 		</div>
-	</div>
 </div>

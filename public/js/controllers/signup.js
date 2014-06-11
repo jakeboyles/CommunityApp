@@ -9,10 +9,8 @@ angular.module('SignupController', ['angularFileUpload'])
 		$scope.signupData.profilepic = profilePicture;
 		Communities.postSignUp($scope.signupData)
 		.success(function(data){
-			if(data.user) {
-				$rootScope.user = data;
-				$location.url("/");
-			}
+			$rootScope.user = data;
+			$location.url("/");
 		}).
 		error(function(data){
 			var n = notyfy({

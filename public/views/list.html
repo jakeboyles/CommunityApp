@@ -2,16 +2,16 @@
 			<div class="item col-md-3 col-xs-12" ng-repeat="post in posts">
 			<div class="contain">
 				<div class="col-md-5">
-					<img src="{{post.images[0]}}" />
+					<a href="#/post/{{post._id}}"><img src="{{post.images[0]}}" /></a>
 				</div>
 				<div class="col-md-7 ">
 					<h3><a href="#/post/{{post._id}}">{{ post.title }}</a></h3>
 					<p class="price">{{post.price | currency:"$"}}</p>
-					<p>{{post.content}}</p>
-					<p>{{post.location}}</p>
-					<span class="pull-right"><i class="fa-comments-o fa"></i> 3</span>
 				</div>
+				<p class="content">{{post.content}}</p>
+					<span class="info col-xs-6">{{post.location}}</span>
+					<span class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> 3</span>
 			</div>
 			</div>
-</div>
+</div> 
 	
