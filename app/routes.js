@@ -1,7 +1,7 @@
 var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
-var fs = require("fs");
+var fs = require ('fs.extra');
 var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('OGc0mZWdpPE41igHW215UQ');
@@ -43,9 +43,9 @@ app.post('/post/image',function(req,res) {
     var time = new Date().getTime();
     var target_path = './public/uploads/' +time+ req.files.file.name;
 
-    // move the file from the temporary location to the intended location
-    fs.rename(tmp_path, target_path, function(err) {
-        if (err) {
+
+    fs.move (tmp_path, target_path, function (err) {
+   		if (err) {
         	res.send(err);
         }
         // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files

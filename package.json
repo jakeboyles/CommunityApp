@@ -17,6 +17,7 @@
     "nodemon":"latest",
     "mongoose-validate": "latest",
     "gm": "latest",
-    "mongodb": "^1.4.5"
+    "mongodb": "^1.4.5",
+    "fs.extra":"latest"
   }
 }
