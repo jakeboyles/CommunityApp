@@ -10,7 +10,13 @@ var flash 	 = require('connect-flash');
 // configuration ===============================================================
 
 
-mongoose.connect("mongodb://jake@jibdesigns.com:Baseball_200@kahana.mongohq.com:10097/app26238411"); 	// connect to mongoDB database on modulus.io
+mongoUri = process.env.MONGOLAB_URI ||
+  process.env.MONGOHQ_URL ||
+  'mongodb://localhost/testMongo';
+
+
+
+mongoose.connect(mongoUri); 	// connect to mongoDB database on modulus.io
 
 require('./config/passport')(passport); // pass passport for configuration
 
