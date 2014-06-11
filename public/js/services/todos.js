@@ -16,7 +16,7 @@ return {
 	return $http.delete('/api/posts/' + id);
 	},
 	postSignUp: function(data) {
-		return $http.post('/signup',data);
+		return $http.post('/api/signup',data);
 	},
 	postSignIn: function(data) {
 		return $http.post('/login',data);

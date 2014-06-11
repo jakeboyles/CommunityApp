@@ -57,7 +57,7 @@ app.post('/post/image',function(req,res) {
 });
 
 
- app.post('/signup', passport.authenticate('local-signup'),function(req, res) {
+ app.post('/api/signup', passport.authenticate('local-signup'),function(req, res) {
         res.send(req.user);
     	sendMessage(req.user);
   });
