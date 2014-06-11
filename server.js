@@ -16,7 +16,7 @@ mongoUri = process.env.MONGOLAB_URI ||
 
 
 
-mongoose.connect("mongodb://heroku:mRXaBB06yQrQRjN-_tlhRcF8BXhw9CvCpLJOPmUpQcjCUmy1uu6kyou1RAofIaextRZcaqTv2SqEf56rqjc16w@kahana.mongohq.com:10097/app26238411"); 	// connect to mongoDB database on modulus.io
+mongoose.connect(mongoUri); 	// connect to mongoDB database on modulus.io
 
 require('./config/passport')(passport); // pass passport for configuration
 
