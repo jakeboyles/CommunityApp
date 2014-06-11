@@ -14,6 +14,7 @@
     "connect-flash": "~0.1.1",
     "mandrill-api": "latest",
     "imagemagick": "latest",
+    "nodemon":"latest",
     "mongoose-validate": "latest",
     "gm": "latest",
     "mongodb": "^1.4.5"
