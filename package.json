@@ -14,5 +14,8 @@
     "mongoose-validate": "latest",
     "gm": "latest",
     "mongodb": "^1.4.5"
-  }
+  },
+  "scripts": {
+  "start": "node server.js",
+}
 }
