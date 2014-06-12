@@ -2,7 +2,7 @@
 var express  = require('express');
 var app      = express(); 								// create our app w/ express
 var mongoose = require('mongoose'); 					// mongoose for mongodb
-var port  	 = process.env.PORT || 8080; 				// set the port
+var port  	 = process.env.PORT || 8082;			// set the port
 var database = require('./config/database'); 			// load the database config
 var passport = require('passport');
 var flash 	 = require('connect-flash');
@@ -22,10 +22,10 @@ require('./config/passport')(passport); // pass passport for configuration
 
 
 
-var allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+// var allowCrossDomain = function(req, res, next) {
+//     res.header('Access-Control-Allow-Origin', '*');
+//     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+//     res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
 
     // intercept OPTIONS method
     if ('OPTIONS' == req.method) {
@@ -40,7 +40,7 @@ var allowCrossDomain = function(req, res, next) {
  
 
 app.configure(function() {
-	app.use(allowCrossDomain);
+	// app.use(allowCrossDomain);
 	app.use(express.static(__dirname + '/public')); 		// set the static files location /public/img will be /img for users
 	app.use(express.logger('dev')); 						// log every request to the console
 	app.use(express.bodyParser()); 							// pull information from html in POST
