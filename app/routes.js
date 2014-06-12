@@ -62,11 +62,13 @@ app.post('/post/image',function(req,res) {
     	sendMessage(req.user);
   });
 
-
+  
   app.get('/logout',function(req, res) {
    		req.logout();
   		res.redirect('/');
-  });
+  });  
+
+  // TEST
 
   app.post('/login', passport.authenticate('local-login'),function(req, res) {
     // If this function gets called, authentication was successful.
