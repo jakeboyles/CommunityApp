@@ -67,7 +67,7 @@ angular.module('SinglePostController', [])
 
 
 		$scope.createComment = function(){
-			if(!isNaN($scope.comment.offer)) {
+			if(!isNaN($scope.comment.offer) || $scope.comment.offer=='') {
 			$scope.comment.postid = $routeParams.postid;
 			Communities.postComment($scope.comment)
 			.success(function(data){
