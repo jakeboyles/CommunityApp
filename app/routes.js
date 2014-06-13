@@ -81,6 +81,35 @@ app.post('/post/image',function(req,res) {
   });
 
 
+
+  	app.get('/api/profile/:post_id', function(req, res) {
+			User.find({
+				_id : req.params.post_id,
+				//user:req.user
+			}).exec(function(err,user){
+				if (err)
+					res.send(err);
+
+				Post.find({
+					user : req.params.post_id,
+					//user:req.user
+				}).exec(function(err,post){
+					if (err)
+						res.send(err);
+
+					Comment.find({
+						user : req.params.post_id,
+					}).exec(function(err,comments){
+					if (err)
+					res.send(err);
+					res.json({"posts":post,"user":user,"comments":comments})
+					});
+				});
+
+			});
+	});
+
+
 	// create todo and send back all todos after creation
 	app.post('/api/posts',isLoggedIn, function(req, res) {
 

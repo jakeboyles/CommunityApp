@@ -1,4 +1,4 @@
-angular.module('scotchTodo', ['communityController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
+angular.module('scotchTodo', ['communityController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
 
 .config(function($routeProvider) {
 $routeProvider
@@ -9,6 +9,10 @@ $routeProvider
     .when('/post/:postid', {
     controller:'getPostController',
     templateUrl:'views/post.html'
+    })
+    .when('/profile/:profileid', {
+    controller:'profileController',
+    templateUrl:'views/profile.html'
     })
     .when('/signin', {
     controller:'signinController',
