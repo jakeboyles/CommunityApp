@@ -86,6 +86,7 @@ module.exports = function(passport) {
 
                 var firstName = capitalize(req.body.firstname);
                 var lastName = capitalize(req.body.lastname);
+                email = email.toLowerCase(); 
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
