@@ -15,7 +15,7 @@
 					<p class="price">{{post.price | currency:"$ "}}</p>
 				</div>
 				<div class="poster col-xs-6">
-					<img src='{{post.user.profilepicture}}' />
+					<a href="#/profile/{{post.user._id}}"><img src='{{post.user.profilepicture}}' /></a>
 				</div>
 			</div>
 			<p class="content">{{post.content}}</p>
@@ -24,7 +24,7 @@
 		</div>
 	</div>
 
-
+    
 	<div class="commentSection col-md-5 col-md-offset-1">
 		<div>
 			<h2>Add Comment</h2>

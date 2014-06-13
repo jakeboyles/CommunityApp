@@ -24,6 +24,9 @@ return {
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},
+	getProfile: function(data) {
+		return $http.get('/api/profile/'+ data);
+	},
 	postComment: function(data) {
 		return $http.post('/api/comment',data);
 	},
