@@ -12,7 +12,7 @@ angular.module('SigninController', [])
 		}).
 		error(function(data){
 			var n = notyfy({
-				text: "Wrong Username or Password"
+				text: "Wrong Username or Password",
 				timeout: 3000,
 				type: 'error',
 			});
