@@ -21,17 +21,15 @@ app.all('/*', function(req, res, next) {
 	// api ---------------------------------------------------------------------
 	// get all todos
 	app.get('/api/posts', function(req, res) {
-
-	Post.find().populate('user').exec(function(err, posts) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-            res.jsonp(posts);
-        }
-    });
-
+		Post.find().populate('user').exec(function(err, posts) {
+	        if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	            res.jsonp(posts);
+	        }
+	    });
 	});
 
 
@@ -43,7 +41,6 @@ app.post('/post/image',function(req,res) {
     var time = new Date().getTime();
     var target_path = './public/uploads/' +time+ req.files.file.name;
 
-
     fs.move (tmp_path, target_path, function (err) {
    		if (err) {
         	res.send(err);
@@ -54,19 +51,20 @@ app.post('/post/image',function(req,res) {
             res.json("uploads/"+time+req.files.file.name);
         });
     });
+
 });
 
 
  app.post('/api/signup', passport.authenticate('local-signup'),function(req, res) {
         res.send(req.user);
     	sendMessage(req.user);
-  });
+ });
 
   
-  app.get('/logout',function(req, res) {
+ app.get('/logout',function(req, res) {
    		req.logout();
   		res.redirect('/');
-  });  
+ });  
 
   // TEST
 
@@ -83,8 +81,6 @@ app.post('/post/image',function(req,res) {
 
 	// create todo and send back all todos after creation
 	app.post('/api/posts',isLoggedIn, function(req, res) {
-
-
 		Post.create({
 			title : req.body.title,
 			content : req.body.content,
@@ -102,15 +98,10 @@ app.post('/post/image',function(req,res) {
 				res.jsonp(posts);
 			});
 		});
-
-
-
-
 	});
 
 
 	app.post('/api/comment', isLoggedIn, function(req, res) {
-
 		Comment.create({ 
 			title : req.body.title,
 			content : req.body.content,
@@ -139,13 +130,11 @@ app.post('/post/image',function(req,res) {
 
 	app.post('/api/acceptOffer',function(req,res){
 
-
 		Comment.find({
 				_id : req.body.comment,
 			}).populate('user').exec(function(err,comment){
 				if (err)
 					res.send(err);
-
 
 				Post.findById(req.body.user).populate('user').exec(function(err,post){
 				  if (err) {
