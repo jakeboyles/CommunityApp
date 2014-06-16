@@ -86,6 +86,7 @@ module.exports = function(passport) {
 
                 var firstName = capitalize(req.body.firstname);
                 var lastName = capitalize(req.body.lastname);
+                email = email.toLowerCase(); 
                 // set the user's local credentials
                 newUser.local.email    = email;
                 newUser.local.password = newUser.generateHash(password);
@@ -124,6 +125,7 @@ module.exports = function(passport) {
 
         // find a user whose email is the same as the forms email
         // we are checking to see if the user trying to login already exists
+        email = email.toLowerCase(); 
         User.findOne({ 'local.email' :  email }, function(err, user) {
             // if there are any errors, return the error before anything else
             if (err)
