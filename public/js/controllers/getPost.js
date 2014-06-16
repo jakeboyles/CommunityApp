@@ -17,7 +17,7 @@ angular.module('SinglePostController', [])
 		Communities.getPost($routeParams.postid)
 				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
-					$scope.post = data[0]; // assign our new list of todos				
+					$scope.listing = data; // assign our new list of todos				
 				}).
 		    error(function(data, status, headers, config) {
 		    	$scope.error(data);
@@ -67,7 +67,6 @@ angular.module('SinglePostController', [])
 
 
 		$scope.createComment = function(){
-			alert("B:"+$scope.comment.offer);
 			if(!isNaN($scope.comment.offer) || $scope.comment.offer===undefined || $scope.comment.offer=="") {
 			$scope.comment.postid = $routeParams.postid;
 			Communities.postComment($scope.comment)
@@ -80,16 +79,14 @@ angular.module('SinglePostController', [])
 							});
 
 				} else {
-					Communities.getComments(str)
-					 .success(function(data){
-					 	$scope.comments = data;
-
-					 	var n = notyfy({
-								text: "Comment Posted!",
-								type: 'success',
-								timeout: 3000,
-						});
-					 })
+					Communities.getPost($routeParams.postid)
+					// if successful creation, call our get function to get all the new todos
+					.success(function(data) {
+						$scope.listing = data; // assign our new list of todos				
+							}).
+					    error(function(data, status, headers, config) {
+					    	$scope.error(data);
+					});
 				}
 			})
 		} else {

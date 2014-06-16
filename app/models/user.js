@@ -13,12 +13,10 @@ var userSchema = mongoose.Schema({
         email        : String,       
         password     : String,
     },
-    
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     location: { type: String, required: true },
     profilepicture: { type: String },
-
 });
 
 // methods ======================
@@ -31,6 +29,7 @@ userSchema.methods.generateHash = function(password) {
 userSchema.methods.validPassword = function(password) {
     return bcrypt.compareSync(password, this.local.password);
 };
+
 
 // create the model for users and expose it to our app
 module.exports = mongoose.model('User', userSchema);

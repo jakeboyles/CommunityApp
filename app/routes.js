@@ -5,6 +5,7 @@ var fs = require ('fs.extra');
 var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('OGc0mZWdpPE41igHW215UQ');
+var async = require('async'); 
 
 
 
@@ -22,7 +23,7 @@ app.all('/*', function(req, res, next) {
 	// get all todos
 	app.get('/api/posts', function(req, res) {
 
-	Post.find().populate('user').exec(function(err, posts) {
+	Post.find().populate('comments').exec(function(err, posts) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -99,7 +100,7 @@ app.post('/post/image',function(req,res) {
 
 					Comment.find({
 						user : req.params.post_id,
-					}).exec(function(err,comments){
+					}).populate('post').exec(function(err,comments){
 					if (err)
 					res.send(err);
 					res.json({"posts":post,"user":user,"comments":comments})
@@ -140,15 +141,23 @@ app.post('/post/image',function(req,res) {
 
 	app.post('/api/comment', isLoggedIn, function(req, res) {
 
-		Comment.create({ 
-			title : req.body.title,
-			content : req.body.content,
-			postid : req.body.postid,
-			offer: req.body.offer,
-			user: req.user,
-		},function(err, comment) {
-			res.send(comment);
-		});
+			Comment.create({ 
+				title : req.body.title,
+				content : req.body.content,
+				postid : req.body.postid,
+				offer: req.body.offer,
+				user: req.user,
+				post: req.body.postid,
+			},function(err, comment) {
+				Post.update({_id: req.body.postid},{$push: {comments:comment}},{upsert:true},function(err,post){
+        			if(err){
+               		 res.send(err);
+        			}else{
+                	res.send(comment);
+        		}
+				});
+
+			});
 	});
 
 
@@ -214,15 +223,26 @@ app.post('/post/image',function(req,res) {
 
 
 	app.get('/api/posts/:post_id', function(req, res) {
+
+
 			Post.find({
 				_id : req.params.post_id,
 				//user:req.user
-			}).populate('user').exec(function(err,post){
+			}).populate('user comments').exec(function(err,docs){
 				if (err)
 					res.send(err);
+					var allComments = [];
+					async.forEach(docs,function(doc,callback) {
+				      Comment.populate( doc.comments,{ "path": "user" },function(err,output) {
+						allComments.push(output);
+				        callback(res.send({"post":docs,"comments":allComments}));
+				      });
 
-				res.json(post);
+				    },function(err) {
+				      console.log( "all: " + JSON.stringify(docs,undefined,4 ));
+				    });
 			});
+
 	});
 
 var offerAccepted = function(comment,post) {

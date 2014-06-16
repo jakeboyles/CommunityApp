@@ -3,24 +3,24 @@
 
 		<div class="col-md-5 col-xs-12 images">
 			<ul class="bxslider">
-			  <li ng-repeat="image in post.images"><img src="{{image}}" /></li>
+			  <li ng-repeat="image in listing.post[0].images"><img src="{{image}}" /></li>
 			</ul>
 		</div>
 
 
 		<div class="col-md-7 col-xs-12">
-			<H2 class="col-xs-12">{{post.title}}</H2>
+			<H2 class="col-xs-12">{{listing.post[0].title}}</H2>
 			<div class="row">
 				<div class="col-xs-6 priceContainer">
-					<p class="price">{{post.price | currency:"$ "}}</p>
+					<p class="price">{{listing.post[0].price | currency:"$ "}}</p>
 				</div>
 				<div class="poster col-xs-6">
-					<a href="#/profile/{{post.user._id}}"><img src='{{post.user.profilepicture}}' /></a>
+					<a href="#/profile/{{post.post[0].user._id}}"><img src='{{listing.post[0].user.profilepicture}}' /></a>
 				</div>
 			</div>
-			<p class="content">{{post.content}}</p>
-			<p class="info col-xs-6">{{post.location}}</p>
-			<p class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{comments.length}}</p>
+			<p class="content">{{listing.post[0].content}}</p>
+			<p class="info col-xs-6">{{listing.post[0].location}}</p>
+			<p class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{listing.comments[0].length}}</p>
 		</div>
 	</div>
 
@@ -39,11 +39,11 @@
 
 
 	<div class="allComments col-xs-12">
-			<h3>{{comments.length}} Comments</h3>
+			<h3>{{listing.comments[0].length}} Comments</h3>
 					
 			<div>
 				<ul>
-				    <li class="comment" data-author="{{comment.user._id}}" ng-repeat="comment in comments"> 
+				    <li class="comment" data-author="{{comment.user._id}}" ng-repeat="comment in listing.comments[0]"> 
 					    <div class="col-xs-4 col-md-1">
 					    	<img src="{{comment.user.profilepicture}}" />
 					    </div>
@@ -52,7 +52,7 @@
 					    	<p>{{comment.user.firstName}} says...</p>
 					    	<p>{{comment.content}}</p>
 					    	<p ng-if="comment.offer!=''" class="offerPrice">{{comment.offer | currency:"$ "}}</p>
-					    	<a class="acceptOffer" ng-click="acceptOffer(post._id,comment._id)" ng-if="post.user._id==user._id && comment.offer!=''">Accept Offer</a>
+					    	<a class="acceptOffer" ng-click="acceptOffer(listing.post[0]._id,comment._id)" ng-if="listing.post[0].user._id==user._id && comment.offer!=''">Accept Offer</a>
 					    </div>
 				    </li>
 			    </ul>

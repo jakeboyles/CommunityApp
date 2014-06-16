@@ -12,13 +12,10 @@ var CommentSchema = new Schema({
         type: String,
         default: '',
     },
-    postid: {
-        type: String,
-        default: '',
-    },
-    user: {
+    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    post: {
         type: Schema.ObjectId,
-        ref: 'User'
+        ref: 'Post'
     },
     offer: {
         type: String,
@@ -27,7 +24,12 @@ var CommentSchema = new Schema({
 });
 
 
+CommentSchema.statics.load = function(id, cb) {
+    this.findOne({
+        _id: id
+    }).populate('user').exec(cb);
+};
+
 
 
 module.exports = mongoose.model('Comment', CommentSchema);
-

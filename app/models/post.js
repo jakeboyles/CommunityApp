@@ -39,7 +39,11 @@ var PostSchema = new Schema({
     },
     accepted : {
         type: [],
-    }
+    },
+    comments: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Comment'
+    }]
 });
 
 

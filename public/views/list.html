@@ -7,10 +7,13 @@
 				<div class="col-md-7 ">
 					<h3><a href="#/post/{{post._id}}">{{ post.title }}</a></h3>
 					<p class="price">{{post.price | currency:"$"}}</p>
+									<p class="content">{{post.content}}</p>
+
 				</div>
-				<p class="content">{{post.content}}</p>
+				<div class="pull-left col-xs-12">
 					<span class="info col-xs-6">{{post.location}}</span>
-					<span class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> 3</span>
+					<span class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{post.comments.length}}</span>
+				</div>
 			</div>
 			</div>
 </div> 

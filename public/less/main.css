@@ -446,6 +446,73 @@ textarea {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   padding: 10px;
 }
+.profile {
+  padding: 0px 10px;
+}
+.profile img {
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+.profile .comments {
+  float: left;
+}
+.profile .comments .comment {
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.profile .stats {
+  clear: none !important;
+  border-right: 2px solid #f2f2f2;
+  padding-right: 20px;
+  padding-left: 20px;
+  width: 100px;
+  float: left;
+}
+.profile .stats span,
+.profile .stats p {
+  float: left;
+  clear: left;
+  display: inline;
+  text-align: center;
+  width: 100%;
+}
+.profile .stats span {
+  font-weight: 400;
+  font-family: 'Oswald', sans-serif;
+}
+.profile .totalStats .stats:last-child {
+  border: none;
+}
+.profile .additionalInfo {
+  float: left;
+}
+.profile .additionalInfo h2 {
+  margin-top: 10px;
+}
+.profile .totalStats {
+  border-top: 2px solid #f2f2f2;
+  border-bottom: 2px solid #f2f2f2;
+  *zoom: 1;
+  display: inline-block;
+  padding: 5px 10px;
+}
+.profile .totalStats:before,
+.profile .totalStats:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.profile .totalStats:after {
+  clear: both;
+}
+.profile .stats:last-child {
+  clear: both;
+}
 @media (min-width: 990px) {
   .desktopHide {
     display: none;
