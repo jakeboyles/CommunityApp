@@ -6,6 +6,20 @@ var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
 var mandrill_client = new mandrill.Mandrill('OGc0mZWdpPE41igHW215UQ');
 var async = require('async'); 
+var s3 = require('s3');
+
+
+var client = s3.createClient({
+  maxAsyncS3: Infinity,
+  s3RetryCount: 3,
+  s3RetryDelay: 1000,
+  s3Options: {
+    accessKeyId: "AKIAIWZ5BTPM6FMGJ7JA",
+    secretAccessKey: "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",
+    // any other options are passed to new AWS.S3()
+    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
+  },
+});
 
 
 
@@ -45,16 +59,41 @@ app.post('/post/image',function(req,res) {
     var target_path = './public/uploads/' +time+ req.files.file.name;
 
 
-    fs.move (tmp_path, target_path, function (err) {
-   		if (err) {
-        	res.send(err);
-        }
-        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-        fs.unlink(tmp_path, function() {
-            if (err) throw err;
-            res.json("uploads/"+time+req.files.file.name);
-        });
-    });
+	    var params = {
+	  localFile: tmp_path,
+
+	  s3Params: {
+	    Bucket: "CommunityApp",
+	    Key: "uploads/"+time+req.files.file.name,
+	     ACL: 'public-read-write',
+	    // other options supported by putObject, except Body and ContentLength.
+	    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
+	  },
+	};
+	var uploader = client.uploadFile(params);
+	uploader.on('error', function(err) {
+	  console.error("unable to upload:", err.stack);
+	});
+	uploader.on('progress', function() {
+	  console.log("progress", uploader.progressMd5Amount,
+	            uploader.progressAmount, uploader.progressTotal);
+	});
+	uploader.on('end', function(err,data) {
+	  res.json("https://s3.amazonaws.com/CommunityApp/uploads/"+time+req.files.file.name);
+	});
+
+
+    // fs.move (tmp_path, target_path, function (err) {
+   	// 	if (err) {
+    //     	res.send(err);
+    //     }
+    //     // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
+    //     fs.unlink(tmp_path, function() {
+    //         if (err) throw err;
+    //         res.json("uploads/"+time+req.files.file.name);
+
+    //     });
+    // });
 });
 
 

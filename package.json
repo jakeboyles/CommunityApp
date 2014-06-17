@@ -20,6 +20,7 @@
     "mongodb": "^1.4.5",
     "fs.extra":"latest",
     "forever":"latest",
-    "async" : "latest"
+    "async" : "latest",
+    "s3" : "latest"
   }
 }
