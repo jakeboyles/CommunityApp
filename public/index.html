@@ -55,14 +55,14 @@
             	</div>
             	<h4 class="col-md-6 mobileHide community">Miami University Community</h4>
             	<div class="userInfo mobileHide pull-right col-md-3 col-xs-8">
-            		<img src="{{user.profilepicture}}">
+            		 <a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
             		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
             		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
                          <a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a>
             	</div>
             	<div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
-            	    <a href="#" ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
-            		<img src="{{user.profilepicture}}">
+            	    <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
+            		<a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
 
             		<ul class="mobileNav">
             			<li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>

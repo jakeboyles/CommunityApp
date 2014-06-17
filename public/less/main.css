@@ -117,6 +117,28 @@ header .row {
 header .postIcon {
   border-right: 0px;
 }
+header a img {
+  padding: 0;
+  margin: 0;
+}
+header .avatar {
+  *zoom: 1;
+  padding: 0 !important;
+  margin: 0 !important;
+  border: 0px !important;
+}
+header .avatar:before,
+header .avatar:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+header .avatar:after {
+  clear: both;
+}
+header .avatar:hover {
+  background: transparent !important;
+}
 header a {
   border-left: 2px solid #445768;
   border-right: 2px solid #445768;
