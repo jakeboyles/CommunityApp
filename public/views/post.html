@@ -15,7 +15,7 @@
 					<p class="price">{{listing.post[0].price | currency:"$ "}}</p>
 				</div>
 				<div class="poster col-xs-6">
-					<a href="#/profile/{{post.post[0].user._id}}"><img src='{{listing.post[0].user.profilepicture}}' /></a>
+					<a href="#/profile/{{listing.post[0].user._id}}"><img src='{{listing.post[0].user.profilepicture}}' /></a>
 				</div>
 			</div>
 			<p class="content">{{listing.post[0].content}}</p>
@@ -52,7 +52,7 @@
 					    	<p>{{comment.user.firstName}} says...</p>
 					    	<p>{{comment.content}}</p>
 					    	<p ng-if="comment.offer!=''" class="offerPrice">{{comment.offer | currency:"$ "}}</p>
-					    	<a class="acceptOffer" ng-click="acceptOffer(listing.post[0]._id,comment._id)" ng-if="listing.post[0].user._id==user._id && comment.offer!=''">Accept Offer</a>
+					    	<a class="acceptOffer" ng-click="acceptOffer(listing.post[0]._id,comment._id)" ng-if="listing.post[0].user._id==user._id && comment.offer!='' && comment.user._id !==user._id">Accept Offer</a>
 					    </div>
 				    </li>
 			    </ul>
