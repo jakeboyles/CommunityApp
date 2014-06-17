@@ -21,16 +21,20 @@
 	</div>
 
 	<div class="pull-left col-md-12">
-		<h2>Posts</h2>
-		<div class="posts comment" ng-repeat="post in profile.posts">
-			<h3>{{post.title}}</h3>
-			<p>{{post.content}}</p>
+		<div ng-if="profile.post > 0" class="profilePosts">
+			<h2>Posts</h2>
+			<div class="posts comment" ng-repeat="post in profile.posts">
+				<h3>{{post.title}}</h3>
+				<p>{{post.content}}</p>
+			</div>
 		</div>
 
-		<h2>Comments</h2>
-		<div class="comments col-xs-12">
-			<div class="comment" ng-repeat="comment in profile.comments">
-			{{comment.content}}
+		<div class="profileComments">
+			<h2>Comments</h2>
+			<div class="comments col-xs-12">
+				<div class="comment" ng-repeat="comment in profile.comments">
+				{{comment.content}}
+				</div>
 			</div>
 		</div>
 
