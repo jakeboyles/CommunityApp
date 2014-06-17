@@ -31,11 +31,9 @@
 
 		<div ng-if="profile.comments.length > 0" class="profileComments">
 			<h2>Comments</h2>
-			<div class="comments col-xs-12">
 				<div class="comment" ng-repeat="comment in profile.comments">
 				{{comment.content}}
 				</div>
-			</div>
 		</div>
 
 		<div ng-if="profile.comments.length==0 && profile.posts.length == 0">

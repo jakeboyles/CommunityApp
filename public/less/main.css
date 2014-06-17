@@ -535,6 +535,31 @@ textarea {
 .profile .stats:last-child {
   clear: both;
 }
+.profilePosts {
+  margin-top: 40px;
+  *zoom: 1;
+}
+.profilePosts:before,
+.profilePosts:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.profilePosts:after {
+  clear: both;
+}
+.profileComments {
+  *zoom: 1;
+}
+.profileComments:before,
+.profileComments:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.profileComments:after {
+  clear: both;
+}
 @media (min-width: 990px) {
   .desktopHide {
     display: none;

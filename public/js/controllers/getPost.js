@@ -82,10 +82,19 @@ angular.module('SinglePostController', [])
 					Communities.getPost($routeParams.postid)
 					// if successful creation, call our get function to get all the new todos
 					.success(function(data) {
-						$scope.listing = data; // assign our new list of todos				
+						$scope.listing = data; // assign our new list of todos	
+						var n = notyfy({
+							text: "Comment Has Been Posted",
+							timeout: 3000,
+							type: 'success',
+						});			
 							}).
 					    error(function(data, status, headers, config) {
-					    	$scope.error(data);
+					    	var n = notyfy({
+							text: data,
+							timeout: 3000,
+							type: 'error',
+						});	
 					});
 				}
 			})
