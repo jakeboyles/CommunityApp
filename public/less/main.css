@@ -48,6 +48,9 @@ button {
 .item .contain:after {
   clear: both;
 }
+.item .content {
+  font-size: 13px;
+}
 .item .info {
   padding: 0;
 }
