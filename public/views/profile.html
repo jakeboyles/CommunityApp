@@ -21,7 +21,7 @@
 	</div>
 
 	<div class="pull-left col-md-12">
-		<div ng-if="profile.post > 0" class="profilePosts">
+		<div ng-if="profile.posts.length > 0" class="profilePosts">
 			<h2>Posts</h2>
 			<div class="posts comment" ng-repeat="post in profile.posts">
 				<h3>{{post.title}}</h3>
@@ -29,13 +29,17 @@
 			</div>
 		</div>
 
-		<div class="profileComments">
+		<div ng-if="profile.comments.length > 0" class="profileComments">
 			<h2>Comments</h2>
 			<div class="comments col-xs-12">
 				<div class="comment" ng-repeat="comment in profile.comments">
 				{{comment.content}}
 				</div>
 			</div>
+		</div>
+
+		<div ng-if="profile.comments.length==0 && profile.posts.length == 0">
+		<h2>No Activity</h2>
 		</div>
 
 
