@@ -9,8 +9,14 @@ angular.module('SigninController', [])
 				$scope.user = data;
 				console.log(data);
 				$location.url("/");
+				var n = notyfy({
+				text: "Wrong Username or Password",
+				timeout: 3000,
+				type: 'error',
+			});
 		}).
 		error(function(data){
+			alert("UGH");
 			var n = notyfy({
 				text: "Wrong Username or Password",
 				timeout: 3000,
