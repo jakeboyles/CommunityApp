@@ -20,18 +20,17 @@
 		</div>
 	</div>
 
-	<div class="col-md-6 col-md-offset-1">
-		<h3>Posts</h3>
-		<div class="posts" ng-repeat="post in profile.posts">
-			<h2>{{post.title}}</h2>
+	<div class="pull-left col-md-12">
+		<h2>Posts</h2>
+		<div class="posts comment" ng-repeat="post in profile.posts">
+			<h3>{{post.title}}</h3>
 			<p>{{post.content}}</p>
 		</div>
 
-		<h3>Comments</h3>
+		<h2>Comments</h2>
 		<div class="comments col-xs-12">
 			<div class="comment" ng-repeat="comment in profile.comments">
 			{{comment.content}}
-			<p>{{comment.offer}}
 			</div>
 		</div>
 
