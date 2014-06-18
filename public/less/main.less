@@ -442,6 +442,13 @@ input, textarea {
 	img {
 		.border-radius(15px);
 		.box-shadow();
+		max-width:200px;
+		margin:0px auto;
+		display:block;
+	}
+
+	.info {
+		text-align:center;
 	}
 
 	.comments {
@@ -455,11 +462,15 @@ input, textarea {
 
 	.stats {
 		clear:none !important;
-		border-right:2px solid darken(#fff,5);
-		padding-right:20px;
-		padding-left:20px;
-		width:100px;
+		padding-right:10px;
+		padding-left:10px;
+		width:120px;
 		float:left;
+		background-color:#fff;
+		.border-radius(15px);
+		margin-right:20px;
+		padding-top:5px;
+		padding-bottom:5px;
 		span,p {
 			float:left;
 			clear:left;
@@ -468,15 +479,22 @@ input, textarea {
 			width:100%;
 		}
 
+		p {
+			font-family: 'Oswald', sans-serif;
+			font-weight:400;
+			font-size:30px;
+			padding:0;
+			margin:0;
+		}
+
 		span {
 			font-weight:400;
-			font-family: 'Oswald', sans-serif;
 		}
 	}
 
 	.totalStats .stats:last-child {
-		border:none;
 	}
+
 
 	.additionalInfo {
 		float:left;
@@ -487,11 +505,12 @@ input, textarea {
 	}
 
 	.totalStats {
-		border-top:2px solid darken(#fff,5);
-		border-bottom:2px solid darken(#fff,5);
+		margin-top:20px;
+		width:100%;
+		background-color:darken(#fff,2);
 		.clearfix();
 		display:inline-block;
-		padding:5px 10px;
+		padding:12px 20px;
 	}
 
 	.stats:last-child {
@@ -501,7 +520,7 @@ input, textarea {
 
 
 .profilePosts {
-	margin-top:40px;
+	margin-top:20px;
 	.clearfix();
 }
 
@@ -535,6 +554,17 @@ input, textarea {
 @media (max-width: 990px) {
   .mobileHide {
   	display:none;
+  }
+
+  .profile .stats {
+  	width:40%;
+  	p {
+  		font-size:16px;
+  	}
+
+  	span {
+  		font-size:11px;
+  	}
   }
 }
 

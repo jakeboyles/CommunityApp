@@ -2,7 +2,7 @@
 <div id="post-form">
 		<form>
 			<div class="col-md-6 form-group">
-				<!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
+			<h2>Post An Item</h2>
 				<input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
 				<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
 				<input required type="text" class="form-control input-lg text-center" placeholder="Location" ng-model="formData.location">
@@ -13,9 +13,15 @@
 
 		</form>
 		<div class="col-md-5 images">
-		<div ng-if="formData.images != null"class="row">
-		<h3 class="imageTitle">Uploaded Images</h3>
-		<img class="col-md-3" ng-repeat="image in formData.images" src="{{image}}">
+		<div class="row">
+		<h2 class="imageTitle">Uploaded Images</h3>
+			<div ng-if="formData.images != null">
+				<img class="col-md-3" ng-repeat="image in formData.images" src="{{image}}">
+			</div>
+
+			<div ng-if="formData.images==null">
+				<p>No Images Uploaded</p>
+			</div>
 		</div>
 		</div>
 </div>

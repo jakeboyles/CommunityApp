@@ -481,6 +481,12 @@ textarea {
   -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  max-width: 200px;
+  margin: 0px auto;
+  display: block;
+}
+.profile .info {
+  text-align: center;
 }
 .profile .comments {
   float: left;
@@ -492,11 +498,17 @@ textarea {
 }
 .profile .stats {
   clear: none !important;
-  border-right: 2px solid #f2f2f2;
-  padding-right: 20px;
-  padding-left: 20px;
-  width: 100px;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 120px;
   float: left;
+  background-color: #fff;
+  -webkit-border-radius: 15px;
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+  margin-right: 20px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 .profile .stats span,
 .profile .stats p {
@@ -506,12 +518,15 @@ textarea {
   text-align: center;
   width: 100%;
 }
+.profile .stats p {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  font-size: 30px;
+  padding: 0;
+  margin: 0;
+}
 .profile .stats span {
   font-weight: 400;
-  font-family: 'Oswald', sans-serif;
-}
-.profile .totalStats .stats:last-child {
-  border: none;
 }
 .profile .additionalInfo {
   float: left;
@@ -520,11 +535,12 @@ textarea {
   margin-top: 10px;
 }
 .profile .totalStats {
-  border-top: 2px solid #f2f2f2;
-  border-bottom: 2px solid #f2f2f2;
+  margin-top: 20px;
+  width: 100%;
+  background-color: #fafafa;
   *zoom: 1;
   display: inline-block;
-  padding: 5px 10px;
+  padding: 12px 20px;
 }
 .profile .totalStats:before,
 .profile .totalStats:after {
@@ -539,7 +555,7 @@ textarea {
   clear: both;
 }
 .profilePosts {
-  margin-top: 40px;
+  margin-top: 20px;
   *zoom: 1;
 }
 .profilePosts:before,
@@ -583,5 +599,14 @@ textarea {
 @media (max-width: 990px) {
   .mobileHide {
     display: none;
+  }
+  .profile .stats {
+    width: 40%;
+  }
+  .profile .stats p {
+    font-size: 16px;
+  }
+  .profile .stats span {
+    font-size: 11px;
   }
 }
