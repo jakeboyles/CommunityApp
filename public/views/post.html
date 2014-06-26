@@ -41,7 +41,11 @@
 
 	<div class="allComments col-xs-12">
 			<h3>{{listing.comments[0].length}} Comments</h3>
-					
+			
+			<li class="comment" ng-if="listing.comments[0].length=='0'">
+				<h5>No Comments Yet, Feel Free To Add One!</h5>
+			</li>
+
 			<div>
 				<ul>
 				    <li class="comment" data-author="{{comment.user._id}}" ng-repeat="comment in listing.comments[0]"> 
@@ -56,7 +60,7 @@
 					    	<a class="acceptOffer" ng-click="acceptOffer(listing.post[0]._id,comment._id)" ng-if="listing.post[0].user._id==user._id && comment.offer!='' && comment.user._id !==user._id">Accept Offer</a>
 					    </div>
 
-					    <div ng-if="listing.comments[0].length==0">No Comments Yet!</div>
+
 				    </li>
 			    </ul>
 			</div>
