@@ -9,6 +9,10 @@ var PostSchema = new Schema({
         required: true,
         default: '',
     },
+    date:{
+        type: Date, 
+        default: Date.now,
+    },
     content: {
         type: String,
         required: true,

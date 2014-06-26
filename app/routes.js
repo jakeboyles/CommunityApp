@@ -82,18 +82,6 @@ app.post('/post/image',function(req,res) {
 	  res.json("https://s3.amazonaws.com/CommunityApp/uploads/"+time+req.files.file.name);
 	});
 
-
-    // fs.move (tmp_path, target_path, function (err) {
-   	// 	if (err) {
-    //     	res.send(err);
-    //     }
-    //     // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-    //     fs.unlink(tmp_path, function() {
-    //         if (err) throw err;
-    //         res.json("uploads/"+time+req.files.file.name);
-
-    //     });
-    // });
 });
 
 

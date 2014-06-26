@@ -1,4 +1,5 @@
-angular.module('communityController', [])
+angular.module('communityController', ['angularMoment'])
+
 
 	// inject the Todo service factory into our controller
 	.controller('mainController', function($scope,$rootScope,$location, $http, Communities) {
@@ -27,9 +28,6 @@ angular.module('communityController', [])
 		})
 
 
-
-
-
     	$scope.menuClick = function() {
 				$(".mobileNav").toggle();
     	}
@@ -54,3 +52,5 @@ angular.module('communityController', [])
 				})
 		};
 	});
+
+

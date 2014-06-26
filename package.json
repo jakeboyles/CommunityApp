@@ -2,7 +2,7 @@
   "main": "server.js",
   "scripts": {
     "start": "forever server.js"
-},
+  },
   "dependencies": {
     "express": "~3.4.4",
     "mongoose": "~3.6.2",
@@ -14,13 +14,15 @@
     "connect-flash": "~0.1.1",
     "mandrill-api": "latest",
     "imagemagick": "latest",
-    "nodemon":"latest",
+    "nodemon": "latest",
     "mongoose-validate": "latest",
     "gm": "latest",
     "mongodb": "^1.4.5",
-    "fs.extra":"latest",
-    "forever":"latest",
-    "async" : "latest",
-    "s3" : "latest"
+    "fs.extra": "latest",
+    "forever": "latest",
+    "async": "latest",
+    "s3": "latest",
+    "moment": "^2.7.0",
+    "angular-moment": "^0.7.1"
   }
 }

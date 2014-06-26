@@ -12,7 +12,14 @@ var CommentSchema = new Schema({
         type: String,
         default: '',
     },
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
+    date:{
+        type: Date, 
+        default: Date.now,
+    },
+    user: { 
+        type: Schema.Types.ObjectId, 
+        ref: 'User' 
+    },
     post: {
         type: Schema.ObjectId,
         ref: 'Post'
