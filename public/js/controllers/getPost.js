@@ -55,15 +55,14 @@ angular.module('SinglePostController', ['angularMoment'])
 		};
 
 		$scope.init = function() {
-
-
-			$(window).load(function(){
-				$('.bxslider').bxSlider({
+			
+			$(document).ready(function(){
+  				$('.bxslider').bxSlider({
   					pager:true,
   					controls:false,
   				});
   				$(".profileComments").hide();
-			})
+			});	
 		}
 
 
