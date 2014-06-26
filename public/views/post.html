@@ -55,6 +55,8 @@
 					    	<p ng-if="comment.offer!=''" class="offerPrice">{{comment.offer | currency:"$ "}}</p>
 					    	<a class="acceptOffer" ng-click="acceptOffer(listing.post[0]._id,comment._id)" ng-if="listing.post[0].user._id==user._id && comment.offer!='' && comment.user._id !==user._id">Accept Offer</a>
 					    </div>
+
+					    <div ng-if="listing.comments[0].length==0">No Comments Yet!</div>
 				    </li>
 			    </ul>
 			</div>
