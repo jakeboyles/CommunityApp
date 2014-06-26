@@ -16,6 +16,9 @@ body {
 img {
   width: 100%;
 }
+a:hover {
+  text-decoration: none;
+}
 h1,
 h2,
 h3,
@@ -484,6 +487,18 @@ textarea {
   max-width: 200px;
   margin: 0px auto;
   display: block;
+}
+.profile .profileButton {
+  padding: 10px 25px;
+  background-color: #eefcec;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #000;
+  margin: 0px auto;
+  margin-top: 20px;
+  display: block;
+  width: 80%;
 }
 .profile .info {
   text-align: center;

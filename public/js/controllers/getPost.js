@@ -1,4 +1,4 @@
-angular.module('SinglePostController', [])
+angular.module('SinglePostController', ['angularMoment'])
 
 	// inject the Todo service factory into our controller
 	.controller('getPostController', function($scope, $routeParams,$location, $http, Communities) {
@@ -22,6 +22,17 @@ angular.module('SinglePostController', [])
 		    error(function(data, status, headers, config) {
 		    	$scope.error(data);
 		});
+
+
+		$scope.getPosts = function(){
+			$(".profilePosts").show();
+			$(".profileComments").hide();
+		}
+
+		$scope.getComments = function() {
+			$(".profilePosts").hide();
+			$(".profileComments").show();
+		}
 
 
 
@@ -61,6 +72,7 @@ angular.module('SinglePostController', [])
   					pager:true,
   					controls:false,
   				});
+  				$(".profileComments").hide();
 			});	
 		}
 

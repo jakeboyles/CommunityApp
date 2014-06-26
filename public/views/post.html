@@ -19,8 +19,9 @@
 				</div>
 			</div>
 			<p class="content">{{listing.post[0].content}}</p>
-			<p class="info col-xs-6"><i class="fa fa-home"></i> {{listing.post[0].location}}</p>
-			<p class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{listing.comments[0].length}}</p>
+			<p class="info col-xs-4"><i class="fa fa-home"></i> {{listing.post[0].location}}</p>
+			<div class="info col-xs-4"><i class="fa fa-clock-o"></i> <span am-time-ago="listing.post[0].date"></span></div>
+			<p class="commentsTotal col-xs-4"><i class="fa-comments-o fa"></i> {{listing.comments[0].length}}</p>
 		</div>
 	</div>
 

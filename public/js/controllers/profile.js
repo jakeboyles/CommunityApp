@@ -14,6 +14,15 @@ angular.module('ProfileController', ['angularFileUpload'])
 		});
 
 
+		$scope.showPosts = function(){
+			$(".profilePosts").show();
+			$(".profileComments").hide();
+		}
+
+		$scope.showComments = function() {
+			$(".profilePosts").hide();
+			$(".profileComments").show();
+		}
 
 });
 

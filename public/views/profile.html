@@ -4,6 +4,9 @@
 		<h2>{{profile.user[0].firstName}} {{profile.user[0].lastName}}</h2>
 		<p><i class="fa fa-home"></i> {{profile.user[0].location}}</p>
 		<img src="{{profile.user[0].profilepicture}}" />
+
+		<a href="" ng-click="showPosts()" class="profileButton">View Posts</a>
+		<a href="" ng-click="showComments()" class="profileButton">View Comments</a>
 	</div>
 
 	<div class="col-md-8">
