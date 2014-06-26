@@ -24,18 +24,6 @@ angular.module('SinglePostController', ['angularMoment'])
 		});
 
 
-		$scope.getPosts = function(){
-			$(".profilePosts").show();
-			$(".profileComments").hide();
-		}
-
-		$scope.getComments = function() {
-			$(".profilePosts").hide();
-			$(".profileComments").show();
-		}
-
-
-
     	Communities.getComments(str)
 	 		.success(function(data){
 	 			$scope.comments = data;
@@ -67,13 +55,15 @@ angular.module('SinglePostController', ['angularMoment'])
 		};
 
 		$scope.init = function() {
-			$(document).ready(function(){
-  				$('.bxslider').bxSlider({
+
+
+			$(window).load(function(){
+				$('.bxslider').bxSlider({
   					pager:true,
   					controls:false,
   				});
   				$(".profileComments").hide();
-			});	
+			})
 		}
 
 
