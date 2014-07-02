@@ -10,6 +10,10 @@ $routeProvider
     controller:'getPostController',
     templateUrl:'views/post.html'
     })
+    .when('/profile/edit', {
+    controller:'signupController',
+    templateUrl:'views/editprofile.html'
+    })
     .when('/profile/:profileid', {
     controller:'profileController',
     templateUrl:'views/profile.html'

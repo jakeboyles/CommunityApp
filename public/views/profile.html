@@ -3,6 +3,7 @@
 	<div class="info col-md-3">
 		<h2>{{profile.user[0].firstName}} {{profile.user[0].lastName}}</h2>
 		<p><i class="fa fa-home"></i> {{profile.user[0].location}}</p>
+		<a href="#/profile/edit" ng-if="profile.user[0]._id == user._id">Edit Profile</a>
 		<img src="{{profile.user[0].profilepicture}}" />
 
 		<a href="" ng-click="showPosts()" class="profileButton">View Posts</a>

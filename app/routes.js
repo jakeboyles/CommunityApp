@@ -109,32 +109,48 @@ app.post('/post/image',function(req,res) {
   });
 
 
+  app.post('/api/editProfile',function(req,res) {
+  	User.findOne({ _id: req.user._id }, function (err, doc){
+  		if(err) {
+  			res.json(err);
+  		}
+  	  doc.firstName = req.body.firstName;
+  	  doc.lastName = req.body.lastName;
+  	  doc.local.email = req.body.local.email;
+  	  doc.location = req.body.location;
+  	  doc.profilepicture = req.body.profilepicture;
+	  doc.phone = req.body.phone;
+	  doc.save();
+	  res.json(doc);
+	});
+  });
 
-  	app.get('/api/profile/:post_id', function(req, res) {
-			User.find({
-				_id : req.params.post_id,
+
+	app.get('/api/profile/:post_id', function(req, res) {
+		User.find({
+			_id : req.params.post_id,
+			//user:req.user
+		}).exec(function(err,user){
+			if (err)
+				res.send(err);
+
+			Post.find({
+				user : req.params.post_id,
 				//user:req.user
-			}).exec(function(err,user){
+			}).exec(function(err,post){
 				if (err)
 					res.send(err);
 
-				Post.find({
+				Comment.find({
 					user : req.params.post_id,
-					//user:req.user
-				}).exec(function(err,post){
-					if (err)
-						res.send(err);
-
-					Comment.find({
-						user : req.params.post_id,
-					}).populate('post').exec(function(err,comments){
-					if (err)
-					res.send(err);
-					res.json({"posts":post,"user":user,"comments":comments})
-					});
+				}).populate('post').exec(function(err,comments){
+				if (err)
+				res.send(err);
+				res.json({"posts":post,"user":user,"comments":comments})
 				});
-
 			});
+
+		});
 	});
 
 

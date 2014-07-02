@@ -569,6 +569,33 @@ textarea {
 .profile .stats:last-child {
   clear: both;
 }
+.edit {
+  padding: 0px 20px;
+}
+.edit label {
+  float: left;
+  clear: left;
+}
+.edit img {
+  max-width: 100px;
+  float: left;
+  clear: left;
+  margin-bottom: 40px;
+}
+.edit input {
+  float: left;
+  clear: left;
+  margin-bottom: 20px;
+}
+.edit input[type='file'] {
+  clear: none;
+  margin-top: 40px;
+}
+.edit button,
+.edit a {
+  float: left;
+  clear: left;
+}
 .profilePosts {
   margin-top: 20px;
   *zoom: 1;

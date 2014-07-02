@@ -17,6 +17,10 @@ var userSchema = mongoose.Schema({
     lastName: { type: String, required: true },
     location: { type: String, required: true },
     profilepicture: { type: String },
+    phone:{
+        type:String,
+        required:false
+    },
 });
 
 // methods ======================

@@ -24,6 +24,9 @@ return {
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},
+	editUser: function(data) {
+		return $http.post('/api/editProfile',data);
+	},
 	getProfile: function(data) {
 		return $http.get('/api/profile/'+ data);
 	},

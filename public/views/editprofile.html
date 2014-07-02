@@ -1,0 +1,21 @@
+<div class="edit container-fluid">
+	<form ng-if="user._id">
+		<h2>Edit Profile</h2>
+		<label>Email</label>
+		<input class="form-control input-lg text-center" ng-model="user.local.email" required placeholder="Email" type="text">
+		<label>First Name</label>
+		<input class="form-control input-lg text-center" ng-model="user.firstName" required  placeholder="First Name" type="text">
+		<label>Last Name</label>
+		<input class="form-control input-lg text-center" ng-model="user.lastName" required  placeholder="Last Name" type="text">
+		<label>Location</label>
+		<input class="form-control input-lg text-center" ng-model="user.location" placeholder="Location" type="text">
+		<label>Phone</label>
+		<input class="form-control input-lg text-center" ng-model="user.phone" placeholder="Phone" type="text">
+		<div class="profilePicture">
+		<img src="{{user.profilepicture}}" />
+		<input class="col-md-3 fileUpload" required type="file" ng-file-select="onProfileEdit($files)">
+		<img class="col-md-3 profilepicture" ng-if="image != null" src="{{image}}">
+		</div>
+		<button type="submit" class="btn btn-primary btn-lg" ng-click="edit()">Edit Profile</button>
+	</form>
+</div>

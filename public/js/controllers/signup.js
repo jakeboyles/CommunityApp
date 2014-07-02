@@ -22,6 +22,33 @@ angular.module('SignupController', ['angularFileUpload'])
 		
 	}
 
+	$scope.edit = function() {
+		var userEdit = $scope.user;
+		Communities.editUser(userEdit)
+		.success(function(data){
+			alert(data)
+		})
+		
+	}
+
+
+$scope.onProfileEdit = function($files) {
+    //$files: an array of files selected, each file has name, size, and type.
+      var $file = $files[0];
+      $upload.upload({
+        url: 'post/image',
+        file: $file,
+        progress: function(e){}
+      }).then(function(data, status, headers, config) {
+      	var str = data.data;
+      	str = str.replace(/"/g, "");
+      	profilePicture = str;
+        $scope.user.profilepicture = str;
+        scope.$digest();
+      }); 
+    
+ }
+
 
 $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
