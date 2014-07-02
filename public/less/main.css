@@ -477,6 +477,11 @@ textarea {
 .profile {
   padding: 0px 10px;
 }
+.profile .editProfile {
+  margin-bottom: 10px;
+  width: 100%;
+  display: block;
+}
 .profile img {
   -webkit-border-radius: 15px;
   -moz-border-radius: 15px;
@@ -571,6 +576,9 @@ textarea {
 }
 .edit {
   padding: 0px 20px;
+  margin-bottom: 30px;
+  float: left;
+  width: 100%;
 }
 .edit label {
   float: left;

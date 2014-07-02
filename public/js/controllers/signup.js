@@ -26,8 +26,12 @@ angular.module('SignupController', ['angularFileUpload'])
 		var userEdit = $scope.user;
 		Communities.editUser(userEdit)
 		.success(function(data){
-			alert(data)
+			var n = notyfy({
+			text: "Profile Updated",
+			timeout: 3000,
+			type: 'success',
 		})
+		});
 		
 	}
 
