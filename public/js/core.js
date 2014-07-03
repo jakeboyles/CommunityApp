@@ -1,4 +1,4 @@
-angular.module('scotchTodo', ['communityController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
+angular.module('scotchTodo', ['communityController','SearchController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
 
 .config(function($routeProvider) {
 $routeProvider
@@ -21,6 +21,10 @@ $routeProvider
     .when('/signin', {
     controller:'signinController',
     templateUrl:'views/signin.html'
+    })
+    .when('/search/:query', {
+    controller:'SearchController',
+    templateUrl:'views/search.html'
     })
     .when('/signup', {
     controller:'signupController',

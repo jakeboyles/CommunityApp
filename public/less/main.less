@@ -95,9 +95,24 @@ header {
 			border-right:0px;
 	}
 
-	.search {
-		display:none;
+	.searchContain {
+		position:relative;
+		float:right;
+		.search {
+			display:none;
+			background-color:#3A4A59;
+			padding:10px 20px;
+			position:absolute;
+			bottom:-80px;
+			z-index:9999;
+			right:0;
+
+			button {
+				margin-top:15px;
+			}
+		}
 	}
+	
 
 	a img{
 		padding:0;

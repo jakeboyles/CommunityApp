@@ -29,15 +29,8 @@ angular.module('communityController', ['angularMoment'])
 
 
 		$scope.searchButton = function() {
-
-		var search = {
-		 	query:$scope.search,
-		 };
-
-		Communities.getSearch(search)
-		.success(function(data){
-			alert(JSON.stringify(data.results[0].obj.title));
-		})
+		 $location.url("/search/"+$scope.search);
+		 $(".search").hide();
 		}
 
 

@@ -1,0 +1,22 @@
+
+<div class="listContain">
+			<div class="item col-md-3 col-xs-12"  ng-repeat="post in posts">
+			<div class="contain">
+				<div class="col-md-5">
+					<a href="#/post/{{post.obj._id}}"><img src="{{post.obj.images[0]}}" /></a>
+				</div>
+				<div class="col-md-7 ">
+					<h3><a href="#/post/{{post.obj._id}}">{{post.obj.title }}</a></h3>
+					<p class="price">{{post.obj.price | currency:"$"}}</p>
+				</div>
+
+				<p class="col-xs-12 pull-left content">{{post.obj.content}}</p>
+
+				<div class="pull-left col-xs-12">
+					<div class="info col-xs-6"><i class="fa fa-clock-o"></i> <span am-time-ago="post.obj.date"></span></div>
+					<span class="commentsTotal col-xs-6"><i class="fa-comments-o fa"></i> {{post.obj.comments.length}}</span>
+				</div>
+			</div>
+			</div>
+</div> 
+	

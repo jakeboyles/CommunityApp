@@ -123,6 +123,22 @@ header .row {
 header .postIcon {
   border-right: 0px;
 }
+header .searchContain {
+  position: relative;
+  float: right;
+}
+header .searchContain .search {
+  display: none;
+  background-color: #3A4A59;
+  padding: 10px 20px;
+  position: absolute;
+  bottom: -80px;
+  z-index: 9999;
+  right: 0;
+}
+header .searchContain .search button {
+  margin-top: 15px;
+}
 header a img {
   padding: 0;
   margin: 0;
