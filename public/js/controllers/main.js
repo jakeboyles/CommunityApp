@@ -28,6 +28,24 @@ angular.module('communityController', ['angularMoment'])
 		})
 
 
+		$scope.searchButton = function() {
+
+		var search = {
+		 	query:$scope.search,
+		 };
+
+		Communities.getSearch(search)
+		.success(function(data){
+			alert(JSON.stringify(data.results[0].obj.title));
+		})
+		}
+
+
+		$scope.showSearch = function() {
+			$(".search").toggle();
+		}
+
+
 		Communities.getMessage()
 		.success(function(data){
 			$rootScope.messages = data;

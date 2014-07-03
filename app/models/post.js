@@ -1,6 +1,8 @@
 var mongoose = require('mongoose')
   , Schema = mongoose.Schema
 
+  var textSearch = require('mongoose-text-search');
+
 
 
 var PostSchema = new Schema({
@@ -51,7 +53,9 @@ var PostSchema = new Schema({
 });
 
 
+PostSchema.plugin(textSearch);
 
+PostSchema.index({ content: 'text' });
 
 module.exports = mongoose.model('Post', PostSchema);
 

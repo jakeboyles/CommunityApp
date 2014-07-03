@@ -51,6 +51,17 @@ app.all('/*', function(req, res, next) {
 	});
 
 
+app.post('/api/search',function(req,res) {
+	var query = req.body.query;
+	Post.textSearch(query, function (err, output) {
+    if (err) res.json(err);
+
+    res.json(output);
+	});
+});
+
+
+
 
 app.post('/api/message',function(req,res) {
 	Message.create({

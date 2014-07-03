@@ -51,7 +51,6 @@
 <body>
 
         <header ng-controller="mainController" id="header" class="container-fluid">
-
             <div ng-if="user.error != 'Please Log In'" class="row">
             	<div class="col-xs-4 col-md-3 logo">
             	<a href="#/"><img src="images/logo.png" /></a>
@@ -61,8 +60,14 @@
             		 <a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
             		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
             		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
-                     <a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a>
-                     <a ng-click="showMessageBox()" class="postIcon"><i class="fa fa-envelope"></i> {{messages.length}} Messages</a>
+                 <div class="searchContain">
+                 <a class="postIcon" ng-click="showSearch()"><i class="fa fa-search"></i> Search</a>
+                 <div style="display:none" class="search" ng-controller="mainController">
+                    <input type="text" ng-model="search">
+                    <button ng-click="searchButton()">Search</button>
+                  </div>
+                 </div>
+                 <a ng-click="showMessageBox()" class="postIcon"><i class="fa fa-envelope"></i> {{messages.length}} Messages</a>
             	</div>
             	<div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
             	    <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
@@ -71,7 +76,7 @@
             		<ul class="mobileNav">
             			<li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
             		 	<li><a href="#/post"><i class="fa fa-plus-square-o"></i> Post</a></li>
-                              <li><a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a></li>
+                  <li><a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a></li>
             		</ul>
             	</div>
             </div>
@@ -83,13 +88,22 @@
             	<div class="pull-right col-xs-8">
             		<a href="#/signin"><i class="fa fa-users"></i> Login</a>
             		<a class="postIcon" href="#/signup"><i class="fa fa-child"></i> Signup</a>
+                <div class="searchContain">
+                 <a class="postIcon" ng-click="showSearch()"><i class="fa fa-search"></i> Search</a>
+                 <div style="display:none" class="search" ng-controller="mainController">
+                    <input type="text" ng-model="search">
+                    <button ng-click="searchButton()">Search</button>
+                  </div>
+              </div>
             	</div>
             </div>
 
 
         </header>
 
-         <div class="container-fluid" ng-view></div>
+
+
+          <div class="container-fluid" ng-view></div>
 
 
 

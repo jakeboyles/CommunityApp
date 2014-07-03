@@ -44,6 +44,9 @@ return {
 	},
 	getMessage:function() {
 		return $http.get('/api/message');
+	},
+	getSearch:function(data) {
+		return $http.post('/api/search',data);
 	}
 }
 });

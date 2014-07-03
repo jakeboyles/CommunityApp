@@ -17,12 +17,13 @@
     "nodemon": "latest",
     "mongoose-validate": "latest",
     "gm": "latest",
-    "mongodb": "^1.4.5",
+    "mongodb": "latest",
     "fs.extra": "latest",
     "forever": "latest",
     "async": "latest",
     "s3": "latest",
     "moment": "^2.7.0",
-    "angular-moment": "^0.7.1"
+    "angular-moment": "^0.7.1",
+    "mongoose-text-search":"latest"
   }
 }
