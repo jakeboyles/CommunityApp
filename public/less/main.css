@@ -629,6 +629,13 @@ textarea {
 .profileComments:after {
   clear: both;
 }
+.modal-open {
+  margin-right: 0 !important;
+}
+.singleMessage,
+.backButton {
+  display: none;
+}
 @media (min-width: 990px) {
   .desktopHide {
     display: none;

@@ -1,6 +1,7 @@
 var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
+var Message = require('./models/message');
 var fs = require ('fs.extra');
 var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
@@ -48,6 +49,35 @@ app.all('/*', function(req, res, next) {
     });
 
 	});
+
+
+
+app.post('/api/message',function(req,res) {
+	Message.create({
+			title : req.body.title,
+			content : req.body.content,
+			to : req.body.to,
+			from : req.body.from,
+		}, function(err, message) {
+			if (err)
+				res.send(err);
+			// get and return all the todos after you create another
+			res.send(message)
+	});
+});
+
+
+app.get('/api/message',function(req,res) {
+
+	Message.find({
+				to : req.user._id,
+			}).populate('from').exec(function(err,messages){
+				if (err)
+					res.send(err);
+
+				res.json(messages);
+			});
+});
 
 
 

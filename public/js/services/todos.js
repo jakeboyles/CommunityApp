@@ -38,6 +38,12 @@ return {
 	},
 	acceptOffer:function(data) {
 		return $http.post('/api/acceptOffer',data);
+	},
+	postMessage:function(data) {
+		return $http.post('/api/message',data);
+	},
+	getMessage:function() {
+		return $http.get('/api/message');
 	}
 }
 });

@@ -43,6 +43,7 @@
 	<script src="js/masonary.js"></script> <!-- load our main application -->
     <script src="js/angular-moment/moment.js"></script>
     <script src="js/angular-moment/angular-moment.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 
 
 </head>
@@ -55,12 +56,13 @@
             	<div class="col-xs-4 col-md-3 logo">
             	<a href="#/"><img src="images/logo.png" /></a>
             	</div>
-            	<h4 class="col-md-6 mobileHide community">Miami University Community</h4>
-            	<div class="userInfo mobileHide pull-right col-md-3 col-xs-8">
+            	<h4 class="col-md-5 mobileHide community">Miami University Community</h4>
+            	<div class="userInfo mobileHide pull-right col-md-4 col-xs-8">
             		 <a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
             		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
             		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
-                         <a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a>
+                     <a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a>
+                     <a ng-click="showMessageBox()" class="postIcon"><i class="fa fa-envelope"></i> {{messages.length}} Messages</a>
             	</div>
             	<div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
             	    <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
@@ -88,6 +90,37 @@
         </header>
 
          <div class="container-fluid" ng-view></div>
+
+
+
+   <div ng-controller="mainController" class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">View Messages</h4>
+      </div>
+      <div class="modal-body">
+        <div class="messages">
+            <div class="message" ng-repeat="message in messages" >
+            <a ng-click="showMessage(message)" >{{message.title}}</a>
+            <p>From {{message.from.firstName}} {{message.from.lastName}}</p>
+            </div>
+        </div>
+
+        <div class="singleMessage">
+        <h2>{{oneMessage.title}}</h2>
+        <p>{{oneMessage.content}}</p>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button ng-click="viewMessages()" type="button" class="btn btn-default backButton">View Messages</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>

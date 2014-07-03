@@ -28,6 +28,31 @@ angular.module('communityController', ['angularMoment'])
 		})
 
 
+		Communities.getMessage()
+		.success(function(data){
+			$rootScope.messages = data;
+		})
+		
+
+		$scope.showMessageBox = function() {
+			$('#viewModal').modal();
+		}
+	
+		$scope.showMessage = function(message) {
+			$(".messages").hide();
+			$(".backButton").show();
+			$scope.oneMessage = message;
+			$(".singleMessage").show();
+		}
+
+		$scope.viewMessages = function() {
+			$('#viewModal').modal();
+			$(".backButton").hide();
+			$(".singleMessage").hide();
+			$(".messages").show();
+		}
+
+
     	$scope.menuClick = function() {
 				$(".mobileNav").toggle();
     	}

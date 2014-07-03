@@ -42,6 +42,16 @@ $scope.createpost = function() {
 
 var images = [];
 
+
+$scope.showMessage = function(message) {
+			$(".messages").hide();
+			$(".backButton").show();
+			$scope.oneMessage = message;
+			$(".singleMessage").show();
+		}
+
+		
+
 $scope.onFileSelect = function($files) {
     //$files: an array of files selected, each file has name, size, and type.
     $scope.formData.images = "";

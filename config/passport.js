@@ -94,6 +94,7 @@ module.exports = function(passport) {
                 newUser.lastName = lastName;
                 newUser.location = req.body.location;
                 newUser.profilepicture = req.body.profilepic;
+                newUser.phone = req.body.phone;
 
 				// save the user
                 newUser.save(function(err) {

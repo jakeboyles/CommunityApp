@@ -32,7 +32,14 @@ angular.module('SinglePostController', ['angularMoment'])
 		    	$scope.error(data);
 		    })
 
+		$scope.showMessage = function(message) {
+			$(".messages").hide();
+			$(".backButton").show();
+			$scope.oneMessage = message;
+			$(".singleMessage").show();
+		}
 
+		
 		$scope.acceptOffer = function(number,comment) {
 
 			var data = {

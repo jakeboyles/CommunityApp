@@ -1,7 +1,7 @@
 angular.module('SignupController', ['angularFileUpload'])
 
 // inject the Todo service factory into our controller
-.controller('signupController', function($scope, $upload, $http, Communities,$location) {
+.controller('signupController', function($scope,$rootScope,$upload, $http, Communities,$location) {
 
 	var profilePicture;
 
