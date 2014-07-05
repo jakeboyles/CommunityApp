@@ -70,24 +70,53 @@ app.post('/api/message',function(req,res) {
 			to : req.body.to,
 			from : req.body.from,
 		}, function(err, message) {
-			if (err)
-				res.send(err);
-			// get and return all the todos after you create another
-			res.send(message)
+
+			if (err) {
+			res.send(err);
+			}
+
+			Message.find({
+				_id : message._id,
+			}).populate('from to').exec(function(err,message){
+				if (err)
+					res.send(err);
+
+				sentMessageEmail(message[0].from,message[0].to,message[0]);
+				res.send(message)
+			});
 	});
 });
 
 
 app.get('/api/message',function(req,res) {
 
+	 var messagesAll = {
+	 	all:"",
+	 	unread:"",
+	 };
+
 	Message.find({
 				to : req.user._id,
 			}).populate('from').exec(function(err,messages){
 				if (err)
 					res.send(err);
+				messagesAll.all = messages;
 
-				res.json(messages);
-			});
+				Message.find({
+					to : req.user._id,
+					read: false,
+				}).populate('from').exec(function(err,messages){
+				if (err)
+					res.send(err);
+
+				messagesAll.unread = messages;
+				res.json(messagesAll);
+	});
+	});
+
+
+
+
 });
 
 
@@ -284,6 +313,32 @@ app.post('/post/image',function(req,res) {
 	});
 
 
+	app.delete('/api/message/:data',function(req,res) {
+		Message.remove({
+			_id: req.params.data,
+		}, function(err,message) {
+			if(err) {
+				res.json(err);
+			}
+
+			res.json(message);
+		});
+	});
+
+	app.put('/api/message',function(req,res) {
+		Message.findById(req.body._id).
+		exec(function(err,message){
+			if (err) {
+				res.json(err);
+			}
+			message.read = true;
+			message.save(function(){
+			res.json(message);
+			});
+		})
+	});
+
+
 	// delete a post
 	app.delete('/api/posts/:post_id',isLoggedIn, function(req, res) {
 
@@ -389,6 +444,42 @@ var sendMessage = function(user) {
 	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
 	});
 };
+
+
+
+
+
+var sentMessageEmail = function(from,to,message) {
+	var message = {
+	    "html": "<h2>New Message</h2><p>You have received a new message from "+from.firstName+"</p><br><br><h4>"+message.title+"</h4><p>"+message.content+"</p>",
+	    "text": "You have received a new message from "+from.firstName,
+	    "subject": "Received New Message",
+	    "from_email": "jake@jibdesigns.com",
+	    "from_name": "Jake Boyles",
+	    "to": [{
+	            "email": to.local.email,
+	            "name": to.firstName+" "+to.lastName,
+	            "type": "to"
+	        }],
+	    "headers": {
+	        "Reply-To": "jake@jibdesigns.com"
+	    },
+	    "important": false,
+	    "track_opens": null,
+	    "track_clicks": null,
+	};
+	var async = false;
+	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
+		    console.log(result);
+
+	}, function(e) {
+	    // Mandrill returns the error as an object with name and message keys
+	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
+	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
+	});
+};
+
+
 
 
 // route middleware to make sure a user is logged in

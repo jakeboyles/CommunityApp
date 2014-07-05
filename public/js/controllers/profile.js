@@ -28,29 +28,15 @@ angular.module('ProfileController', ['angularFileUpload'])
 			$scope.message.from = $scope.user._id;
 			Communities.postMessage($scope.message)
 			.success(function(data){
-				alert(data);
+				$('#myModal').modal('hide');
+				var n = notyfy({
+					text: 'Message Sent!',
+					timeout: 3000,
+					type: 'success',
+				});
 			})
 		}
 
-		
-		$scope.showMessage = function(message) {
-			$(".messages").hide();
-			$(".backButton").show();
-			$scope.oneMessage = message;
-			$(".singleMessage").show();
-		}
-
-		$scope.viewMessages = function() {
-			$(".backButton").hide();
-			$(".singleMessage").hide();
-			$(".messages").show();
-			Communities.getMessage()
-			.success(function(data){
-				$scope.messages = data;
-				$('#viewModal').modal();
-				console.log(data);
-			})
-		}
 
 		$scope.showComments = function() {
 			$(".profilePosts").hide();

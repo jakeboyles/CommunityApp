@@ -10,11 +10,42 @@ img {
 
 a:hover {
 	text-decoration:none;
+	cursor:pointer;
 }
+
+.modal-body {
+	.clearfix();
+}
+
+.sendMessage {
+	input, button, textarea {
+		margin-bottom:20px;
+	}
+}
+
 
 h1,h2,h3,h4,h5,button {
 	font-family: 'Oswald', sans-serif;
 	font-weight:300;
+}
+
+.messages {
+	.message {
+		margin-bottom:20px;
+	}
+	a {
+		color:#3A4A59;
+	}
+	a:hover {
+		text-decoration:underline;
+	}
+}
+
+.singleMessage {
+	h2 {
+		margin:0;
+		padding:0;
+	}
 }
 
 .item {
@@ -75,6 +106,7 @@ h1,h2,h3,h4,h5,button {
 		clear:both;
 	}
 }
+
 
 .row{
 	margin:0;

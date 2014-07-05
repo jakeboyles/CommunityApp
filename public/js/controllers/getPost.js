@@ -8,16 +8,14 @@ angular.module('SinglePostController', ['angularMoment'])
 		var post = {
     	postid:id,
 		};
+
+		
 		str = JSON.stringify(post);
 
 
-		// GET =====================================================================
-		// when landing on the page, get all todos and show them
-		// use the service to get all the todos
 		Communities.getPost($routeParams.postid)
-				// if successful creation, call our get function to get all the new todos
 				.success(function(data) {
-					$scope.listing = data; // assign our new list of todos				
+					$scope.listing = data; 		
 				}).
 		    error(function(data, status, headers, config) {
 		    	$scope.error(data);
@@ -30,7 +28,7 @@ angular.module('SinglePostController', ['angularMoment'])
 			}).
 			error(function(data, status, headers, config) {
 		    	$scope.error(data);
-		    })
+		})
 
 		$scope.showMessage = function(message) {
 			$(".messages").hide();
@@ -57,12 +55,10 @@ angular.module('SinglePostController', ['angularMoment'])
 						timeout: 3000,
 				});
 			})
-			
 			return false;
 		};
 
 		$scope.init = function() {
-			
 			$(document).ready(function(){
   				$('.bxslider').bxSlider({
   					pager:true,
@@ -106,16 +102,20 @@ angular.module('SinglePostController', ['angularMoment'])
 					});
 				}
 			})
-		} else {
-			var n = notyfy({
-				text: "Quote must be a valid number",
-				timeout: 3000,
-				type: 'error',
-			});
-		}
+			} else {
+				var n = notyfy({
+					text: "Quote must be a valid number",
+					timeout: 3000,
+					type: 'error',
+				});
+			}
 		};
-		    setTimeout(function(){
+
+
+	setTimeout(function(){
 		$scope.init();
 	},400);
+
+
 	});
 

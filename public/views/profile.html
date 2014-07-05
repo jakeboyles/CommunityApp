@@ -8,8 +8,8 @@
 
 		<a href="" ng-click="showPosts()" class="profileButton">View Posts</a>
 		<a href="" ng-click="showComments()" class="profileButton">View Comments</a>
-		<a ng-if="profile.user[0]._id == user._id" ng-click="viewMessages()" class="profileButton">View Messages</a>
-		<a ng-if="profile.user[0]._id != user._id" href="" ng-click="showSendMessage()" class="profileButton">Send Message</a>
+		<a ng-controller="mainController" ng-if="profile.user[0]._id == user._id" ng-click="showMessageBox()" class="profileButton">View Messages</a>
+		<a ng-if="profile.user[0]._id != user._id && user._id!=undefined" href="" ng-click="showSendMessage()" class="profileButton">Send Message</a>
 	</div>
 
 	<div class="col-md-8">
@@ -60,42 +60,12 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h4 class="modal-title" id="myModalLabel">Send Message</h4>
       </div>
-      <div class="modal-body">
+      <div class="sendMessage modal-body">
         <form>
         <input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="message.title">
 			<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="message.content"></textarea>
 			<button type="submit" class="btn btn-primary btn-lg" ng-click="sendMessage(profile.user[0]._id)">Send Message</button>
         </form>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-<div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">View Messages</h4>
-      </div>
-      <div class="modal-body">
-      	<div class="messages">
-	      	<div class="message" ng-repeat="message in messages" >
-	      	<a ng-click="showMessage(message)" >{{message.title}}</a>
-	      	<p>From {{message.from.firstName}} {{message.from.lastName}}</p>
-	      	</div>
-      	</div>
-
-      	<div class="singleMessage">
-      	<h2>{{oneMessage.title}}</h2>
-      	<p>{{oneMessage.content}}</p>
-      	</div>
-        
-      </div>
-      <div class="modal-footer">
-        <button ng-click="viewMessages()" type="button" class="btn btn-default backButton">View Messages</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

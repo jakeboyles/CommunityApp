@@ -18,6 +18,24 @@ img {
 }
 a:hover {
   text-decoration: none;
+  cursor: pointer;
+}
+.modal-body {
+  *zoom: 1;
+}
+.modal-body:before,
+.modal-body:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.modal-body:after {
+  clear: both;
+}
+.sendMessage input,
+.sendMessage button,
+.sendMessage textarea {
+  margin-bottom: 20px;
 }
 h1,
 h2,
@@ -27,6 +45,19 @@ h5,
 button {
   font-family: 'Oswald', sans-serif;
   font-weight: 300;
+}
+.messages .message {
+  margin-bottom: 20px;
+}
+.messages a {
+  color: #3A4A59;
+}
+.messages a:hover {
+  text-decoration: underline;
+}
+.singleMessage h2 {
+  margin: 0;
+  padding: 0;
 }
 .item {
   margin-bottom: 20px;

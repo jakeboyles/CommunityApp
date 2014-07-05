@@ -48,12 +48,34 @@ angular.module('communityController', ['angularMoment'])
 		$scope.showMessageBox = function() {
 			$('#viewModal').modal();
 		}
+
+		$scope.deleteMessage = function(id){
+			Communities.deleteMessage(id)
+			.success(function(data){
+				Communities.getMessage()
+				.success(function(data){
+					$rootScope.messages = data;
+					var n = notyfy({
+						text: 'Message Deleted',
+						timeout: 3000,
+						type: 'success',
+					});
+				})
+			})
+		}
 	
 		$scope.showMessage = function(message) {
 			$(".messages").hide();
 			$(".backButton").show();
 			$scope.oneMessage = message;
 			$(".singleMessage").show();
+			Communities.readMessage(message)
+			.success(function(data){
+				Communities.getMessage()
+				.success(function(data){
+					$rootScope.messages = data;
+				})
+			})
 		}
 
 		$scope.viewMessages = function() {
@@ -65,7 +87,7 @@ angular.module('communityController', ['angularMoment'])
 
 
     	$scope.menuClick = function() {
-				$(".mobileNav").toggle();
+			$(".mobileNav").toggle();
     	}
 
 

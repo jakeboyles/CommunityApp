@@ -24,6 +24,12 @@ return {
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},
+	deleteMessage: function(data) {
+		return $http.delete('api/message/'+data);
+	},
+	readMessage: function(data) {
+		return $http.put('api/message',data);
+	},
 	editUser: function(data) {
 		return $http.post('/api/editProfile',data);
 	},
