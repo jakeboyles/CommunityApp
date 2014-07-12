@@ -3,8 +3,8 @@ angular.module('communityService', [])
 // each function returns a promise object 
 .factory('Communities', function($http) {
 return {
-	get : function() {
-	return $http.get('/api/posts');
+	get : function(page) {
+	return $http.post('/api/posts/page',page);
 	},
 	getPost : function(id) {
 	return $http.get('/api/posts/'+ id);

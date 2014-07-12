@@ -36,9 +36,11 @@ app.all('/*', function(req, res, next) {
 
 	// api ---------------------------------------------------------------------
 	// get all todos
-	app.get('/api/posts', function(req, res) {
-
-	Post.find().populate('comments').exec(function(err, posts) {
+	app.post('/api/posts/page', function(req, res) {
+	var page = req.body.number;
+	var number = 15;
+	var skip = number * (page);
+	Post.find().skip(skip).limit(number).populate('comments').exec(function(err, posts) {
         if (err) {
             res.render('error', {
                 status: 500

@@ -1,21 +1,48 @@
-angular.module('communityController', ['angularMoment'])
+angular.module('communityController', ['angularMoment','infinite-scroll'])
+
+
+.directive('scroller', function () {
+    return {
+        restrict: 'A',
+        // new
+        scope: {
+            loadingMethod: "&"
+        },
+        link: function (scope, elem, attrs) {
+            rawElement = elem[0];
+            elem.bind('scroll', function () {
+                if((rawElement.scrollTop + rawElement.offsetHeight+5) >= rawElement.scrollHeight){
+                    alert("TEST");
+                }
+            });
+        }
+    };
+})
 
 
 	// inject the Todo service factory into our controller
 	.controller('mainController', function($scope,$rootScope,$location, $http, Communities) {
 		$scope.formData = {};
 		$scope.loading = true;
+		var posts = [];
+		var number = 0;
+		$scope.posts = [];
+		var page = {number:number};
+		var noMore = false;
 
-
-		Communities.get()
+		Communities.get(page)
 		.success(function(data) {
-			$scope.posts = data;
+			for(i=0;i<data.length;i++) {
+				posts.push(data[i]);
+			}
+			$scope.posts = posts;
 			$scope.loading = false;
 			setTimeout(function () {
 				var container = document.querySelector('.listContain');
 				var msnry = new Masonry( container, {
 			 	 	itemSelector: '.item'
 				});
+						$scope.init();
 			},100);
 		});
 
@@ -27,7 +54,6 @@ angular.module('communityController', ['angularMoment'])
 			$location.url("/signin")
 		})
 
-
 		$scope.searchButton = function() {
 		 $location.url("/search/"+$scope.search);
 		 $(".search").hide();
@@ -36,6 +62,10 @@ angular.module('communityController', ['angularMoment'])
 
 		$scope.showSearch = function() {
 			$(".search").toggle();
+		}
+
+		$scope.loadMore = function() {
+			alert("TEST")
 		}
 
 
@@ -91,6 +121,38 @@ angular.module('communityController', ['angularMoment'])
     	}
 
 
+    	$scope.init =function() {
+			$(window).scroll(function()
+			{
+			    if($(window).scrollTop() == $(document).height() - $(window).height())
+			    {
+			    	number++;
+					page = {number:number};
+
+					if(noMore === false) {
+			        	Communities.get(page)
+						.success(function(data) {
+						if(data.length===0) {
+							noMore=true;
+						}
+						for(i=0;i<data.length;i++) {
+							posts.push(data[i]);
+						}
+						$scope.posts = posts;
+						$scope.loading = false;
+						setTimeout(function () {
+							var container = document.querySelector('.listContain');
+							var msnry = new Masonry( container, {
+						 	 	itemSelector: '.item'
+							});
+						},100);
+						}); 
+					}
+			   	}
+			});
+		}
+
+
 
 		// DELETE ==================================================================
 		// delete a todo after checking it
@@ -109,6 +171,8 @@ angular.module('communityController', ['angularMoment'])
 					}
 				})
 		};
-	});
 
+		$scope.init();
+
+	});
 
