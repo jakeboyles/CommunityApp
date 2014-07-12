@@ -6,8 +6,15 @@
 				<input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
 				<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
 				<input required type="text" class="form-control input-lg text-center" placeholder="Location" ng-model="formData.location">
-				<input required type="number" class="form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
 				<input required type="file" ng-file-select="onFileSelect($files)" multiple> 
+
+				<h3>I want to:</h3>
+				<div class="typeGroup">
+					<a ng-click="type(1)" class="sellit col-xs-6 col-md-3 btn btn-primary btn-lg">Sell It</a>
+					<a ng-click="type(0)" class="tradeit col-xs-6 btn btn-primary btn-lg col-md-3 col-md-offset-1">Trade It</a>
+				</div>
+				<input required type="number" class="hideForm form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
+
 				<button type="submit" class="btn btn-primary btn-lg" ng-click="createpost()">Add Post</button>
 			</div>
 

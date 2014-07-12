@@ -7,7 +7,8 @@
 			</div>
 			<div class="col-md-7 ">
 				<h3><a href="#/post/{{post._id}}">{{ post.title }}</a></h3>
-				<p class="price">{{post.price | currency:"$"}}</p>
+				<p ng-if="post.price!='trade'" class="price">{{post.price | currency:"$"}}</p>
+				<p ng-if="post.price=='trade'" class="price tradeprice">Trade</p>
 			</div>
 
 			<p class="col-xs-12 pull-left content">{{post.content}}</p>

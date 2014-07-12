@@ -50,6 +50,21 @@ $scope.showMessage = function(message) {
 			$(".singleMessage").show();
 		}
 
+
+$scope.type = function(type) {
+	if(type=='1') {
+		$(".hideForm").show();
+		$(this).css("background-color","red");
+		$(".tradeit").removeClass("active");
+		$(".sellit").addClass("active");
+	} else if(type=='0') {
+		$(".hideForm").val("");
+		$(".hideForm").hide();
+		$(".sellit").removeClass("active");
+		$(".tradeit").addClass("active");
+		$scope.formData.price = "trade";
+	}
+}
 		
 
 $scope.onFileSelect = function($files) {
