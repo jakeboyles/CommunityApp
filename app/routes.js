@@ -46,6 +46,7 @@ app.all('/*', function(req, res, next) {
                 status: 500
             });
         } else {
+        	posts.reverse();
             res.jsonp(posts);
         }
     });
