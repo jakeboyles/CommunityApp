@@ -1,25 +1,6 @@
 angular.module('communityController', ['angularMoment','infinite-scroll'])
 
 
-.directive('scroller', function () {
-    return {
-        restrict: 'A',
-        // new
-        scope: {
-            loadingMethod: "&"
-        },
-        link: function (scope, elem, attrs) {
-            rawElement = elem[0];
-            elem.bind('scroll', function () {
-                if((rawElement.scrollTop + rawElement.offsetHeight+5) >= rawElement.scrollHeight){
-                    alert("TEST");
-                }
-            });
-        }
-    };
-})
-
-
 	// inject the Todo service factory into our controller
 	.controller('mainController', function($scope,$rootScope,$location, $http, Communities) {
 		$scope.formData = {};
@@ -42,8 +23,8 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 				var msnry = new Masonry( container, {
 			 	 	itemSelector: '.item'
 				});
-						$scope.init();
-			},100);
+			$scope.init();
+			},400);
 		});
 
 		Communities.loggedIn()
