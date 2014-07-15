@@ -24,7 +24,7 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 			 	 	itemSelector: '.item'
 				});
 			$scope.init();
-			},400);
+			},1000);
 		});
 
 		Communities.loggedIn()
@@ -126,7 +126,7 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 							var msnry = new Masonry( container, {
 						 	 	itemSelector: '.item'
 							});
-						},100);
+						},1000);
 						}); 
 					}
 			   	}
