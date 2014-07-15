@@ -34,7 +34,7 @@
 			</div>
 		</div>
 
-		<div ng-if="profile.comments.length > 0" class="profileComments">
+		<div ng-if="profile.comments.length > 0" class="hide profileComments">
 			<h2>Recent Comments</h2>
 				<div class="comment" ng-repeat="comment in profile.comments">
 				{{comment.content}}
