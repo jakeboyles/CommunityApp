@@ -697,6 +697,7 @@ textarea {
 }
 .profileComments {
   *zoom: 1;
+  margin-top: 20px;
   display: none;
 }
 .profileComments:before,
