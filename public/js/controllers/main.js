@@ -1,8 +1,8 @@
-angular.module('communityController', ['angularMoment','infinite-scroll','stellar.directives'])
+angular.module('communityController', ['angularMoment','infinite-scroll'])
 
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', function($scope,$rootScope,$location,$routeParams, $http, Communities,stellar) {
+	.controller('mainController', function($scope,$rootScope,$location,$routeParams, $http, Communities) {
 		$scope.formData = {};
 		$scope.loading = true;
 		var posts = [];
@@ -14,7 +14,6 @@ angular.module('communityController', ['angularMoment','infinite-scroll','stella
 		var community = {
 			com:$routeParams.communityid,
 		}
-		 stellar.against(window);
 
 		$rootScope.location = $location.path();
 

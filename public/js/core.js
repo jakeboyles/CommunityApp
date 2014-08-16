@@ -1,4 +1,4 @@
-angular.module('scotchTodo', ['stellar.directives','communityController','communitySearch','communityListController','SearchController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
+angular.module('scotchTodo', ['communityController','communitySearch','communityListController','SearchController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
 
 .config(function($routeProvider) {
 $routeProvider
