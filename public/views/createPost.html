@@ -1,4 +1,6 @@
 <!-- FORM TO CREATE TODOS -->
+<div data-ng-include src="'views/header.html'"></div>
+
 <div id="post-form">
 		<form>
 			<div class="col-md-6 form-group">
@@ -7,6 +9,10 @@
 				<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
 				<input required type="text" class="form-control input-lg text-center" placeholder="Location" ng-model="formData.location">
 				<input required type="file" ng-file-select="onFileSelect($files)" multiple> 
+
+				<select ng-model="formData.community">
+				  <option ng-repeat="co in com" value="{{co._id}}">{{co.title}}</option>
+				</select> 
 
 				<h3>I want to:</h3>
 				<div class="typeGroup">

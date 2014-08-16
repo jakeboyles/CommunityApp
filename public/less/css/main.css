@@ -13,14 +13,6 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
-.homeHeader {
-  height: 100%;
-  width: 100%;
-}
-html {
-  height: 100%;
-  width: 100%;
-}
 img {
   width: 100%;
 }
@@ -44,74 +36,6 @@ a:hover {
 .sendMessage button,
 .sendMessage textarea {
   margin-bottom: 20px;
-}
-.homeHeader header {
-  margin-bottom: 0;
-  position: relative;
-  z-index: 2000;
-}
-.space {
-  width: 100%;
-  height: 300px;
-}
-.header {
-  background-color: #fff;
-  background-image: url("../images/bg.jpg");
-  background-size: cover;
-  height: 100%;
-  position: relative;
-  width: 100%;
-  background-position: bottom;
-  text-align: center;
-}
-.header .zipcode {
-  height: 55px;
-  padding: 0px 30px;
-  background-color: rgba(255, 255, 255, 0.9);
-  border: none;
-  margin-top: 60px;
-  color: #000;
-  text-transform: uppercase;
-  -webkit-border-radius: 5px 0px 0px 5px;
-  -moz-border-radius: 5px 0px 0px 5px;
-  border-radius: 5px 0px 0px 5px;
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  position: relative;
-  z-index: 15;
-}
-.header .btn-primary {
-  height: 55px;
-  margin-top: -3px;
-  margin-left: -3px;
-  -webkit-border-radius: 0px 4px 4px 0px;
-  -moz-border-radius: 0px 4px 4px 0px;
-  border-radius: 0px 4px 4px 0px;
-  -webkit-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  -moz-box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
-  position: relative;
-  z-index: 10;
-  padding: 0px 20px;
-}
-.header h2,
-.header h3 {
-  padding: 0;
-  color: #fff;
-  margin: 0;
-  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
-}
-.header h2 {
-  font-size: 70px;
-}
-.header h3 {
-  margin-top: 27px;
-}
-.header .text {
-  position: absolute;
-  top: 25%;
-  width: 100%;
 }
 .container-fluid {
   padding: 0px 15px;
@@ -220,9 +144,6 @@ button {
   margin: 0;
   padding: 0;
 }
-#viewModal {
-  z-index: 99999;
-}
 header {
   height: 65px;
   -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
@@ -251,7 +172,7 @@ header .searchContain .search {
   background-color: #3A4A59;
   padding: 10px 20px;
   position: absolute;
-  bottom: -105px;
+  bottom: -80px;
   z-index: 9999;
   right: 0;
 }
@@ -415,17 +336,7 @@ h3 {
 }
 .post {
   padding: 0px 20px;
-  margin-top: 25px;
-  *zoom: 1;
-}
-.post:before,
-.post:after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.post:after {
-  clear: both;
+  margin-top: 45px;
 }
 .post button {
   margin-top: 10px;
@@ -846,30 +757,9 @@ textarea {
 .hideForm {
   display: none;
 }
-.communityPost .item {
-  margin-top: 20px;
-}
-.communityPost .item .row,
-.communityPost .item .col-xs-12,
-.communityPost .item .col-md-5 {
-  padding: 0;
-}
-.communityPost h3 span {
-  padding-top: 0;
-  margin-top: 0 !important;
-}
-.communityPost img {
-  max-width: 85px;
-}
 @media (max-width: 990px) {
   .mobileHide {
     display: none;
-  }
-  .header h3 {
-    font-size: 23px;
-  }
-  .header h2 {
-    font-size: 38px;
   }
   .profile .stats {
     width: 40%;

@@ -21,6 +21,9 @@ return {
 	postSignIn: function(data) {
 		return $http.post('/login',data);
 	},
+	getCommunitys: function(data) {
+		return $http.post('/api/communities',data);
+	},
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},

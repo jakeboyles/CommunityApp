@@ -1,14 +1,22 @@
-angular.module('scotchTodo', ['communityController','SearchController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
+angular.module('scotchTodo', ['stellar.directives','communityController','communitySearch','communityListController','SearchController','ProfileController','SinglePostController','SigninController','PostController','SignupController', 'communityService','ngRoute'])
 
 .config(function($routeProvider) {
 $routeProvider
     .when('/', {
     controller:'mainController',
-    templateUrl:'views/list.html'
+    templateUrl:'views/home.html'
     })
     .when('/post/:postid', {
     controller:'getPostController',
     templateUrl:'views/post.html'
+    })
+    .when('/community/:communityid', {
+    controller:'mainController',
+    templateUrl:'views/list.html'
+    })
+    .when('/community/search/:zip', {
+    controller:'communitySearch',
+    templateUrl:'views/searchCommunity.html'
     })
     .when('/profile/edit', {
     controller:'signupController',

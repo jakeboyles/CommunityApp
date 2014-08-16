@@ -16,6 +16,16 @@ Communities.loggedIn()
 		$location.url("/signin")
 })
 
+Communities.getCommunitys()
+.success(function(data){
+	if(data.error) {
+		alert(data.error)
+	}
+	else {
+		$scope.com = data;
+	}
+})
+
 // CREATE ==================================================================
 // when submitting the add form, send the text to the node API
 $scope.createpost = function() {
@@ -83,7 +93,6 @@ $scope.onFileSelect = function($files) {
       	images.push(str);
         $scope.image = images[0];
         $scope.formData.images = images;
-        $scope.$digest();
       }); 
     }
     } else {

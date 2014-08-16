@@ -16,7 +16,7 @@ angular.module('SigninController', [])
 		.success(function(data){
 				$scope.user = data;
 				console.log(data);
-				$location.url("/");
+				$location.url("/Communities");
 				if(!data._id) {
 					var n = notyfy({
 						text: "Wrong Username or Password",

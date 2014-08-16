@@ -1,8 +1,8 @@
-angular.module('communityController', ['angularMoment','infinite-scroll'])
+angular.module('communityController', ['angularMoment','infinite-scroll','stellar.directives'])
 
 
 	// inject the Todo service factory into our controller
-	.controller('mainController', function($scope,$rootScope,$location, $http, Communities) {
+	.controller('mainController', function($scope,$rootScope,$location,$routeParams, $http, Communities,stellar) {
 		$scope.formData = {};
 		$scope.loading = true;
 		var posts = [];
@@ -11,11 +11,19 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 		var page = {number:number};
 		var noMore = false;
 
-		Communities.get(page)
+		var community = {
+			com:$routeParams.communityid,
+		}
+		 stellar.against(window);
+
+		$rootScope.location = $location.path();
+
+		Communities.get(community)
 		.success(function(data) {
-			for(i=0;i<data.length;i++) {
-				posts.push(data[i]);
+			for(i=0;i<data.posts.length;i++) {
+				posts.push(data.posts[i]);
 			}
+			$rootScope.communityinfo = data.Community[0];
 			$scope.posts = posts;
 			$scope.loading = false;
 			setTimeout(function () {
@@ -23,9 +31,13 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 				var msnry = new Masonry( container, {
 			 	 	itemSelector: '.item'
 				});
-			$scope.init();
-			},1000);
+			},800);
 		});
+
+		$scope.searchZip = function() {
+			var zip = $scope.zip;
+			$location.path('/community/search/'+zip)
+		}
 
 		Communities.loggedIn()
 		.success(function(data){
@@ -45,16 +57,25 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 			$(".search").toggle();
 		}
 
-		$scope.loadMore = function() {
-			alert("TEST")
+
+		$scope.init = function() {
+			$( document ).ready(function() {
+				var height = $(".ng-scope").height()-65;
+				$('.header').css('height',height);
+			})
 		}
 
 
-		Communities.getMessage()
-		.success(function(data){
-			$rootScope.messages = data;
-		})
+		if(typeof $rootScope.user!=="undefined") {
+			if(!$rootScope.user.error) {
+				Communities.getMessage()
+				.success(function(data){
+					$rootScope.messages = data;
+				})
+			} 
+		}
 		
+
 
 		$scope.showMessageBox = function() {
 			$('#viewModal').modal();
@@ -101,59 +122,8 @@ angular.module('communityController', ['angularMoment','infinite-scroll'])
 			$(".mobileNav").toggle();
     	}
 
+    	$scope.init();
 
-    	$scope.init =function() {
-			$(window).scroll(function()
-			{
-			    if($(window).scrollTop() == $(document).height() - $(window).height())
-			    {
-			    	number++;
-					page = {number:number};
-
-					if(noMore === false) {
-			        	Communities.get(page)
-						.success(function(data) {
-						if(data.length===0) {
-							noMore=true;
-						}
-						for(i=0;i<data.length;i++) {
-							posts.push(data[i]);
-						}
-						$scope.posts = posts;
-						$scope.loading = false;
-						setTimeout(function () {
-							var container = document.querySelector('.listContain');
-							var msnry = new Masonry( container, {
-						 	 	itemSelector: '.item'
-							});
-						},1000);
-						}); 
-					}
-			   	}
-			});
-		}
-
-
-
-		// DELETE ==================================================================
-		// delete a todo after checking it
-		$scope.deletepost = function(id) {
-			$scope.loading = true;
-
-			Communities.delete(id)
-				// if successful creation, call our get function to get all the new todos
-				.success(function(data) {
-					if(data.error){
-						alert(data.error);
-						$scope.loading = false;
-					}else {
-						$scope.loading = false;
-						$scope.posts = data; // assign our new list of todos
-					}
-				})
-		};
-
-		$scope.init();
 
 	});
 

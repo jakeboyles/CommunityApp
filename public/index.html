@@ -36,140 +36,69 @@
 	<script src="js/controllers/signin.js"></script> <!-- load up our controller -->
   <script src="js/controllers/search.js"></script> <!-- load up our controller -->
 	<script src="js/controllers/signup.js"></script> <!-- load up our controller -->
-      <script src="js/controllers/profile.js"></script> <!-- load up our controller -->
+  <script src="js/controllers/profile.js"></script> <!-- load up our controller -->
 	<script src="js/controllers/createPost.js"></script> <!-- load up our controller -->
+  <script src="js/controllers/communitySearch.js"></script> <!-- load up our controller -->
+  <script src="js/controllers/community.js"></script> <!-- load up our controller -->
 	<script src="js/controllers/getPost.js"></script> <!-- load up our controller -->
 	<script src="js/services/todos.js"></script> <!-- load our todo service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 	<script src="js/masonary.js"></script> <!-- load our main application -->
-    <script src="js/angular-moment/moment.js"></script>
-    <script src="js/angular-moment/angular-moment.min.js"></script>
-    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="js/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
-    <script src="js/waypoints-infinite.js"></script>
-
-
-
+  <script src="js/angular-moment/moment.js"></script>
+  <script src="js/angular-moment/angular-moment.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="js/bower_components/ngInfiniteScroll/build/ng-infinite-scroll.min.js"></script>
+  <script src="js/angularjs-stellar/js/stellar.directives.js"></script>
+  <script src="js/stellar.js/jquery.stellar.js"></script>
 
 </head>
-<!-- SET THE CONTROLLER -->
-<body>
+<body ng-controller="mainController" >
 
-        <header ng-controller="mainController" id="header" class="container-fluid">
-            <div ng-if="user.error != 'Please Log In'" class="row">
-            	<div class="col-xs-4 col-md-3 logo">
-            	<a href="#/"><img src="images/logo.png" /></a>
-            	</div>
-            	<h4 class="col-md-5 mobileHide community">Miami University Community</h4>
-            	<div class="userInfo mobileHide pull-right col-md-4 col-xs-8">
-            		 <a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
-            		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
-            		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
-                 <div class="searchContain">
-                 <a class="postIcon" ng-click="showSearch()"><i class="fa fa-search"></i> Search</a>
-                 <div style="display:none" class="search" ng-controller="mainController">
-                    <input type="text" ng-model="search">
-                    <button ng-click="searchButton()">Search</button>
-                  </div>
-                 </div>
-                 <a ng-click="showMessageBox()" class="postIcon"><i class="fa fa-envelope"></i> {{messages.unread.length}} Messages</a>
-            	</div>
+  <div ng-view></div>
 
-            	<div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
-            	  <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
-            		<a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
-
-            		<ul class="mobileNav">
-            			<li><a href="/logout"><i class="fa fa-power-off"></i> Logout</a></li>
-            		 	<li><a href="#/post"><i class="fa fa-plus-square-o"></i> Post</a></li>
-                  <li><a class="postIcon" href="#/profile/{{user._id}}"><i class="fa fa-male"></i> Profile</a></li>
-            		</ul>
-            	</div>
-
-            </div>
-
-            <div ng-if="user.error == 'Please Log In'" class="row">
-            	<div class="col-xs-4 col-md-3 logo">
-            	<a href="#/"><img class="userPic" src="images/logo.png" /></a>
-            	</div>
-            	<div class="mobileHide pull-right col-xs-8">
-            		<a href="#/signin"><i class="fa fa-users"></i> Login</a>
-            		<a class="postIcon" href="#/signup"><i class="fa fa-child"></i> Signup</a>
-                <div class="searchContain">
-                 <a class="postIcon" ng-click="showSearch()"><i class="fa fa-search"></i> Search</a>
-                 <div style="display:none" class="search" ng-controller="mainController">
-                    <input type="text" ng-model="search">
-                    <button ng-click="searchButton()">Search</button>
-                  </div>
+  <div ng-controller="mainController" class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title" id="myModalLabel">View Messages</h4>
+        </div>
+        <div class="modal-body">
+          <div class="messages">
+              <div ng-if="messages.all.length > 0" class="message row" ng-repeat="message in messages.all">
+                <div class="col-xs-1">
+                  <a ng-click="deleteMessage(message._id)" href=""><i class="fa fa-times-circle"></i></a>
                 </div>
-            	</div>
-
-              <div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
-                <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
-
-                <ul class="mobileNav">
-                  <li><a href="#/signin"><i class="fa fa-users"></i> Login</a></li>
-                  <li><a class="postIcon" href="#/signup"><i class="fa fa-child"></i> Signup</a></li>
-                  <li>
-                  <div class="searchContain pull-left">
-                    <a class="postIcon" ng-click="showSearch()"><i class="fa fa-search"></i> Search</a>
-                    <div style="display:none" class="search" ng-controller="mainController">
-                      <input type="text" ng-model="search">
-                      <button ng-click="searchButton()">Search</button>
-                    </div>
-                  </div>
-                  </li>
-                </ul>
+                <div class="col-xs-2">
+                  <img src='{{message.from.profilepicture}}'>
+                </div>
+                <div class="col-xs-8 col-xs-offset-1">
+                  <a href="" ng-click="showMessage(message)">{{message.title}}</a>
+                </div>
               </div>
-
-            </div>
-
-
-        </header>
-
-
-
-          <div class="container-fluid" ng-view></div>
-
-
-
-   <div ng-controller="mainController" class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-        <h4 class="modal-title" id="myModalLabel">View Messages</h4>
-      </div>
-      <div class="modal-body">
-        <div class="messages">
-            <div ng-if="messages.all.length > 0" class="message row" ng-repeat="message in messages.all">
-              <div class="col-xs-1"><a ng-click="deleteMessage(message._id)" href=""><i class="fa fa-times-circle"></i></a></div>
-              <div class="col-xs-2"><img src='{{message.from.profilepicture}}'></div>
-              <div class="col-xs-8 col-xs-offset-1">
-              <a href="" ng-click="showMessage(message)">{{message.title}}</a>
+              <div ng-if="messages.length<=0">
+                <h3>You have no messages</h3>
               </div>
-            </div>
-            <div ng-if="messages.length<=0">
-            <h3>You have no messages</h3>
-            </div>
-        </div>
+          </div>
 
-        <div class="singleMessage">
-        <div class="col-xs-4 col-md-2"><img src='{{oneMessage.from.profilepicture}}'></div>
-        <div class="col-xs-8 col-md-9 col-md-offset-1">
-        <h2>{{oneMessage.title}}</h2>
-        <p>{{oneMessage.content}}</p>
+          <div class="singleMessage">
+            <div class="col-xs-4 col-md-2">
+              <img src='{{oneMessage.from.profilepicture}}'>
+            </div>
+            <div class="col-xs-8 col-md-9 col-md-offset-1">
+              <h2>{{oneMessage.title}}</h2>
+              <p>{{oneMessage.content}}</p>
+            </div>
+          </div>
+          
         </div>
+        <div class="modal-footer">
+          <button ng-click="viewMessages()" type="button" class="btn btn-default backButton">View Messages</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button ng-click="viewMessages()" type="button" class="btn btn-default backButton">View Messages</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
-</div>
 
 </body>
 </html>

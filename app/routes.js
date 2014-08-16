@@ -1,6 +1,9 @@
 var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
+var Community = require('./models/community');
+var _ = require('underscore');
+
 var Message = require('./models/message');
 var fs = require ('fs.extra');
 var gm = require('gm');
@@ -15,15 +18,12 @@ var client = s3.createClient({
   s3RetryCount: 3,
   s3RetryDelay: 1000,
   s3Options: {
-    accessKeyId: "AKIAIWZ5BTPM6FMGJ7JA",
-    secretAccessKey: "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",
+    accessKeyId: "AKIAJ7YYYNC3VQP2KJ6Q",
+    secretAccessKey: "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",
     // any other options are passed to new AWS.S3()
     // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
   },
 });
-
-
-
 
 
 module.exports = function(app,passport) {
@@ -37,21 +37,24 @@ app.all('/*', function(req, res, next) {
 	// api ---------------------------------------------------------------------
 	// get all todos
 	app.post('/api/posts/page', function(req, res) {
-	var page = req.body.number;
-	var number = 15;
-	var skip = number * (page);
-	Post.find().skip(skip).limit(number).populate('comments').exec(function(err, posts) {
-        if (err) {
-            res.render('error', {
-                status: 500
-            });
-        } else {
-        	posts.reverse();
-            res.jsonp(posts);
-        }
+	var communityID = req.body.com;
+		Post.find({community : communityID}).populate('comments').exec(function(err, posts) {
+	        if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	        	posts.reverse();
+
+	        	Community.find({_id:communityID}).exec(function(err,community){
+	        		res.jsonp({"posts":posts,"Community":community});
+	        	})
+	        }
+	    });
+
     });
 
-	});
+
 
 
 app.post('/api/search',function(req,res) {
@@ -62,6 +65,37 @@ app.post('/api/search',function(req,res) {
     res.json(output);
 	});
 });
+
+
+app.post('/api/communities',function(req,res) {
+	var relatedPosts = [];
+	if(req.body.id) {
+		Community.find({zipcode:req.body.id}).populate('posts').exec(function(err, community) {
+	        if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	        	for(i=0;i<community.length;i++){
+	        		relatedPosts.push(community[i].posts);
+	        	}
+	            res.jsonp({"community":community,"posts":relatedPosts});
+	        }
+	    });
+	} else {
+		Community.find().exec(function(err, posts) {
+	        if (err) {
+	            res.render('error', {
+	                status: 500
+	            });
+	        } else {
+	        	posts.reverse();
+	            res.jsonp(posts);
+	        }
+	    });
+	}
+});
+
 
 
 
@@ -236,6 +270,7 @@ app.post('/post/image',function(req,res) {
 			content : req.body.content,
 			price : req.body.price,
 			location:req.body.location,
+			community:req.body.community,
 			user: req.user,
 			images:req.body.images,
 		}, function(err, post) {
@@ -245,7 +280,14 @@ app.post('/post/image',function(req,res) {
 			Post.find(function(err, posts) {
 				if (err)
 					res.send(err)
-				res.jsonp(posts);
+
+				Community.update({_id:req.body.community},{$push: {posts:post}},{upsert:true},function(err,post){
+        			if(err){
+               		 res.send(err);
+        			}else{
+                	res.send(posts);
+        		}
+				});
 			});
 		});
 
@@ -370,7 +412,7 @@ app.post('/post/image',function(req,res) {
 			Post.find({
 				_id : req.params.post_id,
 				//user:req.user
-			}).populate('user comments').exec(function(err,docs){
+			}).populate('user comments community').exec(function(err,docs){
 				if (err)
 					res.send(err);
 					var allComments = [];

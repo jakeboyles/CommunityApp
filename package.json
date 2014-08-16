@@ -24,6 +24,7 @@
     "s3": "latest",
     "moment": "^2.7.0",
     "angular-moment": "^0.7.1",
-    "mongoose-text-search":"latest"
+    "mongoose-text-search":"latest",
+    "underscore":"latest"
   }
 }
