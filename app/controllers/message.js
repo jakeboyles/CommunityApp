@@ -12,7 +12,6 @@ var async = require('async');
 var s3 = require('s3');
 
 
-
 exports.create = function(req,res) {
     Message.create({
             title : req.body.title,
@@ -39,7 +38,6 @@ exports.create = function(req,res) {
 
 
 exports.get = function(req,res) {
-
      var messagesAll = {
         all:"",
         unread:"",
@@ -80,7 +78,6 @@ exports.updateRead = function(req,res){
 }
 
 
-
 exports.delete = function(req,res){
     Message.remove({
         _id: req.params.data,
@@ -94,10 +91,9 @@ exports.delete = function(req,res){
 }
 
 
-
 var sentMessageEmail = function(from,to,message) {
     var message = {
-        "html": "<h2>New Message</h2><p>You have received a new message from "+from.firstName+"</p><br><br><h4>"+message.title+"</h4><p>"+message.content+"</p>",
+        "html": "<h2>New Message</h2><p>You have received a new message from "+from.firstName+"</p><h4>"+message.title+"</h4><p>"+message.content+"</p>",
         "text": "You have received a new message from "+from.firstName,
         "subject": "Received New Message",
         "from_email": "jake@jibdesigns.com",
