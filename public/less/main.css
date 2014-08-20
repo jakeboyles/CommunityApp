@@ -106,7 +106,7 @@ a:hover {
   font-size: 70px;
 }
 .header h3 {
-  margin-top: 27px;
+  margin-top: 39px;
 }
 .header .text {
   position: absolute;
@@ -224,15 +224,15 @@ button {
   z-index: 99999;
 }
 header {
-  height: 65px;
-  -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
-  -moz-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
-  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
   width: 100%;
   padding: 0px 10px;
   background-color: #3A4A59;
   color: #fff;
   margin-bottom: 20px;
+  height: 65px;
+  -webkit-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
+  -moz-box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.6);
 }
 header .row {
   padding: 0;

@@ -2,9 +2,8 @@ var Post = require('./models/post');
 var User = require('./models/user');
 var Comment = require('./models/comment');
 var Community = require('./models/community');
-var _ = require('underscore');
-
 var Message = require('./models/message');
+var _ = require('underscore');
 var fs = require ('fs.extra');
 var gm = require('gm');
 var mandrill = require('mandrill-api/mandrill');
@@ -28,31 +27,56 @@ var client = s3.createClient({
 
 module.exports = function(app,passport) {
 
+
+	/* require your controllers here */
+var posts = require('./controllers/posts');
+var user = require('./controllers/user');
+var community = require('./controllers/community');
+var message = require('./controllers/message');
+var comment = require('./controllers/comment');
+
+
 app.all('/*', function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
 
-	// api ---------------------------------------------------------------------
-	// get all todos
-	app.post('/api/posts/page', function(req, res) {
-	var communityID = req.body.com;
-		Post.find({community : communityID}).populate('comments').exec(function(err, posts) {
-	        if (err) {
-	            res.render('error', {
-	                status: 500
-	            });
-	        } else {
-	        	posts.reverse();
 
-	        	Community.find({_id:communityID}).exec(function(err,community){
-	        		res.jsonp({"posts":posts,"Community":community});
-	        	})
-	        }
-	    });
+app.get('/api/posts/:post_id', posts.single);
 
-    });
+app.post('/api/posts',isLoggedIn, posts.create);
+
+app.post('/api/posts/page',posts.getAll)
+
+app.get('/api/profile/:post_id',user.single);
+
+app.post('/api/editProfile',isLoggedIn,user.edit);
+
+app.post('/api/communities',community.findByZip);
+
+app.post('/api/message',message.create);
+
+app.get('/api/message',message.get);
+
+app.put('/api/message',isLoggedIn,message.updateRead);
+
+app.delete('/api/message/:data',isLoggedIn,message.delete);
+
+app.post('/api/acceptOffer',isLoggedIn,comment.acceptOffer);
+
+app.post('/api/allComments',comment.get);
+
+app.post('/api/comment',isLoggedIn,comment.create);
+
+app.post('/api/signup',passport.authenticate('local-signup'),user.signup);
+
+app.get('/logout',user.logout);
+
+app.post('/login',passport.authenticate('local-login'),user.login);
+
+app.get('/login',isLoggedIn,user.getLogin);
+
 
 
 
@@ -67,99 +91,10 @@ app.post('/api/search',function(req,res) {
 });
 
 
-app.post('/api/communities',function(req,res) {
-	var relatedPosts = [];
-	if(req.body.id) {
-		Community.find({zipcode:req.body.id}).populate('posts').exec(function(err, community) {
-	        if (err) {
-	            res.render('error', {
-	                status: 500
-	            });
-	        } else {
-	        	for(i=0;i<community.length;i++){
-	        		relatedPosts.push(community[i].posts);
-	        	}
-	            res.jsonp({"community":community,"posts":relatedPosts});
-	        }
-	    });
-	} else {
-		Community.find().exec(function(err, posts) {
-	        if (err) {
-	            res.render('error', {
-	                status: 500
-	            });
-	        } else {
-	        	posts.reverse();
-	            res.jsonp(posts);
-	        }
-	    });
-	}
-});
-
-
-
-
-
-app.post('/api/message',function(req,res) {
-	Message.create({
-			title : req.body.title,
-			content : req.body.content,
-			to : req.body.to,
-			from : req.body.from,
-		}, function(err, message) {
-
-			if (err) {
-			res.send(err);
-			}
-
-			Message.find({
-				_id : message._id,
-			}).populate('from to').exec(function(err,message){
-				if (err)
-					res.send(err);
-
-				sentMessageEmail(message[0].from,message[0].to,message[0]);
-				res.send(message)
-			});
-	});
-});
-
-
-app.get('/api/message',function(req,res) {
-
-	 var messagesAll = {
-	 	all:"",
-	 	unread:"",
-	 };
-
-	Message.find({
-				to : req.user._id,
-			}).populate('from').exec(function(err,messages){
-				if (err)
-					res.send(err);
-				messagesAll.all = messages;
-
-				Message.find({
-					to : req.user._id,
-					read: false,
-				}).populate('from').exec(function(err,messages){
-				if (err)
-					res.send(err);
-
-				messagesAll.unread = messages;
-				res.json(messagesAll);
-	});
-	});
-
-
-
-
-});
 
 
 
 app.post('/post/image',function(req,res) {
-	console.log(req.files.file.path);
     var tmp_path = req.files.file.path;
     // set where the file should actually exists - in this case it is in the "images" directory
     var time = new Date().getTime();
@@ -188,348 +123,12 @@ app.post('/post/image',function(req,res) {
 	uploader.on('end', function(err,data) {
 	  res.json("https://s3.amazonaws.com/CommunityApp/uploads/"+time+req.files.file.name);
 	});
-
 });
-
-
- app.post('/api/signup', passport.authenticate('local-signup'),function(req, res) {
-        res.send(req.user);
-    	sendMessage(req.user);
-  });
-
-  
-  app.get('/logout',function(req, res) {
-   		req.logout();
-  		res.redirect('/');
-  });  
-
-  // TEST
-
-  app.post('/login', passport.authenticate('local-login'),function(req, res) {
-    // If this function gets called, authentication was successful.
-    // `req.user` contains the authenticated user.
-    res.send(req.user);
-  });
-
-  app.get('/login', isLoggedIn, function(req, res){
-		res.json(req.user);
-  });
-
-
-  app.post('/api/editProfile',function(req,res) {
-  	User.findOne({ _id: req.user._id }, function (err, doc){
-  		if(err) {
-  			res.json(err);
-  		}
-  	  doc.firstName = req.body.firstName;
-  	  doc.lastName = req.body.lastName;
-  	  doc.local.email = req.body.local.email;
-  	  doc.location = req.body.location;
-  	  doc.profilepicture = req.body.profilepicture;
-	  doc.phone = req.body.phone;
-	  doc.save();
-	  res.json(doc);
-	});
-  });
-
-
-	app.get('/api/profile/:post_id', function(req, res) {
-		User.find({
-			_id : req.params.post_id,
-			//user:req.user
-		}).exec(function(err,user){
-			if (err)
-				res.send(err);
-
-			Post.find({
-				user : req.params.post_id,
-				//user:req.user
-			}).exec(function(err,post){
-				if (err)
-					res.send(err);
-
-				Comment.find({
-					user : req.params.post_id,
-				}).populate('post').exec(function(err,comments){
-				if (err)
-				res.send(err);
-				res.json({"posts":post,"user":user,"comments":comments})
-				});
-			});
-
-		});
-	});
-
-
-	// create todo and send back all todos after creation
-	app.post('/api/posts',isLoggedIn, function(req, res) {
-
-
-		Post.create({
-			title : req.body.title,
-			content : req.body.content,
-			price : req.body.price,
-			location:req.body.location,
-			community:req.body.community,
-			user: req.user,
-			images:req.body.images,
-		}, function(err, post) {
-			if (err)
-				res.send(err);
-			// get and return all the todos after you create another
-			Post.find(function(err, posts) {
-				if (err)
-					res.send(err)
-
-				Community.update({_id:req.body.community},{$push: {posts:post}},{upsert:true},function(err,post){
-        			if(err){
-               		 res.send(err);
-        			}else{
-                	res.send(posts);
-        		}
-				});
-			});
-		});
-
-
-
-
-	});
-
-
-	app.post('/api/comment', isLoggedIn, function(req, res) {
-
-			Comment.create({ 
-				title : req.body.title,
-				content : req.body.content,
-				postid : req.body.postid,
-				offer: req.body.offer,
-				user: req.user,
-				post: req.body.postid,
-			},function(err, comment) {
-				Post.update({_id: req.body.postid},{$push: {comments:comment}},{upsert:true},function(err,post){
-        			if(err){
-               		 res.send(err);
-        			}else{
-                	res.send(comment);
-        		}
-				});
-
-			});
-	});
-
-
-	app.post('/api/allComments', function(req, res) {
-
-		Comment.find({
-				postid : req.body.postid,
-			}).populate('user').exec(function(err,comment){
-				if (err)
-					res.send(err);
-
-				res.json(comment);
-			});
-
-	});
-
-
-	app.post('/api/acceptOffer',function(req,res){
-
-
-		Comment.find({
-				_id : req.body.comment,
-			}).populate('user').exec(function(err,comment){
-				if (err)
-					res.send(err);
-
-
-				Post.findById(req.body.user).populate('user').exec(function(err,post){
-				  if (err) {
-				  	res.json(err);
-				  }
-				  post.accepted = comment;
-				  post.save(function(){
-				  offerAccepted(comment,post);
-				  res.json(post);
-				  });
-				})
-
-			});
-	});
-
-
-	app.delete('/api/message/:data',function(req,res) {
-		Message.remove({
-			_id: req.params.data,
-		}, function(err,message) {
-			if(err) {
-				res.json(err);
-			}
-
-			res.json(message);
-		});
-	});
-
-	app.put('/api/message',function(req,res) {
-		Message.findById(req.body._id).
-		exec(function(err,message){
-			if (err) {
-				res.json(err);
-			}
-			message.read = true;
-			message.save(function(){
-			res.json(message);
-			});
-		})
-	});
-
-
-	// delete a post
-	app.delete('/api/posts/:post_id',isLoggedIn, function(req, res) {
-
-
-			Post.remove({
-				_id : req.params.post_id,
-				user:req.user
-			}, function(err, post) {
-				if (!post)
-					res.json({error:"You cant delete this"});
-
-				// get and return all the todos after you create another
-				Post.find(function(err, posts) {
-					if (err)
-						res.send(err)
-					res.json(posts);
-				});
-			});
-
-	});
-
-
-	app.get('/api/posts/:post_id', function(req, res) {
-
-
-			Post.find({
-				_id : req.params.post_id,
-				//user:req.user
-			}).populate('user comments community').exec(function(err,docs){
-				if (err)
-					res.send(err);
-					var allComments = [];
-					async.forEach(docs,function(doc,callback) {
-				      Comment.populate( doc.comments,{ "path": "user" },function(err,output) {
-						allComments.push(output);
-				        callback(res.send({"post":docs,"comments":allComments}));
-				      });
-
-				    },function(err) {
-				      console.log( "all: " + JSON.stringify(docs,undefined,4 ));
-				    });
-			});
-
-	});
-
-var offerAccepted = function(comment,post) {
-	var message = {
-	    "html": "<h2>Offer Accepted!</h2><p>Congrats "+comment[0].user.firstName+" your offer of $"+comment[0].offer+" was accepted!<p>Please contact "+post.user.firstName+" "+post.user.lastName+" to set up a time to meet. You can email them at: "+post.user.local.email,
-	    "subject": "Offer Accepted!",
-	    "from_email": "jake@jibdesigns.com",
-	    "from_name": "Jake Boyles",
-	    "to": [{
-	            "email": comment[0].user.local.email,
-	            "name": comment[0].user.firstName,
-	            "type": "to"
-	        }],
-	    "headers": {
-	        "Reply-To": "jake@jibdesigns.com"
-	    },
-	    "important": false,
-	    "track_opens": null,
-	    "track_clicks": null,
-	};
-	var async = false;
-	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
-		    console.log(result);
-
-	}, function(e) {
-	    // Mandrill returns the error as an object with name and message keys
-	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-	});
-};	
-
-
-
-var sendMessage = function(user) {
-	var message = {
-	    "html": "<h2>Thanks for registering!</h2><p>Your username is "+user.local.email+"</p>",
-	    "text": "Thanks for registering Your username is "+user.local.email,
-	    "subject": "Thanks for Registering!",
-	    "from_email": "jake@jibdesigns.com",
-	    "from_name": "Jake Boyles",
-	    "to": [{
-	            "email": user.local.email,
-	            "name": "Jake Boyles",
-	            "type": "to"
-	        }],
-	    "headers": {
-	        "Reply-To": "jake@jibdesigns.com"
-	    },
-	    "important": false,
-	    "track_opens": null,
-	    "track_clicks": null,
-	};
-	var async = false;
-	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
-		    console.log(result);
-
-	}, function(e) {
-	    // Mandrill returns the error as an object with name and message keys
-	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-	});
-};
-
-
-
-
-
-var sentMessageEmail = function(from,to,message) {
-	var message = {
-	    "html": "<h2>New Message</h2><p>You have received a new message from "+from.firstName+"</p><br><br><h4>"+message.title+"</h4><p>"+message.content+"</p>",
-	    "text": "You have received a new message from "+from.firstName,
-	    "subject": "Received New Message",
-	    "from_email": "jake@jibdesigns.com",
-	    "from_name": "Jake Boyles",
-	    "to": [{
-	            "email": to.local.email,
-	            "name": to.firstName+" "+to.lastName,
-	            "type": "to"
-	        }],
-	    "headers": {
-	        "Reply-To": "jake@jibdesigns.com"
-	    },
-	    "important": false,
-	    "track_opens": null,
-	    "track_clicks": null,
-	};
-	var async = false;
-	mandrill_client.messages.send({"message": message, "async": async}, function(result) {
-		    console.log(result);
-
-	}, function(e) {
-	    // Mandrill returns the error as an object with name and message keys
-	    console.log('A mandrill error occurred: ' + e.name + ' - ' + e.message);
-	    // A mandrill error occurred: Unknown_Subaccount - No subaccount exists with the id 'customer-123'
-	});
-};
-
 
 
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
-
 	// if user is authenticated in the session, carry on 
 	if (req.isAuthenticated())
 		return next();
@@ -540,8 +139,8 @@ function isLoggedIn(req, res, next) {
 
 
 
-	// application -------------------------------------------------------------
-	app.get('*', function(req, res) {
+app.get('*', function(req, res) {
 		res.sendfile('./public/index.html'); // load the single view file (angular will handle the page changes on the front-end)
-	});
+});
+
 };
