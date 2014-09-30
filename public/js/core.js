@@ -38,7 +38,7 @@ $routeProvider
     controller:'signupController',
     templateUrl:'views/signup.html'
     })
-    .when('/create', {
+    .when('/post', {
     controller:'postController',
     templateUrl:'views/createPost.html'
     })

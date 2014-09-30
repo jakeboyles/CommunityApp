@@ -4,9 +4,9 @@
             	<a href="#/"><img src="images/logo.png" /></a>
             	</div>
 
-            	<h4 ng-if="community.info!=''" class="col-md-5 mobileHide community">{{communityinfo.title}}</h4>
+            	<h4 ng-if="community.info!=''" class="col-md-4 mobileHide community">{{communityinfo.title}}</h4>
 
-            	<div class="userInfo mobileHide pull-right col-md-4 col-xs-8">
+            	<div class="userInfo mobileHide pull-right col-md-5 col-xs-8">
             		 <a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
             		 <a href="/logout"><i class="fa fa-power-off"></i> Logout</a>
             		 <a class="postIcon" href="#/post"><i class="fa fa-plus-square-o"></i> Post</a>
@@ -20,7 +20,7 @@
                  <a ng-click="showMessageBox()" class="postIcon"><i class="fa fa-envelope"></i> {{messages.unread.length}} Messages</a>
             	</div>
 
-            	<div class="userInfo desktopHide pull-right col-md-3 col-xs-7">
+            	<div class="userInfo desktopHide pull-right col-md-5 col-xs-7">
             	  <a ng-click="menuClick()" class="mobileMenu pull-right"><i class="fa fa-bars"></i></a>
             		<a class="avatar" href="#/profile/{{user._id}}"><img src="{{user.profilepicture}}"></a>
 
@@ -40,7 +40,7 @@
 
               <h4 ng-if="community.info!=''" class="col-md-4 mobileHide community">{{communityinfo.title}}</h4>
 
-            	<div class="mobileHide pull-right col-md-4 col-xs-8">
+            	<div class="mobileHide pull-right col-md-5 col-xs-8">
             		<a href="#/signin"><i class="fa fa-users"></i> Login</a>
             		<a class="postIcon" href="#/signup"><i class="fa fa-child"></i> Signup</a>
                 <div class="searchContain">
