@@ -22,6 +22,10 @@ $routeProvider
     controller:'signupController',
     templateUrl:'views/editprofile.html'
     })
+    .when('/community/create', {
+    controller:'signupController',
+    templateUrl:'views/create_community.html'
+    })
     .when('/profile/:profileid', {
     controller:'profileController',
     templateUrl:'views/profile.html'

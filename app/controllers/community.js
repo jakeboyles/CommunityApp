@@ -12,6 +12,21 @@ var async = require('async');
 var s3 = require('s3');
 
 
+exports.create = function(req,res) {
+    Community.create({
+            title : req.body.title,
+            description : req.body.content,
+            zipcode : req.body.zip,
+        }, function(err, message) {
+
+            if (err) {
+            res.send(err);
+            }
+
+            res.send(message);
+    });
+}
+
 
 exports.findByZip = function(req,res){
  var relatedPosts = [];

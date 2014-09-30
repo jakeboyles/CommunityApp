@@ -24,6 +24,9 @@ return {
 	getCommunitys: function(data) {
 		return $http.post('/api/communities',data);
 	},
+	createCommunity: function(data) {
+		return $http.post('/api/communities/create',data);
+	},
 	loggedIn: function(data) {
 		return $http.get('/login');
 	},

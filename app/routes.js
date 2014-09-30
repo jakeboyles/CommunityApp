@@ -55,6 +55,8 @@ app.post('/api/editProfile',isLoggedIn,user.edit);
 
 app.post('/api/communities',community.findByZip);
 
+app.post('/api/communities/create',community.create);
+
 app.post('/api/message',message.create);
 
 app.get('/api/message',message.get);
