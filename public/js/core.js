@@ -2,15 +2,15 @@ angular.module('scotchTodo', ['communityController','communitySearch','community
 
 .config(function($routeProvider) {
 $routeProvider
-    .when('/', {
-    controller:'mainController',
-    templateUrl:'views/home.html'
-    })
     .when('/post/:postid', {
     controller:'getPostController',
     templateUrl:'views/post.html'
     })
     .when('/community/:communityid', {
+    controller:'mainController',
+    templateUrl:'views/list.html'
+    })
+    .when('/community/create', {
     controller:'mainController',
     templateUrl:'views/list.html'
     })
@@ -21,10 +21,6 @@ $routeProvider
     .when('/profile/edit', {
     controller:'signupController',
     templateUrl:'views/editprofile.html'
-    })
-    .when('/community/create', {
-    controller:'signupController',
-    templateUrl:'views/create_community.html'
     })
     .when('/profile/:profileid', {
     controller:'profileController',
@@ -42,9 +38,17 @@ $routeProvider
     controller:'signupController',
     templateUrl:'views/signup.html'
     })
-    .when('/post', {
+    .when('/create', {
     controller:'postController',
     templateUrl:'views/createPost.html'
+    })
+    .when('/create', {
+    controller:'communityListController',
+    templateUrl:'views/create_community.html'
+    })
+    .when('/', {
+    controller:'mainController',
+    templateUrl:'views/home.html'
     })
     .otherwise({
     redirectTo:'/'
