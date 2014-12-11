@@ -55,6 +55,8 @@ app.post('/api/editProfile',isLoggedIn,user.edit);
 
 app.post('/api/communities',community.findByZip);
 
+app.post('/api/communities/add',community.add);
+
 app.post('/api/message',message.create);
 
 app.get('/api/message',message.get);
@@ -99,29 +101,33 @@ app.post('/post/image',function(req,res) {
     // set where the file should actually exists - in this case it is in the "images" directory
     var time = new Date().getTime();
     var target_path = './public/uploads/' +time+ req.files.file.name;
+    var imageName = req.files.file.name
 
+    fs.readFile(req.files.file.path, function (err, data) {
 
-	    var params = {
-	  localFile: tmp_path,
+		var imageName = req.files.file.name
 
-	  s3Params: {
-	    Bucket: "CommunityApp",
-	    Key: "uploads/"+time+req.files.file.name,
-	     ACL: 'public-read-write',
-	    // other options supported by putObject, except Body and ContentLength.
-	    // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#putObject-property
-	  },
-	};
-	var uploader = client.uploadFile(params);
-	uploader.on('error', function(err) {
-	  console.error("unable to upload:", err.stack);
-	});
-	uploader.on('progress', function() {
-	  console.log("progress", uploader.progressMd5Amount,
-	            uploader.progressAmount, uploader.progressTotal);
-	});
-	uploader.on('end', function(err,data) {
-	  res.json("https://s3.amazonaws.com/CommunityApp/uploads/"+time+req.files.file.name);
+		/// If there's an error
+		if(!imageName){
+
+			console.log("There was an error")
+			res.redirect("/");
+			res.end();
+
+		} else {
+
+		  var newPath = "/uploads/" + imageName;
+
+		  /// write file to uploads/fullsize folder
+		  fs.writeFile(newPath, data, function (err) {
+
+		  	/// let's see it
+		  	res.json(newPath);
+
+		  });
+		}
+
+	
 	});
 });
 

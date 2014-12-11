@@ -10,6 +10,10 @@ $routeProvider
     controller:'getPostController',
     templateUrl:'views/post.html'
     })
+     .when('/community/add', {
+    controller:'communitySearch',
+    templateUrl:'views/createCommunity.html'
+    })
     .when('/community/:communityid', {
     controller:'mainController',
     templateUrl:'views/list.html'

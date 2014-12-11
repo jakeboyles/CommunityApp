@@ -42,3 +42,20 @@ exports.findByZip = function(req,res){
     }
 }
 
+
+exports.add = function(req,res){
+console.log(req.body);
+ Community.create({
+            title : req.body.title,
+            description : req.body.content,
+            zipcode : req.body.zip,
+        }, function(err, message) {
+
+            if (err) {
+            res.send(err);
+            }
+
+            res.send(message);
+    });
+}
+

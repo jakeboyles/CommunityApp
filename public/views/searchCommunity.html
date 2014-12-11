@@ -4,6 +4,9 @@
 <div class="col-md-6">
 	<h3 class="col-xs-12 search"><i class="fa fa-home"></i>&nbsp; We found {{communities.length}} Communities for {{zipcode}}</h3>
 	<div class="listContain" >
+	<div ng-if="communities.length==0">
+	<p>There are currently no communites for this zipcode. How about you <a href="#/community/add">add one</a>?</p>
+	</div>
 		<div  class="item col-md-6 col-xs-12"  ng-repeat="community in communities | filter:searchText">
 			<div class="contain">
 				<div class="col-md-7 ">

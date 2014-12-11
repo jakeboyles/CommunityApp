@@ -23,6 +23,21 @@ angular.module('communityListController', ['angularMoment','infinite-scroll'])
 		});
 
 
+	$scope.createcommunity = function() {
+	$scope.loading = true;
+	$scope.formData.images = images;
+	// validate the formData to make sure that something is there
+	// if form is empty, nothing will happen
+
+		// call the create function from our service (returns a promise object)
+		Communities.create($scope.formData)
+			// if successful creation, call our get function to get all the new todos
+			.success(function(data) {
+				alert("added");
+			});
+};
+
+
 
 
 	});

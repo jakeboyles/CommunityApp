@@ -12,6 +12,9 @@ return {
 	create : function(todoData) {
 	return $http.post('/api/posts', todoData);
 	},
+	newCommunity : function(todoData) {
+	return $http.post('/api/communities/add', todoData);
+	},
 	delete : function(id) {
 	return $http.delete('/api/posts/' + id);
 	},

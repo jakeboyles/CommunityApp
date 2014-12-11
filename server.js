@@ -6,6 +6,7 @@ var port  	 = process.env.PORT || 80;			// set the port
 var database = require('./config/database'); 			// load the database config
 var passport = require('passport');
 var flash 	 = require('connect-flash');
+var path     = require('path');
 
 // configuration ===============================================================
 
@@ -52,6 +53,14 @@ app.configure(function() {
 	app.use(passport.initialize());
 	app.use(passport.session()); // persistent login sessions
 	app.use(flash()); // use connect-flash for flash messages stored in session
+	app.use(express.favicon());
+	app.use(express.logger('dev'));
+	app.use(express.bodyParser({ keepExtensions: true, uploadDir: __dirname + '/public/uploads' }));
+	app.use(express.methodOverride());
+	app.use(app.router);
+	app.use(express.static(path.join(__dirname, '/public')));
+	app.use(express.static(__dirname + '/static'));
+	app.use(express.errorHandler()); 
 });
 
 // routes ======================================================================

@@ -1,0 +1,18 @@
+<!-- FORM TO CREATE TODOS -->
+<div data-ng-include src="'views/header.html'"></div>
+
+<div id="post-form">
+		<form>
+			<div class="col-md-12 form-group">
+			<h2>Create Community</h2>
+				<input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
+
+				<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
+				<input required type="text" class="form-control input-lg text-center" placeholder="Zipcode" ng-model="formData.zip">
+
+
+				<button type="submit" class="btn btn-primary btn-lg" ng-click="createcommunity()">Add Post</button>
+			</div>
+
+		</form>
+</div>
