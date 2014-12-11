@@ -55,7 +55,11 @@ app.post('/api/editProfile',isLoggedIn,user.edit);
 
 app.post('/api/communities',community.findByZip);
 
+<<<<<<< HEAD
 app.post('/api/communities/add',community.add);
+=======
+app.post('/api/communities/create',community.create);
+>>>>>>> 37586e0677b4fc217411e179d2f2e720dd63ff57
 
 app.post('/api/message',message.create);
 
