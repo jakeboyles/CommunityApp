@@ -22,7 +22,8 @@ var PostSchema = new Schema({
     },
     community: [{
         type: mongoose.Schema.ObjectId,
-        ref: 'Community'
+        ref: 'Community',
+        required: true,
     }],
     price: {
         type: String,
@@ -36,7 +37,7 @@ var PostSchema = new Schema({
     },
     images: {
         type:[],
-        required: false,
+        required: true,
     },
     user: {
         type: Schema.ObjectId,

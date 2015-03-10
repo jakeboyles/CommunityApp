@@ -116,13 +116,13 @@ app.post('/post/image',function(req,res) {
 
 		} else {
 
-		  var newPath = "/uploads/" + imageName;
+		  var newPath = "./public/uploads/" + imageName;
 
 		  /// write file to uploads/fullsize folder
 		  fs.writeFile(newPath, data, function (err) {
-
+		  	console.log(err);
 		  	/// let's see it
-		  	res.json(newPath);
+		  	res.json('/uploads/'+imageName);
 
 		  });
 		}

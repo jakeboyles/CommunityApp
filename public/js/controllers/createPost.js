@@ -1,4 +1,4 @@
-angular.module('PostController', ['angularFileUpload'])
+angular.module('PostController', ['angularFileUpload','validation','validation.rule'])
 
 // inject the Todo service factory into our controller
 .controller('postController', function($scope, $upload, $http, Communities,$location) {

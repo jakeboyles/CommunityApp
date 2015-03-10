@@ -2,15 +2,21 @@
 <div data-ng-include src="'views/header.html'"></div>
 
 <div id="post-form">
-		<form>
+		<form name="myForm" novalidate>
 			<div class="col-md-6 form-group">
 			<h2>Post An Item</h2>
-				<input required type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
-				<textarea required type="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
-				<input required type="text" class="form-control input-lg text-center" placeholder="Location" ng-model="formData.location">
-				<input required type="file" ng-file-select="onFileSelect($files)" multiple> 
+				<input validator="required" type="text" class="form-control input-lg text-center" placeholder="Title" ng-model="formData.title">
+				<textarea validator="required" type="text" name="text" class="form-control input-lg text-center" placeholder="Content" ng-model="formData.content"></textarea>
 
-				<select ng-model="formData.community">
+				<div ng-show="formData.$submitted || formData.text.$touched">
+			      <span ng-show="form.text.$error.required">Tell us your email.</span>
+			      <span ng-show="form.text.$error.email">This is not a valid email.</span>
+			    </div>
+
+				<input validator="required" type="text" class="form-control input-lg text-center" placeholder="Location" ng-model="formData.location">
+				<input  type="file" ng-file-select="onFileSelect($files)" multiple> 
+
+				<select validator="required" ng-model="formData.community">
 				  <option ng-repeat="co in com" value="{{co._id}}">{{co.title}}</option>
 				</select> 
 
@@ -19,10 +25,12 @@
 					<a ng-click="type(1)" class="sellit col-xs-6 col-md-3 btn btn-primary btn-lg">Sell It</a>
 					<a ng-click="type(0)" class="tradeit col-xs-6 btn btn-primary btn-lg col-md-3 col-md-offset-1">Trade It</a>
 				</div>
-				<input required type="number" class="hideForm form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
+				<input type="number" class="hideForm form-control input-lg text-center" placeholder="Price" ng-model="formData.price">
 
-				<button type="submit" class="btn btn-primary btn-lg" ng-click="createpost()">Add Post</button>
+				<button validation-submit="myForm" type="submit" ng-disabled="form.text.$dirty" class="btn btn-primary btn-lg" ng-click="createpost()">Add Post</button>
 			</div>
+
+
 
 		</form>
 		<div class="col-md-5 images">

@@ -27,6 +27,7 @@
     "mongoose-text-search":"latest",
     "underscore":"latest",
     "util":"latest",
-    "path":"latest"
+    "path":"latest",
+    "angular-validation" : "latest"
   }
 }
