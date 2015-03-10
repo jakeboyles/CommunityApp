@@ -17,8 +17,9 @@ var client = s3.createClient({
   s3RetryCount: 3,
   s3RetryDelay: 1000,
   s3Options: {
-    accessKeyId: "AKIAJ7YYYNC3VQP2KJ6Q",
-    secretAccessKey: "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",
+
+    accessKeyId: "####",
+    secretAccessKey: "#####",
     // any other options are passed to new AWS.S3()
     // See: http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/Config.html#constructor-property
   },
@@ -150,3 +151,4 @@ app.get('*', function(req, res) {
 });
 
 };
+
